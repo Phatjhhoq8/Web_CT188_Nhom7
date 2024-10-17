@@ -1,0 +1,11 @@
+header {
+    height: 150px;
+    background-image: linear-gradient(0,#e1f52e,#f4f775);
+}
+.header_nav {
+    display: flex;
+    justify-content: space-between;
+}
+.header_nav_items {
+    display: inline-block;
+}
