@@ -10,50 +10,60 @@
 </head>
 <body>
     <div class="app">
-        <header class="p-3">
-            <div class="header_content">
-                <div class="header_top d-flex flex-row align-items-center justify-content-between">
-                    <div class="header_top_logo">
-                        <img src="/sources/imgs/home/logo.png" width="50px" alt="">
-                    </div>
-                    <div class="header_top_search_bar d-flex">
-                        <div class="header_search_product">Product</div>
-                        <div class="header_search_input"><input type="text"></div>
-                        icon
-                        <div class="header_search_button">Search</div>
-                    </div>
-                    <div class="header_top_function">
-                        <ul class="d-flex flex-row list-group">
-                            <li class="list-group-item"><span>Tiếng Viết</span></li>
-                            <li class="list-group-item"><span>Tin nhắn</span></li>
-                            <li class="list-group-item"><span>Thông báo</span></li>
-                            <li class="list-group-item"><span>Shopping</span></li>
-                            <li class="list-group-item"><span>Sign in</span></li>
-                        </ul>
-                    </div>
-                </div>
+        <header class="p-3 header_content">
+          <!-- Phần logo và tính năng header -->
+          <div class="header_top d-flex flex-row align-items-center justify-content-between">
+            <div class="header_top_logo">
+                <img src="/sources/imgs/home/logo.png" width="50px" alt="">
             </div>
+            <div class="header_top_search_bar d-flex">
+                <div class="header_search_product">Product</div>
+                <div class="header_search_input"><input type="text"></div>
+                icon
+                <div class="header_search_button">Search</div>
+            </div>
+            <div class="header_top_function">
+                <ul class="d-flex flex-row list-group">
+                    <li class="list-group-item"><span>Tiếng Viết</span></li>
+                    <li class="list-group-item"><span>Tin nhắn</span></li>
+                    <li class="list-group-item"><span>Thông báo</span></li>
+                    <li class="list-group-item"><span>Shopping</span></li>
+                    <li class="list-group-item"><span>Sign in</span></li>
+                </ul>
+            </div>
+        </div>
+        <nav class="navbar navbar-expand-lg navbar-dark ftco_navbar bg-dark ftco-navbar-light" id="ftco-navbar">
+          <div class="container-fluid">
+            <div class="collapse navbar-collapse" id="ftco-nav">
+              <ul class="navbar-nav m-auto">
+                <li class="nav-item active"><a href="#" class="nav-link">Home</a></li>
+                <li class="nav-item"><a href="#" class="nav-link">Product</a></li>
+                <li class="nav-item"><a href="#" class="nav-link">Blog</a></li>
+                <li class="nav-item"><a href="#" class="nav-link">Contact</a></li>
+              </ul>
+            </div>
+          </div>
+        </nav>
         </header>
         <div class="bg-dark text-secondary px-4 py-5 text-center">
             <div class="py-5">
-              <h1 class="display-5 fw-bold text-white">Dark color hero</h1>
+              <h1 class="display-5 fw-bold text-white">The light shop</h1>
               <div class="col-lg-6 mx-auto">
-                <p class="fs-5 mb-4">Quickly design and customize responsive mobile-first sites with Bootstrap, the world’s most popular front-end open source toolkit, featuring Sass variables and mixins, responsive grid system, extensive prebuilt components, and powerful JavaScript plugins.</p>
+                <p class="fs-5 mb-4">Bao gồm đẩy đủ các loại đèn cho mọi yêu cầu</p>
                 <div class="d-grid gap-2 d-sm-flex justify-content-sm-center">
-                  <button type="button" class="btn btn-outline-info btn-lg px-4 me-sm-3 fw-bold">Custom button</button>
-                  <button type="button" class="btn btn-outline-light btn-lg px-4">Secondary</button>
+                  <button type="button" class="btn btn-outline-info btn-lg px-4 me-sm-3 fw-bold">Mua Ngay</button>
                 </div>
               </div>
             </div>
           </div>
           <div class="container px-4 py-5" id="custom-cards">
-            <h2 class="pb-2 border-bottom">Custom cards</h2>
+            <h2 class="pb-2 border-bottom">Khám phá</h2>
         
             <div class="row row-cols-1 row-cols-lg-3 align-items-stretch g-4 py-5">
               <div class="col">
-                <div class="card card-cover h-100 overflow-hidden text-bg-dark rounded-4 shadow-lg" style="background-image: url('unsplash-photo-1.jpg');">
+                <div class="card card-cover h-100 overflow-hidden text-bg-dark rounded-4 shadow-lg" style="background-image: url('/sources/imgs/home/logo.png');">
                   <div class="d-flex flex-column h-100 p-5 pb-3 text-white text-shadow-1">
-                    <h3 class="pt-5 mt-5 mb-4 display-6 lh-1 fw-bold">Short title, long jacket</h3>
+                    <h3 class="pt-5 mt-5 mb-4 display-6 lh-1 fw-bold">Đánh giá tốt nhất</h3>
                     <ul class="d-flex list-unstyled mt-auto">
                       <li class="me-auto">
                         <img src="https://github.com/twbs.png" alt="Bootstrap" width="32" height="32" class="rounded-circle border border-white">
@@ -72,9 +82,9 @@
               </div>
         
               <div class="col">
-                <div class="card card-cover h-100 overflow-hidden text-bg-dark rounded-4 shadow-lg" style="background-image: url('unsplash-photo-2.jpg');">
+                <div class="card card-cover h-100 overflow-hidden text-bg-dark rounded-4 shadow-lg" style="background-image: url('/sources/imgs/home/logo.png');">
                   <div class="d-flex flex-column h-100 p-5 pb-3 text-white text-shadow-1">
-                    <h3 class="pt-5 mt-5 mb-4 display-6 lh-1 fw-bold">Much longer title that wraps to multiple lines</h3>
+                    <h3 class="pt-5 mt-5 mb-4 display-6 lh-1 fw-bold">Phổ biến nhất</h3>
                     <ul class="d-flex list-unstyled mt-auto">
                       <li class="me-auto">
                         <img src="https://github.com/twbs.png" alt="Bootstrap" width="32" height="32" class="rounded-circle border border-white">
@@ -93,9 +103,9 @@
               </div>
         
               <div class="col">
-                <div class="card card-cover h-100 overflow-hidden text-bg-dark rounded-4 shadow-lg" style="background-image: url('unsplash-photo-3.jpg');">
+                <div class="card card-cover h-100 overflow-hidden text-bg-dark rounded-4 shadow-lg" style="background-image: url('/sources/imgs/home/logo.png');">
                   <div class="d-flex flex-column h-100 p-5 pb-3 text-shadow-1">
-                    <h3 class="pt-5 mt-5 mb-4 display-6 lh-1 fw-bold">Another longer title belongs here</h3>
+                    <h3 class="pt-5 mt-5 mb-4 display-6 lh-1 fw-bold">Bán chạy nhất</h3>
                     <ul class="d-flex list-unstyled mt-auto">
                       <li class="me-auto">
                         <img src="https://github.com/twbs.png" alt="Bootstrap" width="32" height="32" class="rounded-circle border border-white">
@@ -115,132 +125,131 @@
             </div>
           </div>
           <div class="container marketing">
-
-            <!-- Three columns of text below the carousel -->
-            <div class="row">
-              <div class="col-lg-4">
-                <svg class="bd-placeholder-img rounded-circle" width="140" height="140" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder" preserveAspectRatio="xMidYMid slice" focusable="false"><title>Placeholder</title><rect width="100%" height="100%" fill="var(--bs-secondary-color)"></rect></svg>
-                <h2 class="fw-normal">Heading</h2>
-                <p>Some representative placeholder content for the three columns of text below the carousel. This is the first column.</p>
-                <p><a class="btn btn-secondary docs-creator" href="#">View details »</a></p>
-              </div><!-- /.col-lg-4 -->
-              <div class="col-lg-4">
-                <svg class="bd-placeholder-img rounded-circle" width="140" height="140" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder" preserveAspectRatio="xMidYMid slice" focusable="false"><title>Placeholder</title><rect width="100%" height="100%" fill="var(--bs-secondary-color)"></rect></svg>
-                <h2 class="fw-normal">Heading</h2>
-                <p>Another exciting bit of representative placeholder content. This time, we've moved on to the second column.</p>
-                <p><a class="btn btn-secondary docs-creator" href="#">View details »</a></p>
-              </div><!-- /.col-lg-4 -->
-              <div class="col-lg-4">
-                <svg class="bd-placeholder-img rounded-circle" width="140" height="140" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder" preserveAspectRatio="xMidYMid slice" focusable="false"><title>Placeholder</title><rect width="100%" height="100%" fill="var(--bs-secondary-color)"></rect></svg>
-                <h2 class="fw-normal">Heading</h2>
-                <p>And lastly this, the third column of representative placeholder content.</p>
-                <p><a class="btn btn-secondary docs-creator" href="#">View details »</a></p>
-              </div><!-- /.col-lg-4 -->
-            </div><!-- /.row -->
-        
-        
             <!-- START THE FEATURETTES -->
-        
-            <hr class="featurette-divider">
-        
-            <div class="row featurette">
-              <div class="col-md-7">
-                <h2 class="featurette-heading fw-normal lh-1">First featurette heading. <span class="text-body-secondary">It’ll blow your mind.</span></h2>
-                <p class="lead">Some great placeholder content for the first featurette here. Imagine some exciting prose here.</p>
-              </div>
-              <div class="col-md-5">
-                <svg class="bd-placeholder-img bd-placeholder-img-lg featurette-image img-fluid mx-auto" width="500" height="500" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: 500x500" preserveAspectRatio="xMidYMid slice" focusable="false"><title>Placeholder</title><rect width="100%" height="100%" fill="var(--bs-secondary-bg)"></rect><text x="50%" y="50%" fill="var(--bs-secondary-color)" dy=".3em">500x500</text></svg>
+            <div class="featurette-container">
+              <div class="featurette-content">
+                <hr class="featurette-divider">
+                <div class="row featurette">
+                  <div class="col-md-7">
+                    <h2 class="featurette-heading fw-normal lh-1">First featurette heading. <span class="text-body-secondary">It’ll blow your mind.</span></h2>
+                    <p class="lead">Some great placeholder content for the first featurette here. Imagine some exciting prose here.</p>
+                  </div>
+                  <div class="col-md-5">
+                    <svg class="bd-placeholder-img bd-placeholder-img-lg featurette-image img-fluid mx-auto" width="500" height="500" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: 500x500" preserveAspectRatio="xMidYMid slice" focusable="false"><title>Placeholder</title><rect width="100%" height="100%" fill="var(--bs-secondary-bg)"></rect><text x="50%" y="50%" fill="var(--bs-secondary-color)" dy=".3em">500x500</text></svg>
+                  </div>
+                </div>
+                <hr class="featurette-divider">
+                <div class="row featurette">
+                  <div class="col-md-7">
+                    <h2 class="featurette-heading fw-normal lh-1">And lastly, this one. <span class="text-body-secondary">Checkmate.</span></h2>
+                    <p class="lead">And yes, this is the last block of representative placeholder content.</p>
+                  </div>
+                  <div class="col-md-5">
+                    <svg class="bd-placeholder-img bd-placeholder-img-lg featurette-image img-fluid mx-auto" width="500" height="500" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: 500x500" preserveAspectRatio="xMidYMid slice" focusable="false"><title>Placeholder</title><rect width="100%" height="100%" fill="var(--bs-secondary-bg)"></rect><text x="50%" y="50%" fill="var(--bs-secondary-color)" dy=".3em">500x500</text></svg>
+                  </div>
+                </div>
+                <hr class="featurette-divider">
+                <div class="row featurette">
+                  <div class="col-md-7">
+                    <h2 class="featurette-heading fw-normal lh-1">And lastly, this one. <span class="text-body-secondary">Checkmate.</span></h2>
+                    <p class="lead">And yes, this is the last block of representative placeholder content.</p>
+                  </div>
+                  <div class="col-md-5">
+                    <svg class="bd-placeholder-img bd-placeholder-img-lg featurette-image img-fluid mx-auto" width="500" height="500" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: 500x500" preserveAspectRatio="xMidYMid slice" focusable="false"><title>Placeholder</title><rect width="100%" height="100%" fill="var(--bs-secondary-bg)"></rect><text x="50%" y="50%" fill="var(--bs-secondary-color)" dy=".3em">500x500</text></svg>
+                  </div>
+                </div>
+                <hr class="featurette-divider">
               </div>
             </div>
-        
-            <hr class="featurette-divider">
-        
-            <div class="row featurette">
-              <div class="col-md-7 order-md-2">
-                <h2 class="featurette-heading fw-normal lh-1">Oh yeah, it’s that good. <span class="text-body-secondary">See for yourself.</span></h2>
-                <p class="lead">Another featurette? Of course. More placeholder content here to give you an idea of how this layout would work with some actual real-world content in place.</p>
-              </div>
-              <div class="col-md-5 order-md-1">
-                <svg class="bd-placeholder-img bd-placeholder-img-lg featurette-image img-fluid mx-auto" width="500" height="500" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: 500x500" preserveAspectRatio="xMidYMid slice" focusable="false"><title>Placeholder</title><rect width="100%" height="100%" fill="var(--bs-secondary-bg)"></rect><text x="50%" y="50%" fill="var(--bs-secondary-color)" dy=".3em">500x500</text></svg>
-              </div>
-            </div>
-        
-            <hr class="featurette-divider">
-        
-            <div class="row featurette">
-              <div class="col-md-7">
-                <h2 class="featurette-heading fw-normal lh-1">And lastly, this one. <span class="text-body-secondary">Checkmate.</span></h2>
-                <p class="lead">And yes, this is the last block of representative placeholder content. Again, not really intended to be actually read, simply here to give you a better view of what this would look like with some actual content. Your content.</p>
-              </div>
-              <div class="col-md-5">
-                <svg class="bd-placeholder-img bd-placeholder-img-lg featurette-image img-fluid mx-auto" width="500" height="500" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: 500x500" preserveAspectRatio="xMidYMid slice" focusable="false"><title>Placeholder</title><rect width="100%" height="100%" fill="var(--bs-secondary-bg)"></rect><text x="50%" y="50%" fill="var(--bs-secondary-color)" dy=".3em">500x500</text></svg>
-              </div>
-            </div>
-        
-            <hr class="featurette-divider">
-        
+
             <!-- /END THE FEATURETTES -->
         
           </div>
-        <div class="container">
-            <footer class="py-5">
-              <div class="row">
-                <div class="col-6 col-md-2 mb-3">
-                  <h5>Section</h5>
-                  <ul class="nav flex-column">
-                    <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-body-secondary docs-creator">Home</a></li>
-                    <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-body-secondary docs-creator">Features</a></li>
-                    <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-body-secondary docs-creator">Pricing</a></li>
-                    <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-body-secondary docs-creator">FAQs</a></li>
-                    <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-body-secondary docs-creator">About</a></li>
+          <footer class="bg-dark text-center text-lg-start text-white">
+
+            <div class="container p-4">
+
+              <div class="row mt-4">
+
+                <div class="col-lg-3 col-md-6 mb-4 mb-md-0">
+                  <h5 class="text-uppercase">See other books</h5>
+        
+                  <ul class="list-unstyled mb-0">
+                    <li>
+                      <a href="#!" class="text-white"><i class="fas fa-book fa-fw fa-sm me-2"></i>Bestsellers</a>
+                    </li>
+                    <li>
+                      <a href="#!" class="text-white"><i class="fas fa-book fa-fw fa-sm me-2"></i>All books</a>
+                    </li>
+                    <li>
+                      <a href="#!" class="text-white"><i class="fas fa-user-edit fa-fw fa-sm me-2"></i>Our authors</a>
+                    </li>
                   </ul>
                 </div>
-          
-                <div class="col-6 col-md-2 mb-3">
-                  <h5>Section</h5>
-                  <ul class="nav flex-column">
-                    <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-body-secondary docs-creator">Home</a></li>
-                    <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-body-secondary docs-creator">Features</a></li>
-                    <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-body-secondary docs-creator">Pricing</a></li>
-                    <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-body-secondary docs-creator">FAQs</a></li>
-                    <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-body-secondary docs-creator">About</a></li>
+
+
+                <div class="col-lg-3 col-md-6 mb-4 mb-md-0">
+                  <h5 class="text-uppercase">Execution of the contract</h5>
+        
+                  <ul class="list-unstyled">
+                    <li>
+                      <a href="#!" class="text-white"><i class="fas fa-shipping-fast fa-fw fa-sm me-2"></i>Supply</a>
+                    </li>
+                    <li>
+                      <a href="#!" class="text-white"><i class="fas fa-backspace fa-fw fa-sm me-2"></i>Returns</a>
+                    </li>
+                    <li>
+                      <a href="#!" class="text-white"><i class="far fa-file-alt fa-fw fa-sm me-2"></i>Regulations</a>
+                    </li>
+                    <li>
+                      <a href="#!" class="text-white"><i class="far fa-file-alt fa-fw fa-sm me-2"></i>Privacy policy</a>
+                    </li>
                   </ul>
                 </div>
-          
-                <div class="col-6 col-md-2 mb-3">
-                  <h5>Section</h5>
-                  <ul class="nav flex-column">
-                    <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-body-secondary docs-creator">Home</a></li>
-                    <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-body-secondary docs-creator">Features</a></li>
-                    <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-body-secondary docs-creator">Pricing</a></li>
-                    <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-body-secondary docs-creator">FAQs</a></li>
-                    <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-body-secondary docs-creator">About</a></li>
+
+
+                <div class="col-lg-3 col-md-6 mb-4 mb-md-0">
+                  <h5 class="text-uppercase">Publishing house</h5>
+        
+                  <ul class="list-unstyled">
+                    <li>
+                      <a href="#!" class="text-white">The BookStore</a>
+                    </li>
+                    <li>
+                      <a href="#!" class="text-white">123 Street</a>
+                    </li>
+                    <li>
+                      <a href="#!" class="text-white">05765 NY</a>
+                    </li>
+                    <li>
+                      <a href="#!" class="text-white"><i class="fas fa-briefcase fa-fw fa-sm me-2"></i>Send us a book</a>
+                    </li>
                   </ul>
                 </div>
-          
-                <div class="col-md-5 offset-md-1 mb-3">
-                  <form>
-                    <h5>Subscribe to our newsletter</h5>
-                    <p>Monthly digest of what's new and exciting from us.</p>
-                    <div class="d-flex flex-column flex-sm-row w-100 gap-2">
-                      <label for="newsletter1" class="visually-hidden">Email address</label>
-                      <input id="newsletter1" type="text" class="form-control" placeholder="Email address">
-                      <button class="btn btn-primary" type="button">Subscribe</button>
-                    </div>
-                  </form>
+
+
+                <div class="col-lg-3 col-md-6 mb-4 mb-md-0">
+                  <h5 class="text-uppercase">Write to us</h5>
+        
+                  <ul class="list-unstyled">
+                    <li>
+                      <a href="#!" class="text-white"><i class="fas fa-at fa-fw fa-sm me-2"></i>Help in purchasing</a>
+                    </li>
+                    <li>
+                      <a href="#!" class="text-white"><i class="fas fa-shipping-fast fa-fw fa-sm me-2"></i>Check the order status</a>
+                    </li>
+                    <li>
+                      <a href="#!" class="text-white"><i class="fas fa-envelope fa-fw fa-sm me-2"></i>Join the newsletter</a>
+                    </li>
+                  </ul>
                 </div>
               </div>
-          
-              <div class="d-flex flex-column flex-sm-row justify-content-between py-4 my-4 border-top">
-                <p>© 2024 Company, Inc. All rights reserved.</p>
-                <ul class="list-unstyled d-flex">
-                  <li class="ms-3"><a class="link-body-emphasis docs-creator" href="#"><svg class="bi" width="24" height="24"><use xlink:href="#twitter"></use></svg></a></li>
-                  <li class="ms-3"><a class="link-body-emphasis docs-creator" href="#"><svg class="bi" width="24" height="24"><use xlink:href="#instagram"></use></svg></a></li>
-                  <li class="ms-3"><a class="link-body-emphasis docs-creator" href="#"><svg class="bi" width="24" height="24"><use xlink:href="#facebook"></use></svg></a></li>
-                </ul>
-              </div>
-            </footer>
-          </div>
+            </div>
+            <div class="text-center p-3" style="background-color: rgba(0, 0, 0, 0.2)">
+              © 2021 Copyright:
+              <a class="text-white" href="https://mdbootstrap.com/">MDBootstrap.com</a>
+            </div>
+          </footer>
     </div>
 </body>
 </html>
