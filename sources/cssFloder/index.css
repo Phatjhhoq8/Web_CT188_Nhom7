@@ -1,3 +1,83 @@
+/* hero title */
+.hero-title-list {
+  position: absolute;
+  top: 22%;
+  left: 50%;
+  transform: translate(-50%,0%);
+  margin: 0;
+  padding: 0;
+  display: flex;
+}
+.hero-title-list .hero-title-items {
+  list-style: none;
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 3em;
+  letter-spacing: 15px;
+  text-shadow: none;
+  animation: animate 1s infinite linear;
+}
+@keyframes animate {
+  0%{
+    color: #484848;
+    text-shadow:none;
+  }
+  18%{
+    color: #484848;
+    text-shadow:none;
+  }
+  20%{
+    color: #fff900;
+    text-shadow:0 0 7px #fff900, 0 0 20px #ff6c00;
+  }
+  30%{
+    color: #484848;
+    text-shadow:none;
+  }
+  35%{
+    color: #fff900;
+    text-shadow:0 0 7px #fff900, 0 0 20px #ff6c00;
+  }
+  70%{
+    color: #484848;
+    text-shadow:none;
+  }
+  85%{
+    color: #fff900;
+    text-shadow:0 0 7px #fff900, 0 0 20px #ff6c00;
+  }
+  90%{
+    color: #484848;
+    text-shadow:none;
+  }
+  100%{
+    color: #484848;
+    text-shadow:none;
+  }
+}
+.hero-title-list .hero-title-items:nth-child(1) {
+  animation-delay: .2s;
+}
+.hero-title-list .hero-title-items:nth-child(2) {
+  animation-delay: .4s;
+}
+.hero-title-list .hero-title-items:nth-child(3) {
+  animation-delay: .6s;
+}
+.hero-title-list .hero-title-items:nth-child(4) {
+  animation-delay: .8s;
+}
+.hero-title-list .hero-title-items:nth-child(5) {
+  animation-delay: 1s;
+}
+.hero-title-list .hero-title-items:nth-child(6) {
+  animation-delay: 1.2s;
+}
+.hero-title-list .hero-title-items:nth-child(7) {
+  animation-delay: 1.4s;
+}
+.hero-title-list .hero-title-items:nth-child(8) {
+  animation-delay: 1.8s;
+}
 /* Container bao quanh toàn bộ phần featurette */
 .featurette-container {
     display: flex;
