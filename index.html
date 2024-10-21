@@ -13,13 +13,13 @@
     <div class="app">
         <header class="header_content">
           <!-- Phần logo và tính năng header -->
-          <div class="header_top d-flex flex-row align-items-center justify-content-between bg-black text-center text-secondary">
-            <div class="header_top_logo">
+          <div class="header_top d-flex flex-row align-items-center justify-content-around bg-black text-center text-secondary">
+            <div class="header_top_logo" style="padding-left: 25px;">
                 <a href="index.html"><img src="/sources/imgs/home/logo.png" width="80px" alt=""></a>
             </div>
-            <div class="col-md-5 mx-auto">
+            <div class="col-md-8 mx-auto">
               <div class="input-group">
-                  <input class="form-control border-end-0 border rounded-pill" type="search" value="Vui lòng nhập sản phẩm tìm kiếm" id="example-search-input">
+                  <input class="form-control border-end-0 border rounded-pill" type="search" placeholder="Vui lòng nhập sản phẩm tìm kiếm" id="example-search-input">
                   <span class="input-group-append">
                       <button class="btn btn-outline-secondary bg-white border-bottom-0 border rounded-pill ms-n5" type="button">
                           <i class="fa fa-search"></i>
@@ -29,11 +29,15 @@
           </div>
             <div class="header_top_function">
                 <ul class="d-flex flex-row list-group">
-                    <li class="list-group-item text-secondary"><span>Tiếng Viết</span></li>
-                    <li class="list-group-item text-secondary"><span>Tin nhắn</span></li>
-                    <li class="list-group-item text-secondary"><span>Thông báo</span></li>
-                    <li class="list-group-item text-secondary"><span>Shopping</span></li>
-                    <li class="list-group-item text-secondary"><span>Sign in</span></li>
+                    <li class="list-group-item text-secondary boder-none text-white">
+                      <div class="tnh-country-flag"><img src="https://s.alicdn.com/@u/mobile/g/common/flags/1.0.0/assets/vn.png" height="20px" loading="lazy">
+                        <span> VN <i class="fas fa-angle-down"></i></span>
+                      </div>
+                    </li>
+                    <li class="list-group-item text-secondary boder-none text-white"><span><i class="fas fa-comments"></i></span></li>
+                    <li class="list-group-item text-secondary boder-none text-white"><span><i class="fas fa-bell"></i></span></li>
+                    <li class="list-group-item text-secondary boder-none text-white"><span><i class="fas fa-shopping-cart"></i></span></li>
+                    <li class="list-group-item text-secondary rounded-pill bg-orange text-white"><span>Sign in</span></li>
                 </ul>
             </div>
         </div>
@@ -68,7 +72,7 @@
               <div class="col-lg-6 mx-auto">
                 <p class="fs-5 mb-4">Bao gồm đẩy đủ các loại đèn cho mọi yêu cầu</p>
                 <div class="d-grid gap-2 d-sm-flex justify-content-sm-center">
-                  <button type="button" class="btn btn-outline-info btn-lg px-4 me-sm-3 fw-bold">Mua Ngay</button>
+                  <button type="button" class="btn btn-outline-info btn-lg px-4 me-sm-3 fw-bold"><a class="text-decoration-none" href="/Pages/product.html">Mua Ngay</a></button>
                 </div>
               </div>
             </div>
@@ -265,8 +269,8 @@
               </div>
             </div>
             <div class="text-center p-3" style="background-color: rgba(0, 0, 0, 0.2)">
-              © 2021 Copyright:
-              <a class="text-white" href="https://mdbootstrap.com/">MDBootstrap.com</a>
+              © 2024 CT188:
+              <a class="text-white" href="#">Nhóm 7</a>
             </div>
           </footer>
     </div>
