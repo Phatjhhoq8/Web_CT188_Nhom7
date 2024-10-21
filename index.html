@@ -7,28 +7,33 @@
     <link rel="shortcut icon" href="/sources/imgs/home/short-cut.png" type="image/x-icon">
     <link rel="stylesheet" href="/sources/css/bootstrap.min.css">
     <link rel="stylesheet" href="/sources/cssFloder/index.css">
+    <link rel="stylesheet" href="/sources/fontawesome-free-5.12.1-web/css/all.min.css">
 </head>
 <body>
     <div class="app">
-        <header class=" header_content">
+        <header class="header_content">
           <!-- Phần logo và tính năng header -->
-          <div class="header_top d-flex flex-row align-items-center justify-content-between">
+          <div class="header_top d-flex flex-row align-items-center justify-content-between bg-black text-center text-secondary">
             <div class="header_top_logo">
-                <img src="/sources/imgs/home/logo.png" width="50px" alt="">
+                <a href="index.html"><img src="/sources/imgs/home/logo.png" width="80px" alt=""></a>
             </div>
-            <div class="header_top_search_bar d-flex">
-                <div class="header_search_product">Product</div>
-                <div class="header_search_input"><input type="text"></div>
-                icon
-                <div class="header_search_button">Search</div>
-            </div>
+            <div class="col-md-5 mx-auto">
+              <div class="input-group">
+                  <input class="form-control border-end-0 border rounded-pill" type="search" value="Vui lòng nhập sản phẩm tìm kiếm" id="example-search-input">
+                  <span class="input-group-append">
+                      <button class="btn btn-outline-secondary bg-white border-bottom-0 border rounded-pill ms-n5" type="button">
+                          <i class="fa fa-search"></i>
+                      </button>
+                  </span>
+              </div>
+          </div>
             <div class="header_top_function">
                 <ul class="d-flex flex-row list-group">
-                    <li class="list-group-item"><span>Tiếng Viết</span></li>
-                    <li class="list-group-item"><span>Tin nhắn</span></li>
-                    <li class="list-group-item"><span>Thông báo</span></li>
-                    <li class="list-group-item"><span>Shopping</span></li>
-                    <li class="list-group-item"><span>Sign in</span></li>
+                    <li class="list-group-item text-secondary"><span>Tiếng Viết</span></li>
+                    <li class="list-group-item text-secondary"><span>Tin nhắn</span></li>
+                    <li class="list-group-item text-secondary"><span>Thông báo</span></li>
+                    <li class="list-group-item text-secondary"><span>Shopping</span></li>
+                    <li class="list-group-item text-secondary"><span>Sign in</span></li>
                 </ul>
             </div>
         </div>
@@ -47,7 +52,7 @@
         </nav>
         </header>
         <!-- Phần Hero -->
-        <div class="bg-dark text-secondary px-4 py-5 text-center">
+        <div class="bg-dark text-secondary px-4 py-5 text-center hero">
             <div class="py-5">
               <!-- <h1 class="display-5 fw-bold text-white">The light shop</h1> -->
                <ul class="hero-title-list ">

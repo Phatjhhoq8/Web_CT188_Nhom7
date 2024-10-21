@@ -1,9 +1,23 @@
+/* Header top */
+.header_top {
+  height: 80px;
+  background-color: #484848
+}
+.header_search_product {
+  background-color: ;
+}
+.ms-n5 {
+  margin-left: -40px;
+}
 /* hero title */
+.hero {
+  position: relative;
+}
 .hero-title-list {
   position: absolute;
-  top: 22%;
+  top: 10%;
   left: 50%;
-  transform: translate(-50%,0%);
+  transform: translate(-50%);
   margin: 0;
   padding: 0;
   display: flex;
