@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="vi">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="keywords" content="">
+    <title>Đăng Ký</title>
+    
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f7f7f7;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+
+        main {
+            background-color: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        td {
+            padding: 10px;
+            border: 1px solid #ccc;
+            vertical-align: top;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 5px;
+        }
+
+        input[type="text"],
+        input[type="password"],
+        select {
+            width: 100%;
+            padding: 8px;
+            box-sizing: border-box;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+
+        input[type="submit"],
+        input[type="reset"] {
+            padding: 10px 15px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            background-color: #4CAF50;
+            color: white;
+            margin-right: 10px;
+        }
+
+        input[type="reset"] {
+            background-color: #f44336;
+        }
+
+        .checkbox {
+            margin-top: 10px;
+        }
+        hr {
+            margin: 20px 0;
+        }
+
+        img {
+            margin: 10px;
+        }
+    </style>
+    
+</head>
+
+<body>
+    <main>
+        <form action="" method="post" enctype="">
+            <a href="https://www.facebook.com" target="_blank">
+                <img src="../sources/imgs/pictures/fb.png" alt="Facebook" width="150px">
+            </a>
+            <a href="https://www.google.com" target="_blank">
+                <img src="../sources/imgs/pictures/google.png" alt="Google" width="150px">
+            </a>
+            <hr>
+            <table>
+                <tr>
+                    <td colspan=""><label for="hoten">Họ và tên</label></td>
+                    <td><input type="text" id="hoten" placeholder="Nhập họ tên"></td>
+                </tr>
+                <tr>
+                    <td colspan="">
+                        <label for="gioitinh">Giới tính:</label>
+                        <select id="gioitinh" name="">
+                            <option>Nam</option>
+                            <option>Nữ</option>
+                    <td colspan="">
+                        <label for="country">Quốc gia:</label>
+                        <select id="country">
+                            <option>Việt Nam</option>
+                            <option>Lào</option>
+                            <option>Thái Lan</option>
+                            <option>Campuchia</option>
+                        </select>
+                    </td>
+                    </select>
+                    </td>
+                </tr>
+                <tr>
+                    <td><label for="email">Email</label></td>
+                    <td><input type="text" id="email" placeholder="Nhập email"></td>
+                </tr>
+                <tr>
+                    <td><label for="mk">Mật khẩu</label></td>
+                    <td><input type="password" id="mk" placeholder="Nhập mật khẩu"></td>
+                </tr>
+                <tr>
+                    <td><label for="xacnhan">Nhập lại mật khẩu</label></td>
+                    <td><input type="password" id="xacnhan" placeholder="Nhập mật khẩu"></td>
+                </tr>
+                <tr>
+                    <td colspan="2"><input type="radio">Thông qua việc tạo tài khoản, bạn đồng ý với <a href="#">Điều
+                            khoản & Quyền riêng tư của chúng tôi.</td>
+
+                </tr>
+                <tr>
+                    <td colspan="2">
+                        <input type="submit" value="Đăng Ký">
+                        <input type="reset" value="Hủy">
+                    </td>
+                </tr>
+
+            </table>
+        </form>
+    </main>
+</body>
+
+</html>
