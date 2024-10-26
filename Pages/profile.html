@@ -384,12 +384,12 @@
                 <section id="myOder" class="d-none">
                     <h3>Đơn Hàng</h3>
                     <div class="btn-group" style="width: 100%;">
-                        <button class="btn btn-outline-warning">Giỏ hàng</button>
+                        <button id="giohang" class="btn btn-outline-warning">Giỏ hàng</button>
                         <button class="btn btn-outline-warning">Đơn đã đặt</button>
                         <button class="btn btn-outline-warning">vận chuyển</button>
                         <button class="btn btn-outline-warning">hoàn thành</button>
                     </div>
-                    <div class="iframe-container mt-3"><iframe src="" frameborder="0" id="orderInformation"></iframe></div>
+                    <div class="iframe-container mt-3"><iframe src="donhang/vanchuyen.html" frameborder="0" id="orderInformation"></iframe></div>
                 </section>
             </article>
         </div>
@@ -536,6 +536,11 @@
         function checkFrmVali(frm){
             return frm.checkValidity();
         }
+    </script>
+    <!-- thao tác iframe -->
+    <script>
+        let orderInformation = document.getElementById('orderInformation');
+         
     </script>
 </body>
 
