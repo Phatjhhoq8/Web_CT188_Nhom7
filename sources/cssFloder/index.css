@@ -372,15 +372,18 @@
 
 .header__cart-notice {
   position: absolute;
-  padding: 3px 3px;
-  font-size: 1rem;
-  line-height: 1rem;
-  border-radius: 100%;
-  border: 2px solid #ee4d2d;
-  background-color: var(--white-color);
-  color: var(--color-orange);
-  top: -16px;
-  right: -10px;
+  /* padding: 3px 3px; */
+  align-content: center;
+  width: 15px;
+  height: 15px;
+  font-size: .8rem;
+  line-height: .8rem;
+  border-radius: 50%;
+  /* border: 2px solid #ee4d2d; */
+  background-color: red;
+  color: var(--white-color);
+  top: -5px;
+  right: -8px;
 }
 /* sign in */
 .user-icon-container {
@@ -496,6 +499,46 @@ h2 {
 .user-icon-container:hover .login-container {
   display: block;
 }
+/* mess */
+.mess-icon-container {
+  position: relative;
+}
+.mess-container {
+  background-color: white;
+  border: 1px solid #ddd;
+  padding: 20px;
+  width: 300px;
+  text-align: center;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  position: absolute;
+  top: 40px;
+  right: 0;
+  display: none;
+  z-index: 10;
+}
+.mess-container::before {
+  content: "";
+  position: absolute;
+  right: 7px;
+  top: -18px;
+  border-width: 10px 16px;
+  border-style: solid;
+  border-color: transparent transparent var(--white-color) transparent;
+  cursor: pointer;
+}
+
+.mess-container::after {
+  content: "";
+  position: absolute;
+  right: 0;
+  top: -15px;
+  display: block;
+  height: 15px;
+  width: 100px;
+}
+.mess-icon-container:hover .mess-container {
+  display: block;
+}
 /* hero title */
 .hero {
   position: relative;
@@ -582,12 +625,13 @@ h2 {
 }
 /* Container bao quanh toàn bộ phần featurette */
 .featurette-container {
-    display: flex;
-    overflow-x: auto;
+    display: block;
+    /* overflow-x: hidden; */
     scroll-snap-type: x mandatory;
     scroll-behavior: smooth;
     width: 100%;
     padding: 1rem;
+    position: relative;
   }
   
   .featurette-content {
@@ -602,9 +646,39 @@ h2 {
     border: 1px solid #ddd;
     background-color: #f9f9f9;
     border-radius: 10px;
-    min-width: 100%; 
+    min-width: 100%;
+    display: none;
   }
-  
+  .row.featurette.active {
+    display: flex;
+  }
+  .arrow-button {
+    width: 50px;
+    height: 50px;
+    background-color: #fff;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+    transition: background-color 0.3s ease;
+    color: #000;
+    font-size: 24px;
+    border: none;
+    position: absolute;
+}
+.arrow-button:hover {
+    background-color: #f7f2f2;
+}
+.arrow-button.fas.fa-chevron-left {
+  top: 50%;
+  left: -25px;
+}
+.arrow-button.fas.fa-chevron-right {
+  right: -25px;
+  top: 50%;
+}
 /* Định dạng cho nút Scroll to Top */
 .scroll-top-btn {
   position: fixed;
