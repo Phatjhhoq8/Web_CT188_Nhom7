@@ -394,32 +394,6 @@
       <div class="featurette-container">
         <div class="featurette-content">
           <button class="arrow-button fas fa-chevron-left" onclick="buttonLeft()"></button>
-          <div class="row featurette active">
-            <div class="col-md-7">
-              <h2 class="featurette-heading lh-1">
-                Mr Lê Văn Quan
-                <div class="text-body-secondary fw-normal">Người mẫu, Diễn viên, Nam Vương Thế Giới năm 2030</span>
-              </h2>
-              <p class="lead" style="text-align: justify;">
-                "Đèn năng lượng mặt trời của The Light là sản phẩm tuyệt vời! Nó không chỉ mang lại ánh sáng đầy đủ cho
-                sân vườn của tôi mà còn giúp tôi tiết kiệm chi phí điện. Tôi cũng rất thích thiết kế đẹp mắt của đèn,
-                khiến không gian sống của tôi thêm phần nổi bật. Nếu bạn đang tìm kiếm một giải pháp chiếu sáng hiệu quả
-                và bền vững, đừng ngần ngại thử ngay sản phẩm này!"</p>
-            </div>
-            <div class="col-md-5">
-              <svg class="bd-placeholder-img bd-placeholder-img-lg featurette-image img-fluid mx-auto" width="500"
-                height="500" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: 500x500"
-                preserveAspectRatio="xMidYMid slice" focusable="false">
-                <defs>
-                  <pattern id="khachhang1" patternUnits="userSpaceOnUse" width="100%" height="100%">
-                    <image href="sources/imgs/home/khachhang1.jpg" width="100%" height="100%"
-                      preserveAspectRatio="xMidYMid slice" />
-                  </pattern>
-                </defs>
-                <rect width="100%" height="100%" fill="url(#khachhang1)"></rect>
-              </svg>
-            </div>
-          </div>
           <div class="row featurette">
             <div class="col-md-7">
               <h2 class="featurette-heading lh-1">
@@ -471,6 +445,32 @@
                   </pattern>
                 </defs>
                 <rect width="100%" height="100%" fill="url(#khachhang3)"></rect>
+              </svg>
+            </div>
+          </div>
+          <div class="row featurette active">
+            <div class="col-md-7">
+              <h2 class="featurette-heading lh-1">
+                Mr Lê Văn Quan
+                <div class="text-body-secondary fw-normal">Người mẫu, Diễn viên, Nam Vương Thế Giới năm 2030</span>
+              </h2>
+              <p class="lead" style="text-align: justify;">
+                "Đèn năng lượng mặt trời của The Light là sản phẩm tuyệt vời! Nó không chỉ mang lại ánh sáng đầy đủ cho
+                sân vườn của tôi mà còn giúp tôi tiết kiệm chi phí điện. Tôi cũng rất thích thiết kế đẹp mắt của đèn,
+                khiến không gian sống của tôi thêm phần nổi bật. Nếu bạn đang tìm kiếm một giải pháp chiếu sáng hiệu quả
+                và bền vững, đừng ngần ngại thử ngay sản phẩm này!"</p>
+            </div>
+            <div class="col-md-5">
+              <svg class="bd-placeholder-img bd-placeholder-img-lg featurette-image img-fluid mx-auto" width="500"
+                height="500" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: 500x500"
+                preserveAspectRatio="xMidYMid slice" focusable="false">
+                <defs>
+                  <pattern id="khachhang1" patternUnits="userSpaceOnUse" width="100%" height="100%">
+                    <image href="sources/imgs/home/khachhang1.jpg" width="100%" height="100%"
+                      preserveAspectRatio="xMidYMid slice" />
+                  </pattern>
+                </defs>
+                <rect width="100%" height="100%" fill="url(#khachhang1)"></rect>
               </svg>
             </div>
           </div>
@@ -586,7 +586,7 @@
         if (!ulMess.querySelector('.header__notify-item--viewed')) {
             let li = document.createElement('li');
             li.classList.add("header__notify-item", "header__notify-item--viewed");
-            li.innerHTML = "<a class='header__notify-link justify-content-center' href='#'>Vui lòng đăng nhập để xem thông báo</a>";
+            li.innerHTML = `<a class='header__notify-link justify-content-center' href='#'>Vui lòng đăng nhập để xem thông báo</a>`;
             ulMess.appendChild(li);
         }
       }else {
@@ -610,25 +610,40 @@
     const bannerList = document.querySelectorAll(".featurette");
     const nBanner = bannerList.length;
     let i = 0;
+    var repeatBanner=setInterval(() => {
+      const bannerItem = document.querySelector(".featurette.active");
+      if (bannerItem) bannerItem.classList.remove("active");
+      bannerList[i].classList.add("active");
+      i = (i + 1) % nBanner;
+    }, 10000);
     var buttonLeft = () => {
       const bannerItem = document.querySelector(".featurette.active");
       if (bannerItem) bannerItem.classList.remove("active");
       bannerList[i].classList.add("active");
       i = (i - 1);
       if (i < 0) i = nBanner - 1;
+      clearInterval(repeatBanner);
+      repeatBanner=setInterval(() => {
+      const bannerItem = document.querySelector(".featurette.active");
+      if (bannerItem) bannerItem.classList.remove("active");
+      bannerList[i].classList.add("active");
+      i = (i + 1) % nBanner;
+    }, 10000);
     }
     var buttonRight = () => {
       const bannerItem = document.querySelector(".featurette.active");
       if (bannerItem) bannerItem.classList.remove("active");
       bannerList[i].classList.add("active");
       i = (i + 1) % nBanner;
-    }
-    setInterval(() => {
+      clearInterval(repeatBanner);
+      repeatBanner=setInterval(() => {
       const bannerItem = document.querySelector(".featurette.active");
       if (bannerItem) bannerItem.classList.remove("active");
       bannerList[i].classList.add("active");
       i = (i + 1) % nBanner;
-    }, 30000);
+    }, 10000);
+    }
+    
   </script>
 </body>
 
