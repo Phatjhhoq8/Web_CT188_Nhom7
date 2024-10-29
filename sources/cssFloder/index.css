@@ -150,7 +150,7 @@
 }
 
 .header__notify-item:hover {
-  background-color: #f3b84b;
+  background-color: #c2c1be;
 }
 
 .header__notify-item--viewed {
@@ -176,7 +176,7 @@
 .header__notify-name {
   display: block;
   font-size: 1.3rem;
-  color: var(--black-color);
+  color: #000;
   font-weight: 400px;
   line-height: 1.9rem;
 }
@@ -248,7 +248,7 @@
 }
 
 .header__cart-item:hover {
-  background-color: #f8f8f8;
+  background-color: #c2c1be;
 }
 
 .header__cart-img {
@@ -321,10 +321,13 @@
 }
 
 .header__cart-view-cart {
+  display: none;
   float: right;
   margin: 0 12px 12px 0;
 }
-
+.header__cart-view-cart.show {
+  display: block;
+}
 .header__cart-view-cart:hover {
   opacity: 0.9;
 }
@@ -354,8 +357,8 @@
   padding: 24px 0;
 }
 
-.header__cart-list--no-cart .header__cart-no-cart-img,
-.header__cart-list--no-cart .header__cart-no-cart-msg {
+.header__cart-list--no-cart.header__cart-no-cart-img,
+.header__cart-list--no-cart.header__cart-no-cart-msg {
   display: block;
   margin-left: auto;
   margin-right: auto;
@@ -541,6 +544,9 @@ h2 {
 }
 .mess-icon-container:hover .mess-container {
   display: block;
+}
+.header__notify-link.mess-txt :hover {
+  background-color: #e9e8e8;
 }
 /* hero title */
 .hero {

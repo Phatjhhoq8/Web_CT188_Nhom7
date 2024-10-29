@@ -6,140 +6,107 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="keywords" content="">
     <title>Đăng Ký</title>
-    
+    <link rel="shortcut icon" href="/sources/imgs/home/short-cut.png" type="image/x-icon">
+    <link rel="stylesheet" href="/sources/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/sources/cssFloder/index.css">
+    <link rel="stylesheet" href="/sources/fontawesome-free-5.12.1-web/css/all.min.css">
     <style>
-        body {
-            font-family: Arial, sans-serif;
+        .custom-body {
             background-color: #f7f7f7;
+            height: 100vh;
             display: flex;
             justify-content: center;
             align-items: center;
-            height: 100vh;
-            margin: 0;
         }
 
-        main {
+        .custom-main {
             background-color: white;
             padding: 20px;
             border-radius: 8px;
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
         }
 
-        table {
-            width: 100%;
-            border-collapse: collapse;
-        }
-
-        td {
-            padding: 10px;
-            border: 1px solid #ccc;
-            vertical-align: top;
-        }
-
-        label {
-            display: block;
-            margin-bottom: 5px;
-        }
-
-        input[type="text"],
-        input[type="password"],
-        select {
-            width: 100%;
-            padding: 8px;
-            box-sizing: border-box;
-            border: 1px solid #ccc;
-            border-radius: 4px;
-        }
-
-        input[type="submit"],
-        input[type="reset"] {
-            padding: 10px 15px;
-            border: none;
-            border-radius: 4px;
-            cursor: pointer;
-            background-color: #4CAF50;
-            color: white;
-            margin-right: 10px;
-        }
-
-        input[type="reset"] {
-            background-color: #f44336;
-        }
-
-        .checkbox {
-            margin-top: 10px;
-        }
-        hr {
+        .custom-hr {
             margin: 20px 0;
         }
 
-        img {
+        .custom-img {
             margin: 10px;
         }
     </style>
-    
+
 </head>
 
 <body>
-    <main>
-        <form action="" method="post" enctype="">
-            <a href="https://www.facebook.com" target="_blank">
-                <img src="../sources/imgs/pictures/fb.png" alt="Facebook" width="150px">
-            </a>
-            <a href="https://www.google.com" target="_blank">
-                <img src="../sources/imgs/pictures/google.png" alt="Google" width="150px">
-            </a>
-            <hr>
-            <table>
-                <tr>
-                    <td colspan=""><label for="hoten">Họ và tên</label></td>
-                    <td><input type="text" id="hoten" placeholder="Nhập họ tên"></td>
-                </tr>
-                <tr>
-                    <td colspan="">
-                        <label for="gioitinh">Giới tính:</label>
-                        <select id="gioitinh" name="">
-                            <option>Nam</option>
-                            <option>Nữ</option>
-                    <td colspan="">
-                        <label for="country">Quốc gia:</label>
-                        <select id="country">
-                            <option>Việt Nam</option>
-                            <option>Lào</option>
-                            <option>Thái Lan</option>
-                            <option>Campuchia</option>
-                        </select>
-                    </td>
+    <div class="custom-body">
+        <main class="custom-main">
+            <form action="" method="post" enctype="">
+                <fieldset class="border-0">
+                    <legend style="text-align: center;" class="font-weight-bold mb-3"><h3>ĐĂNG KÝ</h3></legend>
+                
+                <div style="text-align: center;">
+                    <a href="https://www.facebook.com" target="_blank">
+                        <img src="../sources/imgs/pictures/fb.png" alt="Facebook" class="custom-img" width="50vh">
+                    </a>
+                    <a href="https://www.google.com" target="_blank">
+                        <img src="../sources/imgs/pictures/google.png" alt="Google" class="custom-img" width="50vh">
+                    </a>
+                </div>
+                <hr class="custom-hr">
+                <div class="form-group">
+                    <label for="hoten">Họ và tên</label>
+                    <input type="text" id="hoten" class="form-control" placeholder="Nhập họ tên">
+                </div>
+
+                <div class="form-group">
+                    <label for="gioitinh">Giới tính:</label>
+                    <select id="gioitinh" class="form-control">
+                        <option value="none" disabled selected>---Chọn---</option>
+                        <option value="Không muốn tiết lộ">Không muốn tiết lộ</option>
+                        <option value="Nam">Nam</option>
+                        <option value="Nữ">Nữ</option>
+                        <option value="Khác">Khác</option>
                     </select>
-                    </td>
-                </tr>
-                <tr>
-                    <td><label for="email">Email</label></td>
-                    <td><input type="text" id="email" placeholder="Nhập email"></td>
-                </tr>
-                <tr>
-                    <td><label for="mk">Mật khẩu</label></td>
-                    <td><input type="password" id="mk" placeholder="Nhập mật khẩu"></td>
-                </tr>
-                <tr>
-                    <td><label for="xacnhan">Nhập lại mật khẩu</label></td>
-                    <td><input type="password" id="xacnhan" placeholder="Nhập mật khẩu"></td>
-                </tr>
-                <tr>
-                    <td colspan="2"><input type="radio">Thông qua việc tạo tài khoản, bạn đồng ý với <a href="#">Điều
-                            khoản & Quyền riêng tư của chúng tôi.</td>
+                </div>
 
-                </tr>
-                <tr>
-                    <td colspan="2">
-                        <input type="submit" value="Đăng Ký">
-                        <input type="reset" value="Hủy">
-                    </td>
-                </tr>
+                <div class="form-group">
+                    <label for="country">Quốc gia:</label>
+                    <select id="country" class="form-control">
+                        <option>Việt Nam</option>
+                        <option>Lào</option>
+                        <option>Thái Lan</option>
+                        <option>Campuchia</option>
+                    </select>
+                </div>
 
-            </table>
+                <div class="form-group">
+                    <label for="email">Email</label>
+                    <input type="text" id="email" class="form-control" placeholder="Nhập email">
+                </div>
+
+                <div class="form-group">
+                    <label for="mk">Mật khẩu</label>
+                    <input type="password" id="mk" class="form-control" placeholder="Nhập mật khẩu">
+                </div>
+
+                <div class="form-group">
+                    <label for="xacnhan">Nhập lại mật khẩu</label>
+                    <input type="password" id="xacnhan" class="form-control" placeholder="Nhập mật khẩu">
+                </div>
+
+                <div class="form-group form-check">
+                    <input type="checkbox" class="form-check-input" id="terms">
+                    <label class="form-check-label" for="terms">Thông qua việc tạo tài khoản, bạn đồng ý với <a
+                            href="#">Điều khoản & Quyền riêng tư của chúng tôi.</a></label>
+                </div>
+
+                <button type="submit" class="btn btn-primary">Đăng Ký</button>
+                <button type="reset" class="btn btn-danger">Hủy</button>
+            </fieldset>
         </form>
-    </main>
+        </main>
+    </div>
+
 </body>
 
 </html>
