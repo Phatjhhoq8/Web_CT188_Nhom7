@@ -62,15 +62,16 @@
                 <span> VN <i class="fas fa-angle-down"></i></span>
               </div>
             </li>
-            <li onmouseover="showListMess()"
+            <li onmouseenter="showListMess()"
               class="list-group-item text-secondary boder-none text-white poiter mess-icon-container">
               <span><i class="fas fa-comments"></i></span>
               <div class="mess-container">
-                <h2 class="text-secondary">Tin nhắn</h2>
-                <p class="text-secondary">Không có tin nhắn nào</p>
+                <h2 class="text-secondary" style="margin-bottom: 8px;">Tin nhắn</h2>
+                <!-- <p class="text-secondary">Không có tin nhắn nào</p> -->
+                 <ul class="mess-box"></ul>
               </div>
             </li>
-            <li onmouseover="showListNotice()"
+            <li onmouseenter="showListNotice()"
               class="list-group-item text-secondary boder-none text-white header__navbar-item--has-notify poiter">
               <span><i class="fas fa-bell"></i></span>
               <!-- Header Notification  -->
@@ -86,7 +87,7 @@
                 </footer>
               </div>
             </li>
-            <li onmouseover="showCart()" class="list-group-item text-secondary boder-none text-white">
+            <li onmouseenter="showCart()" class="list-group-item text-secondary boder-none text-white">
               <div class="header__cart-wrap">
                 <i class="header__cart-icon fas fa-shopping-cart"></i>
 
@@ -97,32 +98,14 @@
                   <!-- <img src="/sources/imgs/home/cart-empty.png" alt="No cart" class="header__cart-list--no-cart header__cart-no-cart-img" />
                   <span class="header__cart-list--no-cart header__cart-no-cart-msg">Chưa có sản phẩm</span> -->
 
-                  <h4 class="header__cart-heading">Sản phẩm đã thêm</h4>
+                  <h4 class="header__cart-heading text-center">Sản phẩm đã thêm</h4>
                   <ul class="header__cart-list-item"></ul>
 
                   <a href="#" class="header__cart-view-cart btn btn--primary">Xem giỏ hàng</a>
                 </div>
               </div>
             </li>
-            <li class="list-group-item text-secondary rounded-pill bg-orange text-white user-icon-container poiter">
-              <i class="fas fa-user"></i>
-              <span>Sign in</span>
-              <div class="login-container">
-                <h2 class="text-secondary">Sign back in to continue</h2>
-                <button class="sign-in-btn">Sign in</button>
-                <p class="text-secondary">Or, continue with:</p>
-                <div class="social-buttons">
-                  <button class="social-btn facebook">Facebook</button>
-                  <button class="social-btn google">Google</button>
-                  <button class="social-btn linkedin">LinkedIn</button>
-                </div>
-                <p class="agreement">
-                  By signing in via social media, I agree to the
-                  <a href="#">Alibaba.com Free Membership Agreement</a> and
-                  <a href="#">Privacy Policy</a>, and to receive emails about
-                  the platform's products and services.
-                </p>
-              </div>
+            <li id="stateLogin" class="list-group-item text-secondary rounded-pill bg-orange text-white user-icon-container poiter"></div>
             </li>
           </ul>
         </div>
@@ -496,14 +479,51 @@
     window.addEventListener("storage", (event) => {
       if (event.key === 'Ischecked' && event.newValue !== isChecked) location.reload();
     });
+    // Trạng thái đăng nhập
+    document.addEventListener('DOMContentLoaded',() => {
+      var userState=document.querySelector('#stateLogin');
+      if(isChecked=='false') {
+        userState.innerHTML=`<i class="fas fa-user"></i>
+              <span>Sign in</span>
+              <div class="login-container">
+                <h2 class="text-secondary">Sign back in to continue</h2>
+                <button class="sign-in-btn rounded-pill">Sign in</button>
+                <p class="text-secondary">Or register to create a new account:</p>
+                <button class="sign-in-btn rounded-pill">Register</button>
+                <p class="agreement">
+                  I agree to the
+                  <a href="#">TheLight.com Free Membership Agreement</a> and
+                  <a href="#">Privacy Policy.</a>
+                </p>`;
+      }
+      else {
+        userState.innerHTML=`<li class="header__navbar-item header__navbar-user">
+                            <img src="https://i.pinimg.com/736x/13/2e/a7/132ea72d2bc3b85d90409c9e8f2d0f4a.jpg" alt=""
+                                class="header__navbar-user-img">
+                            <span class="header__navbar-user-name">Tiến Phát</span>
+                            <ul class="header__navbar-user-menu">
+                                <li class="header__navbar-user-item">
+                                    <a href="">Tài khoản của tôi</a>
+                                </li>
+                                <li class="header__navbar-user-item header__navbar-user-item--separate">
+                                    <a href="#" onclick="logout()">Đăng xuất</a>
+                                </li>
+                            </ul>
+                        </li>`;
+      }
+    })
     // Tin nhắn
     var showListMess = (e) => {
-      const divMess = document.querySelector('.mess-container>p');
+      const ulMess = document.querySelector('.mess-box');
       if (isChecked === "false") {
-        divMess.innerHTML = `<a class='header__notify-link justify-content-center mess-txt' href='#'>Vui lòng đăng nhập để xem tin nhắn</a>`;
+        if (!ulMess.querySelector('.header__mess-item')) {
+          let li = document.createElement('li');
+          li.classList.add("header__mess-item", "header__mess-item--viewed");
+          li.innerHTML= `<a class='header__mess-link justify-content-center' href='#'>Vui lòng đăng nhập để xem tin nhắn</a>`;
+          ulMess.appendChild(li); 
+        }
       } else {
-        divMess.innerHTML = `<p class="text-secondary">Không có tin nhắn nào</p>`;
-
+        if(!ulMess.querySelector('p')) ulMess.innerHTML = `<p class="text-secondary">Không có tin nhắn nào</p>`;
       }
     }
     // Thông báo
@@ -512,7 +532,7 @@
       const messFooter = document.querySelector(".header__notify-footer-btn");
       if (isChecked === "false") {
         messFooter.classList.remove("show");
-        if (!ulMess.querySelector('.header__notify-item--viewed')) {
+        if (!ulMess.querySelector('.header__notify-item')) {
           let li = document.createElement('li');
           li.classList.add("header__notify-item", "header__notify-item--viewed");
           li.innerHTML = `<a class='header__notify-link justify-content-center' href='#'>Vui lòng đăng nhập để xem thông báo</a>`;
@@ -545,7 +565,7 @@
         if (!ulCart.querySelector('.header__notify-item--viewed')) {
           let li = document.createElement('li');
           li.classList.add("header__notify-item", "header__notify-item--viewed");
-          li.innerHTML = `<a class='header__notify-link justify-content-center' href='#'>Vui lòng đăng nhập để xem thông báo</a>`;
+          li.innerHTML = `<a class='header__notify-link justify-content-center' href='#'>Vui lòng đăng nhập để xem sản phẩm</a>`;
           ulCart.appendChild(li);
         }
       } else {
@@ -621,7 +641,11 @@
       updateBanner(i);
       repeatBanner = startAutoBanner();
     };
-
+    // Đăng xuất
+    var logout =() => {
+      window.localStorage.setItem('Ischecked',false);
+      location.reload();
+    }
 
   </script>
 </body>

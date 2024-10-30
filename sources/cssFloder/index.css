@@ -58,7 +58,7 @@
 }
 
 .header__search-history-item:hover {
-  background-color: #f8f8f8;
+  background-color: #c2c1be;
 }
 
 .header__search-history-item a {
@@ -137,7 +137,7 @@
   color: #999;
   margin: 0 0 0 12px;
   font-weight: 400px;
-  font-size: 1.3rem;
+  font-size: 1.4rem;
   line-height: 40px;
 }
 
@@ -175,7 +175,7 @@
 
 .header__notify-name {
   display: block;
-  font-size: 1.3rem;
+  font-size: 1.2rem;
   color: #000;
   font-weight: 400px;
   line-height: 1.9rem;
@@ -183,7 +183,7 @@
 
 .header__notify-description {
   display: block;
-  font-size: 1.1rem;
+  font-size: 1rem;
   color: #756f6e;
   line-height: 1.6rem;
   margin-top: 5px;
@@ -194,7 +194,7 @@
   color: var(--text-color);
   width: 100%;
   padding: 8px 0;
-  font-size: 1.4rem;
+  font-size: 1.2rem;
   font-weight: 400;
   text-align: center;
   display: none;
@@ -329,7 +329,7 @@
   display: block;
 }
 .header__cart-view-cart:hover {
-  opacity: 0.9;
+  color: var(--color-orange);
 }
 
 .header__cart-list::before {
@@ -505,14 +505,146 @@ h2 {
 .user-icon-container:hover .login-container {
   display: block;
 }
+.header__navbar-user {
+  display: flex;
+  align-items: center;
+  position: relative;
+}
+
+.header__navbar-user:hover .header__navbar-user-menu {
+  display: block;
+}
+
+.header__navbar-user-img {
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  border: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+.header__navbar-user-name {
+  margin-left: 4px;
+  font-size: 1rem;
+  font-weight: 300;
+}
+
+.header__navbar-user-menu {
+  position: absolute;
+  z-index: 1;
+  padding-left: 0;
+  top: calc(100% + 23px);
+  right: -10px;
+  background-color: var(--white-color);
+  border-radius: 2px;
+  width: 160px;
+  list-style: none;
+  box-shadow: 0 1px 2px #e0e0e0;
+  display: none;
+}
+
+.header__navbar-user-menu::before {
+  content: "";
+  border-width: 13px 18px;
+  border-style: solid;
+  border-color: transparent transparent var(--white-color) transparent;
+  position: absolute;
+  right: 20px;
+  top: -25px;
+}
+
+.header__navbar-user-menu::after {
+  content: "";
+  display: block;
+  position: absolute;
+  right: 0;
+  top: -25px;
+  width: 70%;
+  height: 30px;
+}
+
+.header__navbar-user-item--separate {
+  border-top: 1px solid rgba(0, 0, 0, 0.05);
+}
+
+.header__navbar-user-item a {
+  text-decoration: none;
+  color: var(--text-color);
+  font-size: 1rem;
+  padding: 8px 16px;
+  display: block;
+}
+
+.header__navbar-user-item a:first-child {
+  border-top-left-radius: 2px;
+  border-top-right-radius: 2px;
+}
+
+.header__navbar-user-item a:last-child {
+  border-bottom-left-radius: 2px;
+  border-bottom-right-radius: 2px;
+}
+
+.header__navbar-user-item a:hover {
+  background-color: #c2c1be;
+}
+
 /* mess */
+.mess-box {
+  padding-left: 0;
+  justify-content: stretch;
+  width: 100%;
+}
+.header__mess-item {
+  display: flex;
+  width: 100%;
+}
+.header__mess-item:hover {
+  background-color: #c2c1be;
+}
+
+.header__mess-item--viewed {
+  background-color: rgba(41, 31, 31, 0.1);
+}
+
+.header__mess-link {
+  display: flex;
+  width: 100%;
+  padding: 12px;
+  text-decoration: none;
+}
+
+.header__mess-img {
+  width: 100px;
+  object-fit: contain;
+}
+
+.header__mess-info {
+  margin-left: 12px;
+}
+
+.header__mess-name {
+  display: block;
+  font-size: 1.3rem;
+  color: #000;
+  font-weight: 400px;
+  line-height: 1.9rem;
+}
+
+.header__mess-description {
+  display: block;
+  font-size: 1.1rem;
+  color: #756f6e;
+  line-height: 1.6rem;
+  margin-top: 5px;
+}
+
 .mess-icon-container {
   position: relative;
 }
 .mess-container {
   background-color: white;
   border: 1px solid #ddd;
-  padding: 20px;
+  padding: 12px 0 0 0;
   width: 300px;
   text-align: center;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
@@ -521,6 +653,7 @@ h2 {
   right: 0;
   display: none;
   z-index: 10;
+  border-radius: 5px;
 }
 .mess-container::before {
   content: "";
@@ -544,9 +677,6 @@ h2 {
 }
 .mess-icon-container:hover .mess-container {
   display: block;
-}
-.header__notify-link.mess-txt :hover {
-  background-color: #e9e8e8;
 }
 /* hero title */
 .hero {

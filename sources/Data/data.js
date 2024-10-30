@@ -1,4 +1,4 @@
-var productInfoList = [
+const productInfoList = [
     {
         id: "SP001",
         nameProduct: "Đèn Đường Năng Lượng Mặt Trời Liền Thể LT6120 Nhiều Khoang Kitawa",
@@ -280,3 +280,30 @@ var productInfoList = [
         detail: "SP028",
     }
 ];
+const user =[
+    {userName: '',
+    pwd: ''
+    },
+];
+const dataUser=[
+    {
+      userName: "user1",
+      data: {
+        cart: [
+          { itemId: 1, itemName: "Sản phẩm A", quantity: 2, price: 100 },
+          { itemId: 2, itemName: "Sản phẩm B", quantity: 1, price: 200 },
+        ],
+        ordersPlaced: [
+          { orderId: 101, items: [{ itemId: 1, quantity: 1 }], total: 100, status: "Đã đặt" },
+          { orderId: 102, items: [{ itemId: 2, quantity: 1 }], total: 200, status: "Đã đặt" }
+        ],
+        ordersPaid: [
+          { orderId: 103, items: [{ itemId: 3, quantity: 1 }], total: 300, status: "Đã thanh toán" }
+        ],
+        notificationsReceived: [
+          { notificationId: 1, message: "Đơn hàng của bạn đã được xác nhận", date: "2023-10-15" },
+          { notificationId: 2, message: "Sản phẩm mới đã có trong cửa hàng", date: "2023-10-20" }
+        ]
+      }
+    }
+  ];
