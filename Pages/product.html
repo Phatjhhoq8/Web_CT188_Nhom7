@@ -210,107 +210,177 @@
       </nav>
     </header>
 
-    <div class="container">
+    <div class="container" style="background-color: #f4f4f4;">
       <div class="row">
         <div class="col-6 col-md-3">
-          <ul>
-            <p>Công suất</p>
-            <li>25W</li>
-            <li>60W</li>
-            <li>100W</li>
-            <li>120W</li>
-            <li>150W</li>
-            <li>Xem Thêm</li>
-          </ul>
-          <ul>
-            <p>Giá</p>
-            <li>Giá dưới 1.000.000đ</li>
-            <li>1.000.000đ - 2.000.000đ</li>
-            <li>2.000.000đ - 3.000.000đ</li>
-            <li>3.000.000đ - 5.000.000đ</li>
-            <li>Giá trên 5.000.000đ</li>
-            <li>Xem Thêm</li>
-          </ul>
-          <ul>
-            <p>Loại Sản Phẩm</p>
-            <li>Đèn Pha</li>
-            <li>Đèn LED</li>
-            <li>Đèn UFO</li>
-            <li>Đèn ốp trần</li>
-          </ul>
-          <ul>
-            <p>Vị Trí Lắp Dặt</p>
-            <li>Trong nhà</li>
-            <li>Ngoài Trời</li>
-          </ul>
-        </div>
+            <div>
+              <h2 class="fw-bold fs-2">Sắp xếp</h2>
+              <div class="mb-3">
+                  <p class="fw-bold">Công suất</p>
+                  <ul class="list-unstyled">
+                      <li><input type="checkbox" class="form-check-input"> 25W</li>
+                      <li><input type="checkbox" class="form-check-input"> 60W</li>
+                      <li><input type="checkbox" class="form-check-input"> 100W</li>
+                      <li><input type="checkbox" class="form-check-input"> 120W</li>
+                      <li><input type="checkbox" class="form-check-input"> 150W</li>
+                  </ul>
+              </div>
+              
+              <div class="mb-3">
+                  <p class="fw-bold">Giá</p>
+                  <ul class="list-unstyled">
+                      <li><input type="checkbox" class="form-check-input"> Giá dưới 1.000.000đ</li>
+                      <li><input type="checkbox" class="form-check-input"> 1.000.000đ - 2.000.000đ</li>
+                      <li><input type="checkbox" class="form-check-input"> 2.000.000đ - 3.000.000đ</li>
+                      <li><input type="checkbox" class="form-check-input"> 3.000.000đ - 5.000.000đ</li>
+                      <li><input type="checkbox" class="form-check-input"> Giá trên 5.000.000đ</li>
+                  </ul>
+              </div>
+              
+              <div class="mb-3">
+                  <p class="fw-bold">Loại Sản Phẩm</p>
+                  <ul class="list-unstyled">
+                      <li><input type="checkbox" class="form-check-input"> Đèn Pha</li>
+                      <li><input type="checkbox" class="form-check-input"> Đèn LED</li>
+                      <li><input type="checkbox" class="form-check-input"> Đèn UFO</li>
+                      <li><input type="checkbox" class="form-check-input"> Đèn ốp trần</li>
+                  </ul>
+              </div>
+              
+              <div class="mb-3">
+                  <p class="fw-bold">Vị Trí Lắp Đặt</p>
+                  <ul class="list-unstyled">
+                      <li><input type="checkbox" class="form-check-input"> Trong nhà</li>
+                      <li><input type="checkbox" class="form-check-input"> Ngoài Trời</li>
+                  </ul>
+              </div>
+            </div>
+      </div>
+      
         <div class="col-md-9">
-          <div class="row row-cols-1 row-cols-lg-3 align-items-stretch g-4 py-5">
-            <div class="col">
-              <div class="card card-cover h-100 overflow-hidden text-bg-dark rounded-4 shadow-lg"
-                style="background-image: url('/sources/imgs/home/logo.png');">
-                <div class="d-flex flex-column h-100 p-5 pb-3 text-white text-shadow-1">
-                  <h3 class="pt-5 mt-5 mb-4 display-6 lh-1 fw-bold">Đánh giá tốt nhất</h3>
-                  <ul class="d-flex list-unstyled mt-auto">
-
-                    <li class="d-flex align-items-center me-3">
-                      <svg class="bi me-2" width="1em" height="1em">
-                        <use xlink:href="#geo-fill"></use>
-                      </svg>
-                      <small>Giá</small>
-                    </li>
-                    <li class="d-flex align-items-center">
-                      <svg class="bi me-2" width="1em" height="1em">
-                        <use xlink:href="#calendar3"></use>
-                      </svg>
-                      <small>Số lượng: </small>
-                    </li>
-                  </ul>
+          <nav aria-label="Page navigation" style="position: absolute;right: 140px;top: 144px;">
+            <ul class="pagination">
+              <li class="page-item">
+                <a class="page-link" href="#" aria-label="Previous">
+                  <span aria-hidden="true">&laquo;</span>
+                </a>
+              </li>
+              <li class="page-item"><a class="page-link" href="#">1</a></li>
+              <li class="page-item"><a class="page-link" href="#">2</a></li>
+              <li class="page-item"><a class="page-link" href="#">3</a></li>
+              <li class="page-item">
+                <a class="page-link" href="#" aria-label="Next">
+                  <span aria-hidden="true">&raquo;</span>
+                </a>
+              </li>
+            </ul>
+          </nav>
+          <div class="container">
+            <div class="row justify-content-center">
+              <div class="col-12">
+                <div class="section-title text-center pb-2 mb-5">
+                  <!-- <h4 class="title">Our products</h4> -->
+                </div>
+              </div><!--end col-->
+            </div><!--end row-->
+            <div class="row">
+              <div class="col-md-3 col-sm-6">
+                <div class="product-grid">
+                  <div class="product-image">
+                    <a href="#" class="image">
+                      <img class="pic-1"
+                        src="https://images.unsplash.com/photo-1539840093138-9b3e230e5206?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=765a2eb222b1851840a4a157780fb487&auto=format&fit=crop&w=1534&q=80">
+                      <img class="pic-2"
+                        src="https://images.unsplash.com/photo-1539840093138-9b3e230e5206?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=765a2eb222b1851840a4a157780fb487&auto=format&fit=crop&w=1534&q=80">
+                    </a>
+                    <a href="#" class="product-like-icon" data-tip="Add to Wishlist">
+                      <i class="far fa-heart"></i>
+                    </a>
+                    <ul class="product-links">
+                      <li><a href="#"><i class="fa fa-search"></i></a></li>
+                      <li><a href="#"><i class="fas fa-shopping-cart"></i></a></li>
+                      <li><a href="#"><i class="fa fa-random"></i></a></li>
+                    </ul>
+                  </div>
+                  <div class="product-content">
+                    <h3 class="title"><a href="#">Women's Top</a></h3>
+                    <div class="price">$75.99</div>
+                  </div>
                 </div>
               </div>
-            </div>
-
-            <div class="col">
-              <div class="card card-cover h-100 overflow-hidden text-bg-dark rounded-4 shadow-lg"
-                style="background-image: url('/sources/imgs/home/logo.png');">
-                <div class="d-flex flex-column h-100 p-5 pb-3 text-white text-shadow-1">
-                  <h3 class="pt-5 mt-5 mb-4 display-6 lh-1 fw-bold">Phổ biến nhất</h3>
-                  <ul class="d-flex list-unstyled mt-auto">
-                    <li class="d-flex align-items-center me-3">
-                      <svg class="bi me-2" width="1em" height="1em">
-                        <use xlink:href="#geo-fill"></use>
-                      </svg>
-                      <small>Giá</small>
-                    </li>
-                    <li class="d-flex align-items-center">
-                      <svg class="bi me-2" width="1em" height="1em">
-                        <use xlink:href="#calendar3"></use>
-                      </svg>
-                      <small>Số lượng: </small>
-                    </li>
-                  </ul>
+              <div class="col-md-3 col-sm-6">
+                <div class="product-grid">
+                  <div class="product-image">
+                    <a href="#" class="image">
+                      <img class="pic-1"
+                        src="https://images.unsplash.com/photo-1511556820780-d912e42b4980?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=04aebe9a22884efa1a5f61e434215597&auto=format&fit=crop&w=500&q=60">
+                      <img class="pic-2"
+                        src="https://images.unsplash.com/photo-1511556820780-d912e42b4980?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=04aebe9a22884efa1a5f61e434215597&auto=format&fit=crop&w=500&q=60">
+                    </a>
+                    <span class="product-sale-label">Sale</span>
+                    <a href="#" class="product-like-icon" data-tip="Add to Wishlist">
+                      <i class="far fa-heart"></i>
+                    </a>
+                    <ul class="product-links">
+                      <li><a href="#"><i class="fa fa-search"></i></a></li>
+                      <li><a href="#"><i class="fas fa-shopping-cart"></i></a></li>
+                      <li><a href="#"><i class="fa fa-random"></i></a></li>
+                    </ul>
+                  </div>
+                  <div class="product-content">
+                    <h3 class="title"><a href="#">Men's Blazer</a></h3>
+                    <div class="price"><span>$86.33</span> $71.55</div>
+                  </div>
                 </div>
               </div>
-            </div>
-
-            <div class="col">
-              <div class="card card-cover h-100 overflow-hidden text-bg-dark rounded-4 shadow-lg"
-                style="background-image: url('/sources/imgs/home/logo.png');">
-                <div class="d-flex flex-column h-100 p-5 pb-3 text-shadow-1">
-                  <h3 class="pt-5 mt-5 mb-4 display-6 lh-1 fw-bold">Bán chạy nhất</h3>
-                  <ul class="d-flex list-unstyled mt-auto">
-                    <li class="d-flex align-items-center me-3">
-                      <svg class="bi me-2" width="1em" height="1em">
-                        <use xlink:href="#geo-fill"></use>
-                      </svg>
-                      <small>Giá</small>
-                    </li>
-                    <li class="d-flex align-items-center">
-                      <svg class="bi me-2" width="1em" height="1em">
-                        <use xlink:href="#calendar3"></use>
-                      </svg>
-                      <small>Số lượng: </small>
-                  </ul>
+              <div class="col-md-3 col-sm-6">
+                <div class="product-grid">
+                  <div class="product-image">
+                    <a href="#" class="image">
+                      <img class="pic-1"
+                        src="https://images.unsplash.com/photo-1516961642265-531546e84af2?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=74065eec3c2f6a8284bbe30402432f1d&auto=format&fit=crop&w=500&q=60">
+                      <img class="pic-2"
+                        src="https://images.unsplash.com/photo-1516961642265-531546e84af2?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=74065eec3c2f6a8284bbe30402432f1d&auto=format&fit=crop&w=500&q=60">
+                    </a>
+                    <span class="product-sale-label">Sale</span>
+                    <a href="#" class="product-like-icon" data-tip="Add to Wishlist">
+                      <i class="far fa-heart"></i>
+                    </a>
+                    <ul class="product-links">
+                      <li><a href="#"><i class="fa fa-search"></i></a></li>
+                      <li><a href="#"><i class="fas fa-shopping-cart"></i></a></li>
+                      <li><a href="#"><i class="fa fa-random"></i></a></li>
+                    </ul>
+                  </div>
+                  <div class="product-content">
+                    <h3 class="title"><a href="#">Men's Blazer</a></h3>
+                    <div class="price"><span>$86.33</span> $71.55</div>
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-3 col-sm-6">
+                <div class="product-grid">
+                  <div class="product-image">
+                    <a href="#" class="image">
+                      <img class="pic-1"
+                        src="https://images.unsplash.com/photo-1524010349062-860def6649c3?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=e725946a3f177dce83a705d4b12019c2&auto=format&fit=crop&w=500&q=60">
+                      <img class="pic-2"
+                        src="https://images.unsplash.com/photo-1524010349062-860def6649c3?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=e725946a3f177dce83a705d4b12019c2&auto=format&fit=crop&w=500&q=60">
+                    </a>
+                    <span class="product-sale-label">Sale</span>
+                    <a href="#" class="product-like-icon" data-tip="Add to Wishlist">
+                      <i class="far fa-heart"></i>
+                    </a>
+                    <ul class="product-links">
+                      <li><a href="#"><i class="fa fa-search"></i></a></li>
+                      <li><a href="#"><i class="fas fa-shopping-cart"></i></a></li>
+                      <li><a href="#"><i class="fa fa-random"></i></a></li>
+                    </ul>
+                  </div>
+                  <div class="product-content">
+                    <h3 class="title"><a href="#">Men's Blazer</a></h3>
+                    <div class="price"><span>$86.33</span> $71.55</div>
+                  </div>
                 </div>
               </div>
             </div>
