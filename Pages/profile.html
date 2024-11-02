@@ -7,7 +7,7 @@
     <title>Hồ sơ</title>
     <link rel="shortcut icon" href="/sources/imgs/home/short-cut.png" type="image/x-icon">
     <link rel="stylesheet" href="/sources/css/bootstrap.min.css">
-    <link rel="stylesheet" href="/sources/cssFloder/index.css">
+    <link rel="stylesheet" href="/sources/cssFolder/index.css" />
     <link rel="stylesheet" href="/sources/fontawesome-free-5.12.1-web/css/all.min.css">
     <style>
         /* css ngoài cấm đụng vào đụng vào là hỏng */
@@ -258,33 +258,40 @@
                 </div>
             </nav>
         </header>
-        <div class="container pb-5 row" style="height: 100vh;">
+        <div class="container-fluid pb-5 row gx-0 container-bg-color" style="height: 100vh;">
             <!-- phần tab chọn  -->
-            <article class="col-sm-3">
-                <section>
+            <article class="col-sm-3 left-nav">
+                <div class="d-flex align-items-center gap-3">
                     <div class="avatar-tab"></div>
-                    <div style="display: inline-block;">Nguyễn Văn Mèo</div>
-                </section>
-                <section>
                     <div>
-                        <div id="TK" class="tab-hover">Tài khoản của tôi</div>
-                        <ul id="TKList" class="list-group list-group-flush">
-                            <div class="list-group-item list-group-item-action">
+                        <div class="fw-bold"><span>naruto123</span></div>
+                        <div>
+                            <i class="fas fa-pen" style="color: #9897a2;"></i>
+                            <a class="profile-edit">Sửa Hồ Sơ</a>
+                        </div>
+                        
+                    </div>
+                </div>
+                <section>
+                    <div class="mt-3">
+                        <div id="TK" class="tab-hover"><i class="fas fa-user" style="margin-right: 7px; color: #9897a2;"></i>Tài khoản của tôi</div>
+                        <ul id="TKList" class="list-group list-group-flush mt-1">
+                            <div class="list-group-item list-group-item-custom list-group-item-action">
                                 <input type="radio" name="TK" id="HS" checked>
                                 <label for="HS" class="tab-hover">Hồ sơ</label>
                             </div>
-                            <div class="list-group-item list-group-item-action">
+                            <div class="list-group-item list-group-item-custom list-group-item-action">
                                 <input type="radio" name="TK" id="MK">
                                 <label for="MK" class="tab-hover">Mật khẩu</label>
                             </div>
                         </ul>
                     </div>
-                    <div>
-                        <div id="DH" class="tab-hover">Đơn hàng</div>
+                    <div class="mt-2">
+                        <div id="DH" class="tab-hover"><i class="fas fa-shopping-cart" style="margin-right: 7px; color: #9897a2;"></i>Đơn hàng</div>
                     </div>
                 </section>
             </article>
-            <article class="col-sm-9">
+            <article class="main-content col-sm-9">
                 <!-- phần tài khoản -->
                 <section id="myAcc">
                     <!-- form hồ sơ -->
@@ -294,70 +301,48 @@
                                 <legend>
                                     <h3>Hồ sơ của tôi</h3>
                                 </legend>
-                                <div>Quản lý thông tin hồ sơ để bảo mật tài khoản</div>
-                                <div id="changeAvatar">
+                                <div class="border-bottom pb-1">Quản lý thông tin hồ sơ để bảo mật tài khoản</div>
+                                <div id="changeAvatar" class="d-flex mt-3">
                                     <div class="avatar"></div>
-                                    <div style="display: inline-block;">
+                                    <div style="">
                                         <input type="file" accept=".jpg,.jpeg,.png">
                                         <div>Dụng lượng file tối đa 1 MB</div>
                                         <div>Định dạng:.JPG, .JPEG, .PNG</div>
                                     </div>
                                 </div>
-                                <div>
-                                    <table>
-                                        <tr>
-                                            <td><label for="nameAcc">Tên đăng nhập</label></td>
-                                            <td>
-                                                <div>
-                                                    <input type="text" name="" id="nameAcc" required maxlength="32"
-                                                        pattern="^[a-zA-Z0-9_ ]+$">
-                                                    <div>Tên Đăng nhập chỉ có thể thay đổi một lần.</div>
-                                                </div>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td><label for="name">Tên</label></td>
-                                            <td>
-                                                <div>
-                                                    <input type="text" name="" id="name" required maxlength="32"
-                                                        pattern="^[a-zA-Z0-9_ ]+$">
-                                                </div>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td><label for="email">Email</label></td>
-                                            <td>
-                                                <div>meodeptrai123@gmail.com</div>
-                                                <input type="button" value="Thay đổi">
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td><label for="phone">Số điện thoại</label></td>
-                                            <td>
-                                                <div>0123456789</div>
-                                                <input type="button" value="Thay đổi">
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td><label for="sex">Giới tính</label></td>
-                                            <td>
-                                                <div>
-                                                    <input type="radio" name="sex" checked> không muốn tiết lộ
-                                                    <input type="radio" name="sex"> nam
-                                                    <input type="radio" name="sex"> nữ
-                                                    <input type="radio" name="sex"> khác
-                                                </div>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td><label for="birth">Ngày sinh</label></td>
-                                            <td>
-                                                <div>2000-01-01</div>
-                                                <input type="button" value="Thay đổi">
-                                            </td>
-                                        </tr>
-                                    </table>
-                                    <button type="submit" value="Lưu">Lưu</button>
+                                <div class="profile-information">
+                                    <div class="form-group">
+                                        <span>Tên đăng nhập</span>
+                                        <input type="text" id="nameAcc" required maxlength="32" pattern="^[a-zA-Z0-9_ ]+$">
+                                    </div>
+                                    <div class="form-group">
+                                        <span>Tên</span>
+                                        <input type="text" id="name" required maxlength="32" pattern="^[a-zA-Z0-9_ ]+$">
+                                    </div>
+                                    <div class="form-group">
+                                        <span>Email</span>
+                                        <span class="email-text">n*****p@gmail.com</span>
+                                        <a href="#" class="change-link">Thay đổi</a>
+                                    </div>
+                                    <div class="form-group">
+                                        <span>Số điện thoại</span>
+                                        <span class="email-text">********94</span>
+                                        <a href="#" class="change-link">Thay đổi</a>
+                                    </div>
+                                    <div class="form-group">
+                                        <span>Giới tính:</span>
+                                        <label><input type="radio" name="gender" value="male"> Nam</label>
+                                        <label><input type="radio" name="gender" value="female"> Nữ</label>
+                                        <label><input type="radio" name="gender" value="other"> Khác</label>
+                                    </div>
+                                    <div class="form-group">
+                                        <span>Ngày sinh</span>
+                                        <span class="email-text">**/08/20**</span>
+                                        <a href="#" class="change-link">Thay đổi</a>
+                                    </div>
+                                    <div class="form-group button-center">
+                                        <button type="submit" class="save-button">Lưu</button>
+                                    </div>
                                 </div>
                             </fieldset>
                         </form>
@@ -369,29 +354,28 @@
                                 <legend>
                                     <h3>Đổi mật khẩu</h3>
                                 </legend>
-                                <div>
+                                <div class="form-content">
                                     <table>
                                         <tr>
                                             <td><label for="currentPassword">Mật khẩu hiện tại</label></td>
-                                            <td><input type="password" name="" id="currentPassword" required
-                                                    minlength="8" maxlength="32"></td>
+                                            <td><input type="password" id="currentPassword" required minlength="8" maxlength="32"></td>
                                         </tr>
                                         <tr>
                                             <td><label for="newPassword">Mật khẩu mới</label></td>
-                                            <td><input type="password" name="" id="newPassword" required minlength="8"
-                                                    maxlength="32"></td>
+                                            <td><input type="password" id="newPassword" required minlength="8" maxlength="32"></td>
                                         </tr>
                                         <tr>
                                             <td><label for="rePassword">Nhập lại mật khẩu mới</label></td>
-                                            <td><input type="password" name="" id="rePassword" required minlength="8"
-                                                    maxlength="32"></td>
+                                            <td><input type="password" id="rePassword" required minlength="8" maxlength="32"></td>
                                         </tr>
                                     </table>
-                                    <button type="submit" value="lưu">Lưu</button>
+                                    <div class="button-center">
+                                        <button type="submit" class="save-button">Lưu</button>
+                                    </div>
                                 </div>
                             </fieldset>
                         </form>
-                    </div>
+                    </div>                    
                 </section>
                 <!-- phần giỏ hàng -->
                 <section id="myOder" class="d-none">

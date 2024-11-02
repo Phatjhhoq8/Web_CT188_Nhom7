@@ -307,3 +307,17 @@ const dataUser=[
       }
     }
   ];
+window.onload = (e) => {
+    if (typeof localStorage["Ischecked"] === "undefined") {
+        localStorage.setItem("Ischecked", false);
+      }
+    if(typeof localStorage["products"]==="undefined") {
+        localStorage.setItem("products",JSON.stringify(productInfoList));
+    }
+    if(typeof localStorage["users"]==="undefined") {
+        localStorage.setItem("users",JSON.stringify(user));
+    }
+    if(typeof localStorage["dataUsers"]==="undefined") {
+        localStorage.setItem("dataUsers",JSON.stringify(dataUser));
+    }
+}
