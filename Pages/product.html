@@ -268,8 +268,8 @@
 
         <div class="col-md-9">
           <nav aria-label="Page navigation" style="position: absolute;right: 140px;top: 144px;">
-            <ul class="pagination">
-              <li class="page-item">
+            <ul class="pagination" id="pagination-Product">
+              <!-- <li class="page-item">
                 <a class="page-link" href="#" aria-label="Previous">
                   <span aria-hidden="true">&laquo;</span>
                 </a>
@@ -281,7 +281,7 @@
                 <a class="page-link" href="#" aria-label="Next">
                   <span aria-hidden="true">&raquo;</span>
                 </a>
-              </li>
+              </li> -->
             </ul>
           </nav>
           <div class="container">
@@ -293,7 +293,7 @@
               </div><!--end col-->
             </div><!--end row-->
             <div class="row" id="product-container">
-              <div class="col-md-3 col-sm-6">
+              <!-- <div class="col-md-3 col-sm-6">
                 <div class="product-grid">
                   <div class="product-image">
                     <a href="#" class="image">
@@ -391,7 +391,7 @@
                     <div class="price"><span>$86.33</span> $71.55</div>
                   </div>
                 </div>
-              </div>
+              </div> -->
             </div>
           </div>
         </div>
@@ -486,12 +486,12 @@
     </div>
   </footer>
   </div>
-  <script defer>
+  <script>
+    // Toggle hiện/ẩn danh sách
     function toggleList(element) {
       const ul = element.nextElementSibling;
       const arrow = element.querySelector(".arrow");
 
-      // Toggle hiện/ẩn danh sách
       if (ul.style.display === "none" || ul.style.display === "") {
         ul.style.display = "block";
         arrow.classList.add("rotate-arrow");
@@ -500,41 +500,104 @@
         arrow.classList.remove("rotate-arrow");
       }
     }
-    
-    var showProduct = (e) => {
-      const listProduct = document.querySelector('#product-container');
-      const productList = JSON.parse(window.localStorage.getItem('products'));
-      console.log(productList)
-      // <div class="col-md-3 col-sm-6">
-      //             <div class="product-grid">
-      //               <div class="product-image">
-      //                 <a href="#" class="image">
-      //                   <img class="pic-1"
-      //                     src="https://images.unsplash.com/photo-1539840093138-9b3e230e5206?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=765a2eb222b1851840a4a157780fb487&auto=format&fit=crop&w=1534&q=80">
-      //                   <img class="pic-2"
-      //                     src="https://images.unsplash.com/photo-1539840093138-9b3e230e5206?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=765a2eb222b1851840a4a157780fb487&auto=format&fit=crop&w=1534&q=80">
-      //                 </a>
-      //                 <a href="#" class="product-like-icon" data-tip="Add to Wishlist">
-      //                   <i class="far fa-heart"></i>
-      //                 </a>
-      //                 <ul class="product-links">
-      //                   <li><a href="#"><i class="fa fa-search"></i></a></li>
-      //                   <li><a href="#"><i class="fas fa-shopping-cart"></i></a></li>
-      //                   <li><a href="#"><i class="fa fa-random"></i></a></li>
-      //                 </ul>
-      //               </div>
-      //               <div class="product-content">
-      //                 <h3 class="title"><a href="#">Women's Top</a></h3>
-      //                 <div class="price">$75.99</div>
-      //               </div>
-      //             </div>
-      //           </div>
-    }
-    window.onload = (e) => {
-      showProduct(e);
-    }
   </script>
-  <script src="/sources/Data/data.js"></script>
+  <script type="module">
+    // đẩy sản phẩm lên web
+    import { addDatasp,addDataUser } from '../sources/Data/data.js'
+    const listProduct = document.querySelector('#product-container');
+    let productInfoList = addDatasp();
+    let pagProduct = document.querySelector("#pagination-Product");
+    var showPag = () => {
+    let nPag = Math.ceil(productInfoList.length / 12);
+    let fragment = document.createDocumentFragment();
+
+    // "Previous" button
+    let prevLi = document.createElement('li');
+    prevLi.classList.add("page-item");
+    let prevLink = document.createElement('a');
+    prevLink.setAttribute("href", "#");
+    prevLink.setAttribute("id", "Previous");
+    prevLink.classList.add('page-link');
+    prevLink.innerHTML = `<span aria-hidden="true">&laquo;</span>`;
+    prevLi.appendChild(prevLink);
+    prevLi.onclick = () => showProduct("Previous");
+    fragment.appendChild(prevLi);
+
+    // Page numbers
+    for (let i = 0; i < nPag; i++) {
+        let pageLi = document.createElement('li');
+        pageLi.classList.add('page-item');
+        if (i === 0) pageLi.classList.add("active");
+        pageLi.innerHTML = `<a class="page-link" href="#" id="${i}">${i + 1}</a>`;
+        pageLi.onclick = () => showProduct(i.toString());
+        fragment.appendChild(pageLi);
+    }
+
+    // "Next" button
+    let nextLi = document.createElement('li');
+    nextLi.classList.add("page-item");
+    let nextLink = document.createElement('a');
+    nextLink.setAttribute("href", "#");
+    nextLink.setAttribute("id", "Next");
+    nextLink.classList.add('page-link');
+    nextLink.innerHTML = `<span aria-hidden="true">&raquo;</span>`;
+    nextLi.appendChild(nextLink);
+    nextLi.onclick = () => showProduct("Next");
+    fragment.appendChild(nextLi);
+
+    pagProduct.appendChild(fragment);
+}
+
+var showProduct = (state) => {
+    let nItem = productInfoList.length;
+    let maxProduct = 12;
+    let currentPage = parseInt(document.querySelector(".page-item.active>a")?.id || "0");
+    let nPages = Math.ceil(nItem / maxProduct);
+
+    if ((state === "Previous" && currentPage === 0) || (state === "Next" && currentPage === nPages - 1)) return;
+
+    let newPageIndex;
+    if (state === "Previous") newPageIndex = currentPage - 1;
+    else if (state === "Next") newPageIndex = currentPage + 1;
+    else newPageIndex = parseInt(state);
+
+    document.querySelector(".page-item.active")?.classList.remove('active');
+    document.querySelectorAll('.page-item')[newPageIndex + 1].classList.add('active'); 
+
+    listProduct.innerHTML = "";
+
+    let startIdx = newPageIndex * maxProduct;
+    for (let i = startIdx; i < Math.min(startIdx + maxProduct, nItem); i++) {
+        let divGrid = document.createElement('div');
+        divGrid.classList.add("col-md-4", "col-sm-3", "mb-4");
+        divGrid.innerHTML = `
+            <div class="product-grid">
+                <div class="product-image">
+                    <a href="#" class="image">
+                        <img class="pic-1" src="../sources/Data/${productInfoList[i].id}/1.webp">
+                        <img class="pic-2" src="../sources/Data/${productInfoList[i].id}/2.webp">
+                    </a>
+                    <a href="#" class="product-like-icon" data-tip="Add to Wishlist">
+                        <i class="far fa-heart"></i>
+                    </a>
+                    <ul class="product-links">
+                        <li><a href="#"><i class="fa fa-search"></i></a></li>
+                        <li><a href="#"><i class="fas fa-shopping-cart"></i></a></li>
+                        <li><a href="#"><i class="fa fa-random"></i></a></li>
+                    </ul>
+                </div>
+                <div class="product-content">
+                    <h3 class="title title-product"><a href="#">${productInfoList[i].nameProduct}</a></h3>
+                    <div class="price">${productInfoList[i].price} VND</div>
+                </div>
+            </div>`;
+        listProduct.appendChild(divGrid);
+    }
+}
+showPag();
+showProduct("0");
+
+  </script>
 </body>
 
 </html>
