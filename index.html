@@ -672,7 +672,7 @@
       if (search.value !== "") {
         let li = document.createElement('li');
         li.classList.add('header__search-history-item');
-        li.innerHTML = `<a href="#">${search.value}<i class="fas fa-times"></i></a>`;
+        li.innerHTML = `<a href="#">${search.value}<i class="fas fa-times" style="background-color: red"></i></a>`;
         ulSearch.appendChild(li);
         search.value = "";
       }
