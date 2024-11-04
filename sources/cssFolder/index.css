@@ -326,13 +326,11 @@
 }
 
 .header__cart-view-cart {
-  display: none;
+  display: block;
   float: right;
   margin: 0 12px 12px 0;
 }
-.header__cart-view-cart.show {
-  display: block;
-}
+
 .header__cart-view-cart:hover {
   color: var(--color-orange);
 }
@@ -384,13 +382,14 @@
 .header__cart-notice {
   position: absolute;
   /* padding: 3px 3px; */
+  /* border: 2px solid #ee4d2d; */
+  display: none;
   align-content: center;
   width: 15px;
   height: 15px;
   font-size: .8rem;
   line-height: .8rem;
   border-radius: 50%;
-  /* border: 2px solid #ee4d2d; */
   background-color: red;
   color: var(--white-color);
   top: -5px;
@@ -531,6 +530,10 @@ h2 {
   margin-left: 4px;
   font-size: 1rem;
   font-weight: 300;
+  max-width: 100px;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
 }
 
 .header__navbar-user-menu {

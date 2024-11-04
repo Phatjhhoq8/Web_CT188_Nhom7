@@ -108,6 +108,7 @@
         let loginForm = document.getElementById('loginForm');
         loginForm.onsubmit = function (event) {
             event.preventDefault();
+            localStorage.setItem("searchData",JSON.stringify([]));
             let acc = document.getElementById('userNameOrEmail').value;
             let password = document.getElementById('password').value;
             let i;
@@ -120,6 +121,7 @@
                     document.getElementById('warning').classList.add('d-none');
                     document.getElementById('success').classList.remove('d-none');
                     let currentUser = i;
+                    localStorage.setItem("curUser",userList[i].userName);
                     localStorage.setItem('currentUser', currentUser);
                     window.location.assign(localStorage.getItem('currentPage'));
                     return;
