@@ -28,9 +28,10 @@
   margin-left: -40px;
 }
 /* Header search history */
-.header__search-input:focus ~ .header__search-history {
+/* .header__search-input:focus-within ~ .header__search-history {
   display: block;
-}
+} */
+
 .header__search-history {
   position: absolute;
   z-index: 2;

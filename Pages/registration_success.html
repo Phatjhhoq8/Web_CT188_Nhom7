@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Đăng Ký Thành Công</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f9f9f9;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            text-align: center;
+        }
+
+        .container {
+            background: white;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        h1 {
+            color: #198754;
+        }
+
+        p {
+            font-size: 16px;
+            margin: 20px 0;
+        }
+
+        .button {
+            background-color: #0d6efd;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 16px;
+            margin: 4px 2px;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        .button:hover {
+            background-color: #0a58ca;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Đăng Ký Thành Công!</h1>
+        <p>Bạn đã hoàn tất quá trình đăng ký.Chân thành cảm ơn vì đã tin tưởng chúng tôi.</p>
+        <p>Chúc bạn có một trải nghiệm tuyệt vời cùng The Light.</p>
+        <a href="#" class="button" id="buttonGoToBack">Quay Về Trang Chính</a>
+    </div>
+    <script>
+        let currentPage = localStorage.getItem('currentPage');
+        let buttonGoToBack = document.getElementById('buttonGoToBack');
+        buttonGoToBack.href = currentPage;
+    </script>
+</body>
+</html>

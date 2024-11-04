@@ -476,6 +476,12 @@
       if (typeof localStorage["Ischecked"] === "undefined") {
         localStorage.setItem("Ischecked", false);
       }
+      if (typeof localStorage["searchData"] === "undefined") {
+        localStorage.setItem("searchData", JSON.stringify([]));
+      }
+      if (typeof localStorage["curSearch"] === "undefined") {
+        localStorage.setItem("curSearch", "");
+      }
     }
     const isChecked = window.localStorage.getItem("Ischecked");
     // reset trang khi đổi trạng thái đăng nhập
@@ -487,12 +493,12 @@
       var userState = document.querySelector('#stateLogin');
       if (isChecked == 'false') {
         userState.innerHTML = `<i class="fas fa-user"></i>
-              <span>Sign in</span>
-              <div class="login-container">
+              <span onclick="toLogin(event)">Sign in</span>
+              <div class="login-container" >
                 <h2 class="text-secondary">Sign back in to continue</h2>
-                <button class="sign-in-btn rounded-pill">Sign in</button>
+                <button class="sign-in-btn rounded-pill "onclick="toLogin(event)">Sign in</button>
                 <p class="text-secondary">Or register to create a new account:</p>
-                <button class="sign-in-btn rounded-pill">Register</button>
+                <button class="sign-in-btn rounded-pill" onclick="toSignup(event)">Register</button>
                 <p class="agreement">
                   I agree to the
                   <a href="#">TheLight.com Free Membership Agreement</a> and
@@ -649,17 +655,60 @@
       window.localStorage.setItem('Ischecked', false);
       location.reload();
     }
+    // xư kiện đăng nhập đăng xuất
+    var toLogin = (e) => {
+      window.localStorage.setItem("currentPage", location.pathname);
+      window.location.href = "Pages/login.html";
+    }
+    var toSignup = (e) => {
+      window.localStorage.setItem("currentPage", location.pathname);
+      window.location.href = "Pages/signup.html";
+    }
+
     // Search input
+    var searchData;
+    const search = document.querySelector('#header-search');
+    const ulSearch = document.querySelector('.header__search-history-list');
+    var showHistory = (e) => {
+      ulSearch.innerHTML = "";
+      searchData = JSON.parse(localStorage.getItem("searchData"));
+      for (let i = searchData.length - 1; i >= Math.max(0, searchData.length - 5); i--) {
+        let li = document.createElement('li');
+        li.classList.add('header__search-history-item');
+        li.innerHTML = `<a  href="#">${searchData[i]}<i class="fas fa-times" onclick=delHistory(${i},event)></i></a>`;
+        ulSearch.appendChild(li);
+      }
+    }
+    var delHistory = (index, event) => {
+      event.preventDefault();
+      searchData.splice(index, 1);
+      window.localStorage.setItem("searchData", JSON.stringify(searchData));
+      showHistory();
+    }
+
+
+    const searchHistory = document.querySelector('.header__search-history');
+    search.addEventListener('focus', () => {
+      searchHistory.style.display = 'block';
+    });
+
+    document.addEventListener('click', (event) => {
+      if (!event.target.closest('.header__search-input') && !event.target.closest('.header__search-history') && !event.target.closest('.header__search-history-item')) {
+        searchHistory.style.display = 'none';
+      }
+    });
+    search.onfocus = showHistory();
+
+
     var searchHandle = (e) => {
       const search = document.querySelector('#header-search');
       const ulSearch = document.querySelector('.header__search-history-list');
-      // console.log(e)
       if (e.key === "Enter") {
         search.value = search.value.trim();
         if (search.value !== "") {
           let li = document.createElement('li');
           li.classList.add('header__search-history-item');
-          li.innerHTML = `<a href="#">${search.value}</a>`;
+          li.innerHTML = `<a href="#">${search.value}<i class="fas fa-times" ></i></a>`;
           ulSearch.appendChild(li);
           search.value = "";
         }
@@ -672,7 +721,7 @@
       if (search.value !== "") {
         let li = document.createElement('li');
         li.classList.add('header__search-history-item');
-        li.innerHTML = `<a href="#">${search.value}<i class="fas fa-times" style="background-color: red"></i></a>`;
+        li.innerHTML = `<a href="#">${search.value}<i class="fas fa-times" ></i></a>`;
         ulSearch.appendChild(li);
         search.value = "";
       }

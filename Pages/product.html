@@ -9,9 +9,84 @@
   <link rel="stylesheet" href="/sources/css/bootstrap.min.css">
   <link rel="stylesheet" href="/sources/cssFolder/index.css" />
   <link rel="stylesheet" href="/sources/fontawesome-free-5.12.1-web/css/all.min.css">
+  <style>
+    /* Styles cho quảng cáo đè */
+    .overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0, 0, 0, 0.3);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      z-index: 1000;
+      opacity: 0;
+      visibility: hidden;
+      transition: opacity 0.5s ease;
+    }
+
+    .ad-content {
+      background: white;
+      padding: 40px;
+      box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+      text-align: center;
+      position: relative;
+      width: 90%;
+      max-width: 500px;
+    }
+
+    .close-btn {
+      position: absolute;
+      top: -10px;
+      right: 10px;
+      background: none;
+      border: none;
+      font-size: 50px;
+      cursor: pointer;
+      color: #000;
+    }
+
+    .button {
+      background-color: #0d6efd;
+      /* Màu xanh dương chính */
+      color: white;
+      border: none;
+      padding: 12px 24px;
+      text-align: center;
+      text-decoration: none;
+      display: inline-block;
+      font-size: 18px;
+      margin-top: 20px;
+      border-radius: 5px;
+      cursor: pointer;
+      transition: background-color 0.3s;
+    }
+
+    .button:hover {
+      background-color: #0a58ca;
+    }
+
+    .background-image {
+      background-color: #ffae00;
+      background-image: url('../sources/imgs/products/ads.png');
+      background-size: 67vh;
+      background-position: center;
+      background-repeat: no-repeat;
+      background-attachment: fixed;
+      height: 70vh;
+      width: 70vh;
+    }
+  </style>
 </head>
 
 <body>
+  <div class="overlay" id="overlay">
+    <div class="ad-content background-image">
+      <button class="close-btn" id="closeBtn">&times;</button> <!-- Nút thoát -->
+    </div>
+  </div>
   <div class="app">
     <header class="header_content">
       <!-- Phần logo và tính năng header -->
@@ -487,6 +562,26 @@
   </footer>
   </div>
   <script>
+    // Kiểm tra xem người dùng đã tắt quảng cáo hôm nay chưa
+    const today = new Date().toISOString().split('T')[0]; // Lấy ngày hiện tại theo định dạng YYYY-MM-DD
+    const adClosedDate = localStorage.getItem('adClosedDate');
+
+    if (adClosedDate !== today) {
+      // Hàm hiển thị quảng cáo sau 2 giây nếu chưa tắt
+      setTimeout(function () {
+        document.getElementById('overlay').style.opacity = 1;
+        document.getElementById('overlay').style.visibility = 'visible';
+      }, 2000); // 2000 milliseconds = 2 seconds
+    }
+
+    // Đóng quảng cáo và lưu trạng thái khi nhấn nút thoát
+    document.getElementById('closeBtn').onclick = function () {
+      document.getElementById('overlay').style.opacity = 0;
+      document.getElementById('overlay').style.visibility = 'hidden';
+      localStorage.setItem('adClosedDate', today); // Lưu ngày tắt quảng cáo
+    }
+  </script>
+  <script>
     // Toggle hiện/ẩn danh sách
     function toggleList(element) {
       const ul = element.nextElementSibling;
@@ -503,71 +598,71 @@
   </script>
   <script type="module">
     // đẩy sản phẩm lên web
-    import { addDatasp,addDataUser } from '../sources/Data/data.js'
+    import { addDatasp, addDataUser } from '../sources/Data/data.js'
     const listProduct = document.querySelector('#product-container');
     let productInfoList = addDatasp();
     let pagProduct = document.querySelector("#pagination-Product");
     var showPag = () => {
-    let nPag = Math.ceil(productInfoList.length / 12);
-    let fragment = document.createDocumentFragment();
+      let nPag = Math.ceil(productInfoList.length / 12);
+      let fragment = document.createDocumentFragment();
 
-    // "Previous" button
-    let prevLi = document.createElement('li');
-    prevLi.classList.add("page-item");
-    let prevLink = document.createElement('a');
-    prevLink.setAttribute("href", "#");
-    prevLink.setAttribute("id", "Previous");
-    prevLink.classList.add('page-link');
-    prevLink.innerHTML = `<span aria-hidden="true">&laquo;</span>`;
-    prevLi.appendChild(prevLink);
-    prevLi.onclick = () => showProduct("Previous");
-    fragment.appendChild(prevLi);
+      // "Previous" button
+      let prevLi = document.createElement('li');
+      prevLi.classList.add("page-item");
+      let prevLink = document.createElement('a');
+      prevLink.setAttribute("href", "#");
+      prevLink.setAttribute("id", "Previous");
+      prevLink.classList.add('page-link');
+      prevLink.innerHTML = `<span aria-hidden="true">&laquo;</span>`;
+      prevLi.appendChild(prevLink);
+      prevLi.onclick = () => showProduct("Previous");
+      fragment.appendChild(prevLi);
 
-    // Page numbers
-    for (let i = 0; i < nPag; i++) {
+      // Page numbers
+      for (let i = 0; i < nPag; i++) {
         let pageLi = document.createElement('li');
         pageLi.classList.add('page-item');
         if (i === 0) pageLi.classList.add("active");
         pageLi.innerHTML = `<a class="page-link" href="#" id="${i}">${i + 1}</a>`;
         pageLi.onclick = () => showProduct(i.toString());
         fragment.appendChild(pageLi);
+      }
+
+      // "Next" button
+      let nextLi = document.createElement('li');
+      nextLi.classList.add("page-item");
+      let nextLink = document.createElement('a');
+      nextLink.setAttribute("href", "#");
+      nextLink.setAttribute("id", "Next");
+      nextLink.classList.add('page-link');
+      nextLink.innerHTML = `<span aria-hidden="true">&raquo;</span>`;
+      nextLi.appendChild(nextLink);
+      nextLi.onclick = () => showProduct("Next");
+      fragment.appendChild(nextLi);
+
+      pagProduct.appendChild(fragment);
     }
 
-    // "Next" button
-    let nextLi = document.createElement('li');
-    nextLi.classList.add("page-item");
-    let nextLink = document.createElement('a');
-    nextLink.setAttribute("href", "#");
-    nextLink.setAttribute("id", "Next");
-    nextLink.classList.add('page-link');
-    nextLink.innerHTML = `<span aria-hidden="true">&raquo;</span>`;
-    nextLi.appendChild(nextLink);
-    nextLi.onclick = () => showProduct("Next");
-    fragment.appendChild(nextLi);
+    var showProduct = (state) => {
+      let nItem = productInfoList.length;
+      let maxProduct = 12;
+      let currentPage = parseInt(document.querySelector(".page-item.active>a")?.id || "0");
+      let nPages = Math.ceil(nItem / maxProduct);
 
-    pagProduct.appendChild(fragment);
-}
+      if ((state === "Previous" && currentPage === 0) || (state === "Next" && currentPage === nPages - 1)) return;
 
-var showProduct = (state) => {
-    let nItem = productInfoList.length;
-    let maxProduct = 12;
-    let currentPage = parseInt(document.querySelector(".page-item.active>a")?.id || "0");
-    let nPages = Math.ceil(nItem / maxProduct);
+      let newPageIndex;
+      if (state === "Previous") newPageIndex = currentPage - 1;
+      else if (state === "Next") newPageIndex = currentPage + 1;
+      else newPageIndex = parseInt(state);
 
-    if ((state === "Previous" && currentPage === 0) || (state === "Next" && currentPage === nPages - 1)) return;
+      document.querySelector(".page-item.active")?.classList.remove('active');
+      document.querySelectorAll('.page-item')[newPageIndex + 1].classList.add('active');
 
-    let newPageIndex;
-    if (state === "Previous") newPageIndex = currentPage - 1;
-    else if (state === "Next") newPageIndex = currentPage + 1;
-    else newPageIndex = parseInt(state);
+      listProduct.innerHTML = "";
 
-    document.querySelector(".page-item.active")?.classList.remove('active');
-    document.querySelectorAll('.page-item')[newPageIndex + 1].classList.add('active'); 
-
-    listProduct.innerHTML = "";
-
-    let startIdx = newPageIndex * maxProduct;
-    for (let i = startIdx; i < Math.min(startIdx + maxProduct, nItem); i++) {
+      let startIdx = newPageIndex * maxProduct;
+      for (let i = startIdx; i < Math.min(startIdx + maxProduct, nItem); i++) {
         let divGrid = document.createElement('div');
         divGrid.classList.add("col-md-4", "col-sm-3", "mb-4");
         divGrid.innerHTML = `
@@ -592,10 +687,10 @@ var showProduct = (state) => {
                 </div>
             </div>`;
         listProduct.appendChild(divGrid);
+      }
     }
-}
-showPag();
-showProduct("0");
+    showPag();
+    showProduct("0");
 
   </script>
 </body>
