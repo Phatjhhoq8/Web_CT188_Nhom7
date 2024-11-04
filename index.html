@@ -480,6 +480,12 @@
       if (typeof localStorage["curUser"] === "undefined") {
         localStorage.setItem("curUser", "");
       }
+      let temp=productInfoList.filter(product => userActive.data.cart.includes(product.id)).length
+      const headerNotice = document.querySelector('.header__cart-notice');
+      if(temp>0) {
+          headerNotice.style.display = "block";
+          headerNotice.innerText = `${temp}`;
+      } else headerNotice.style.display = "none";
     }
     const curUser = window.localStorage.getItem("curUser");
     // reset trang khi đổi trạng thái đăng nhập
@@ -490,7 +496,7 @@
 
     // Lấy danh sách user và sản phẩm
     const userList = JSON.parse(window.localStorage.getItem("userList")) || [];
-    const productInfoList = JSON.parse(localStorage.getItem('productList'));
+    const productInfoList = JSON.parse(localStorage.getItem('productList')) || [];
     let userActive = null;
     for (let i = 0; i < userList.length; i++) {
       if (userList[i].userName === curUser) {
@@ -593,17 +599,6 @@
       }
     }
     //  Giỏ hàng 
-    // <li onmouseenter="showCart()" class="list-group-item text-secondary boder-none text-white">
-    //           <div class="header__cart-wrap">
-    //             <div class="header__cart-list">
-    //               <h4 class="header__cart-heading text-center">Sản phẩm đã thêm</h4>
-    //               <ul class="header__cart-list-item"></ul>
-
-    //               <a href="#" class="header__cart-view-cart btn btn--primary">Xem giỏ hàng</a>
-    //             </div>
-    //             <span class="header__cart-notice">3</span>
-    //           </div>
-    //         </li>
     var showCart = (e) => {
       const cartContainer = document.querySelector('.header__cart-wrap');
       const cartList = document.querySelector('.header__cart-list');
@@ -663,7 +658,8 @@
                             <div class="header__cart-item-body">
                               <span class="header__cart-item-description">
                                 Phân loại: ${productOfCart[i].type}
-                              </span>
+                                </span>
+                                <span class="header__cart-item-remove" onclick="delCartItem('${productOfCart[i].id}')">Xóa</span>
                             </div>
                           </div>`;
             ulCart.appendChild(li);
@@ -671,6 +667,20 @@
         }
       }
     }
+    var delCartItem = (itemId) => {
+      console.log(userActive)
+      for (let i = 0; i < userList.length; i++) {
+        if (userList[i].userName == userActive.userName) {
+          for (let j = 0; j < userList[i].data.cart.length; j++) {
+            userList[i].data.cart = userList[i].data.cart.filter(item => item !== itemId);
+            localStorage.setItem("userList", JSON.stringify(userList));
+            location.reload();
+            return;
+          }
+        }
+      }
+    }
+
     function formatNumber(num) {
       return num.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".");
     }

@@ -300,6 +300,7 @@
             localStorage.setItem('userList', userListJson);
             let currentUser = userList.length - 1;
             localStorage.setItem('currentUser', currentUser);
+            localStorage.setItem("curUser",userList[currentUser].userName);
             window.location.replace("registration_success.html");
         }        
     </script>
