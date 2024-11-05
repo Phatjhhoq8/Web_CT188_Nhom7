@@ -86,7 +86,7 @@
 }
 .header__notify {
   position: absolute;
-  z-index: 3;
+  z-index: 10;
   top: 110%;
   right: -4px;
   width: 400px;
@@ -96,6 +96,7 @@
   transform-origin: calc(100% - 10%) top; /* Thay tâm animation */
   animation: headerNotifyGrowth ease-in 0.2s;
   display: none;
+  box-shadow: 0 1px 3.125rem 0 rgba(0, 0, 0, 0.2);
 }
 
 .header__notify::before {
@@ -148,6 +149,8 @@
 
 .header__notify-list {
   padding-left: 0;
+  max-height: 56vh;
+  overflow-y: auto;
 }
 
 .header__notify-item {
@@ -229,7 +232,7 @@
   display: none;
   animation: fadeIn ease-in 0.2;
   cursor: default;
-  z-index: 3;
+  z-index: 10;
 }
 
 .header__cart-heading {

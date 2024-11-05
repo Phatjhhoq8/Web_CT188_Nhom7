@@ -68,7 +68,7 @@
                     <div class="form-group">
                         <label for="userName">Tên đăng nhập</label>
                         <input type="text" id="userName" class="form-control" placeholder="Nhập tên đăng nhập"
-                            pattern="^[a-zA-Z_][a-zA-Z0-9_]{3,15}$" required style="border-radius: 5px;" minlength="4"
+                            pattern="^[a-zA-Z_][a-zA-Z0-9_]{3,15}$" required style="border-radius: 5px;" minlength="6"
                             maxlength="16">
                         <div class="invalid-feedback" id="userNameAlert">Vui lòng điền tên đăng nhập.</div>
                     </div>
@@ -278,15 +278,16 @@
         newUser = document.getElementById('registrationForm');
         newUser.onsubmit = function (event) {
             event.preventDefault();
-            localStorage.setItem("searchData",JSON.stringify([]));
+
             userList.push(
                 {
                     fullName: document.getElementById('fullName').value,
                     userName: document.getElementById('userName').value,
                     pwd: document.getElementById('confirmPassword').value,
                     email: document.getElementById('email').value,
-                    phoneNum: "",
-                    birth: "",
+                    phoneNum:"",
+                    gender: "orther",
+                    address:"",
                     data: {
                         cart: [],
                         ordersPlaced: [],

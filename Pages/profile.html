@@ -14,12 +14,12 @@
         .iframe-container {
             position: relative;
             width: 100%;
-            padding-top: 50%;
+            padding-top: 85vh;
             border: 1px solid;
             overflow-x: hidden;
         }
 
-        iframe {
+        .iframe-content {
             position: absolute;
             top: 0;
             left: 0;
@@ -60,7 +60,7 @@
     </style>
 </head>
 
-<body>
+<body style="background-color: #f4f1ff;">
     <div class="app">
         <header class="header_content">
             <!-- Phần logo và tính năng header -->
@@ -258,7 +258,7 @@
                 </div>
             </nav>
         </header>
-        <div class="container-fluid pb-5 row gx-0 container-bg-color" style="height: 110vh;">
+        <div class="container pb-5 row gx-0 container-bg-color" style="height: 120vh;">
             <!-- phần tab chọn  -->
             <article class="col-sm-3 left-nav">
                 <div class="d-flex align-items-center gap-3">
@@ -269,12 +269,13 @@
                             <i class="fas fa-pen" style="color: #9897a2;"></i>
                             <a class="profile-edit">Sửa Hồ Sơ</a>
                         </div>
-                        
+
                     </div>
                 </div>
                 <section>
                     <div class="mt-3">
-                        <div id="TK" class="tab-hover"><i class="fas fa-user" style="margin-right: 7px; color: #9897a2;"></i>Tài khoản của tôi</div>
+                        <div id="TK" class="tab-hover"><i class="fas fa-user"
+                                style="margin-right: 7px; color: #9897a2;"></i>Tài khoản của tôi</div>
                         <ul id="TKList" class="list-group list-group-flush mt-1">
                             <div class="list-group-item list-group-item-custom list-group-item-action">
                                 <input type="radio" name="TK" id="HS" checked>
@@ -287,7 +288,8 @@
                         </ul>
                     </div>
                     <div class="mt-2">
-                        <div id="DH" class="tab-hover"><i class="fas fa-shopping-cart" style="margin-right: 7px; color: #9897a2;"></i>Đơn hàng</div>
+                        <div id="DH" class="tab-hover"><i class="fas fa-shopping-cart"
+                                style="margin-right: 7px; color: #9897a2;"></i>Đơn hàng</div>
                     </div>
                 </section>
             </article>
@@ -304,7 +306,7 @@
                                 <div class="border-bottom pb-1">Quản lý thông tin hồ sơ để bảo mật tài khoản</div>
                                 <div id="changeAvatar" class="d-flex mt-3">
                                     <div class="avatar"></div>
-                                    <div style="">
+                                    <div>
                                         <input type="file" accept=".jpg,.jpeg,.png">
                                         <div>Dụng lượng file tối đa 1 MB</div>
                                         <div>Định dạng:.JPG, .JPEG, .PNG</div>
@@ -313,35 +315,33 @@
                                 <div class="profile-information">
                                     <div class="form-group">
                                         <span>Tên đăng nhập</span>
-                                        <input type="text" id="nameAcc" required maxlength="32" pattern="^[a-zA-Z0-9_ ]+$">
+                                        <input type="text" id="userNameFormProfile" disabled>
                                     </div>
                                     <div class="form-group">
                                         <span>Tên</span>
-                                        <input type="text" id="name" required maxlength="32" pattern="^[a-zA-Z0-9_ ]+$">
+                                        <input type="text" id="nameFormProfile" disabled>
                                     </div>
                                     <div class="form-group">
                                         <span>Email</span>
-                                        <span class="email-text">n*****p@gmail.com</span>
-                                        <a href="#" class="change-link">Thay đổi</a>
+                                        <input value="n*****p@gmail.com" disabled id="emailFormProfile"></input>
                                     </div>
                                     <div class="form-group">
                                         <span>Số điện thoại</span>
-                                        <span class="email-text">********94</span>
-                                        <a href="#" class="change-link">Thay đổi</a>
+                                        <input style="text-align: right;" value="********94" id="phoneNumFormProfile"
+                                            disabled></input>
                                     </div>
                                     <div class="form-group">
-                                        <span>Giới tính:</span>
-                                        <label><input type="radio" name="gender" value="male"> Nam</label>
-                                        <label><input type="radio" name="gender" value="female"> Nữ</label>
-                                        <label><input type="radio" name="gender" value="other"> Khác</label>
+                                        <span>Giới tính</span>
+                                        <label><input type="radio" name="gender" value="male" disabled> Nam</label>
+                                        <label><input type="radio" name="gender" value="female" disabled> Nữ</label>
+                                        <label><input type="radio" name="gender" value="orther" checked> Khác</label>
                                     </div>
                                     <div class="form-group">
-                                        <span>Ngày sinh</span>
-                                        <span class="email-text">**/08/20**</span>
-                                        <a href="#" class="change-link">Thay đổi</a>
+                                        <span>Địa chỉ giao hàng</span>
+                                        <textarea id="address" disabled style="text-align: left;" cols="32" rows="3"></textarea>
                                     </div>
                                     <div class="form-group button-center">
-                                        <button type="submit" class="save-button">Lưu</button>
+                                        <button class="save-button" id="buttonChange">Sửa</button>
                                     </div>
                                 </div>
                             </fieldset>
@@ -358,24 +358,27 @@
                                     <table>
                                         <tr>
                                             <td><label for="currentPassword">Mật khẩu hiện tại</label></td>
-                                            <td><input type="password" id="currentPassword" required minlength="8" maxlength="32"></td>
+                                            <td><input type="password" id="currentPassword" required minlength="8"
+                                                    maxlength="32"></td>
                                         </tr>
                                         <tr>
                                             <td><label for="newPassword">Mật khẩu mới</label></td>
-                                            <td><input type="password" id="newPassword" required minlength="8" maxlength="32"></td>
+                                            <td><input type="password" id="newPassword" required minlength="8"
+                                                    maxlength="32"></td>
                                         </tr>
                                         <tr>
                                             <td><label for="rePassword">Nhập lại mật khẩu mới</label></td>
-                                            <td><input type="password" id="rePassword" required minlength="8" maxlength="32"></td>
+                                            <td><input type="password" id="rePassword" required minlength="8"
+                                                    maxlength="32"></td>
                                         </tr>
                                     </table>
                                     <div class="button-center">
-                                        <button type="submit" class="save-button">Lưu</button>
+                                        <button class="save-button">Lưu</button>
                                     </div>
                                 </div>
                             </fieldset>
                         </form>
-                    </div>                    
+                    </div>
                 </section>
                 <!-- phần giỏ hàng -->
                 <section id="myOder" class="d-none">
@@ -386,7 +389,7 @@
                         <button id="vanchuyen" class="btn btn-outline-warning">vận chuyển</button>
                         <button id="hoanthanh" class="btn btn-outline-warning">hoàn thành</button>
                     </div>
-                    <div class="iframe-container mt-3"><iframe src="donhang/giohang.html" frameborder="0"
+                    <div class="iframe-container mt-3"><iframe class="iframe-content" src="donhang/giohang.html"
                             id="orderInformation"></iframe></div>
                 </section>
             </article>
@@ -545,6 +548,35 @@
         document.getElementById('dondadat').onclick = function () { setButon('dondadat'); };
         document.getElementById('hoanthanh').onclick = function () { setButon('hoanthanh'); };
         document.getElementById('vanchuyen').onclick = function () { setButon('vanchuyen'); };
+    </script>
+    <script>
+        let nameFormProfile = document.getElementById('nameFormProfile');
+        let phoneNumFormProfile = document.getElementById('phoneNumFormProfile');
+        let address = document.getElementById('address');
+        let gender = document.getElementsByName('gender');
+        let buttonChange = document.getElementById('buttonChange');
+        var count = 0;
+        profileForm.onsubmit = function (event) {
+            event.preventDefault();
+            count = (count + 1) & 1;
+            if (count) {
+                nameFormProfile.disabled = false;
+                for (let i = 0; i < gender.length; ++i) {
+                    gender[i].disabled = false;
+                }
+                phoneNumFormProfile.disabled = false;
+                address.disabled = false;
+                buttonChange.innerText = 'Lưu';
+            }else{
+                nameFormProfile.disabled = true;
+                for (let i = 0; i < gender.length; ++i) {
+                    if(!gender[i].checked) gender[i].disabled = true;
+                }
+                phoneNumFormProfile.disabled = true;
+                address.disabled = true;
+                buttonChange.innerText = 'Sửa';
+            }
+        }
     </script>
 </body>
 

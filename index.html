@@ -480,11 +480,11 @@
       if (typeof localStorage["currentUser"] === "undefined") {
         localStorage.setItem("currentUser", "-1");
       }
-      let temp=productInfoList.filter(product => userActive.data.cart.includes(product.id)).length
+      let temp = productInfoList.filter(product => userActive.data.cart.includes(product.id)).length
       const headerNotice = document.querySelector('.header__cart-notice');
-      if(temp>0) {
-          headerNotice.style.display = "block";
-          headerNotice.innerText = `${temp}`;
+      if (temp > 0) {
+        headerNotice.style.display = "block";
+        headerNotice.innerText = `${temp}`;
       } else headerNotice.style.display = "none";
     }
     const curUser = window.localStorage.getItem("currentUser");
@@ -550,9 +550,11 @@
       }
     }
     // Thông báo
+    let currentNoticeCount = 5;
     var showListNotice = (e) => {
       const ulMess = document.querySelector('.header__notify-list');
       const messFooter = document.querySelector(".header__notify-footer-btn");
+
       if (curUser == "-1") {
         messFooter.classList.remove("show");
         if (!ulMess.querySelector('.header__notify-item')) {
@@ -566,34 +568,42 @@
         let productOfNoctify = productInfoList.filter(product =>
           userActive.data.notificationsReceived.includes(product.id)
         );
-
-        for (let i = productOfNoctify.length - 1; i >= Math.max(0, productOfNoctify.length - 5); i--) {
+        for (let i = productOfNoctify.length - 1; i >= Math.max(0, productOfNoctify.length - currentNoticeCount); i--) {
           let li = document.createElement('li');
           li.classList.add("header__notify-item", "header__notify-item--viewed");
           li.innerHTML = `<a href="#" class="header__notify-link">
-                      <img src="/sources/Data/${productOfNoctify[i].id}/1.webp" alt=""
-                        class="header__notify-img" />
-                      <div class="header__notify-info">
-                        <span class="header__notify-name">${productOfNoctify[i].nameProduct}</span>
-                        <span class="header__notify-description">Đã được xác nhận</span>
-                      </div>
-                    </a>`;
+                    <img src="/sources/Data/${productOfNoctify[i].id}/1.webp" alt=""
+                      class="header__notify-img" />
+                    <div class="header__notify-info">
+                      <span class="header__notify-name">${productOfNoctify[i].nameProduct}</span>
+                      <span class="header__notify-description">Đã được xác nhận</span>
+                    </div>
+                  </a>`;
           ulMess.appendChild(li);
         }
-        let li = document.createElement('li');
-        li.classList.add("header__notify-item", "header__notify-item--viewed");
-        li.innerHTML = `<a href="#" class="header__notify-link">
-                      <img src="/sources/imgs/home/notice_welcom.webp" alt=""
-                        class="header__notify-img" />
-                      <div class="header__notify-info">
-                        <span class="header__notify-name">Chào mừng bạn đến với The Light Shop</span>
-                        <span class="header__notify-description">Rất vui được phục vụ bạn</span>
-                      </div>
-                    </a>`;
-        ulMess.appendChild(li);
+
+        if (currentNoticeCount <= 5) {
+          let li = document.createElement('li');
+          li.classList.add("header__notify-item", "header__notify-item--viewed");
+          li.innerHTML = `<a href="#" class="header__notify-link">
+                    <img src="/sources/imgs/home/notice_welcom.webp" alt=""
+                      class="header__notify-img" />
+                    <div class="header__notify-info">
+                      <span class="header__notify-name">Chào mừng bạn đến với The Light Shop</span>
+                      <span class="header__notify-description">Rất vui được phục vụ bạn</span>
+                    </div>
+                  </a>`;
+          ulMess.appendChild(li);
+        }
+
         messFooter.classList.add("show");
       }
-    }
+    };
+    document.querySelector('.header__notify-footer-btn').addEventListener('click', (event) => {
+      event.preventDefault();
+      currentNoticeCount += 5;
+      showListNotice();
+    });
     //  Giỏ hàng 
     var showCart = (e) => {
       const cartContainer = document.querySelector('.header__cart-wrap');
@@ -664,12 +674,10 @@
       }
     }
     var delCartItem = (itemId) => {
-      for (let j = 0; j < userList[i].data.cart.length; j++) {
-            userList[parseInt(curUser)].data.cart = userList[i].data.cart.filter(item => item !== itemId);
-            localStorage.setItem("userList", JSON.stringify(userList));
-            location.reload();
-            return;
-          }
+      userList[parseInt(curUser)].data.cart = userList[parseInt(curUser)].data.cart.filter(item => item !== itemId);
+      localStorage.setItem("userList", JSON.stringify(userList));
+      location.reload();
+      return;
     }
 
     function formatNumber(num) {
@@ -722,7 +730,7 @@
     };
     // Đăng xuất
     var logout = () => {
-      window.localStorage.setItem('curUser', "-1");
+      window.localStorage.setItem('currentUser', "-1");
       if (typeof localStorage["adClosedDate"] !== "undefined") localStorage.removeItem("adClosedDate");
       location.reload();
     }
