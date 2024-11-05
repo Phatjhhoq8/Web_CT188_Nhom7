@@ -61,7 +61,7 @@
         <a href="#" class="button" id="buttonGoToBack">Quay Về Trang Chính</a>
     </div>
     <script>
-        let currentPage = localStorage.getItem('currentPage');
+        let currentPage = localStorage.getItem('currentPage')||"../index.html";
         let buttonGoToBack = document.getElementById('buttonGoToBack');
         buttonGoToBack.href = currentPage;
     </script>

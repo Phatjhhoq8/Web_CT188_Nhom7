@@ -250,6 +250,7 @@
 .header__cart-item {
   display: flex;
   align-items: center;
+  background-color: #e9e8e8;
 }
 
 .header__cart-item:hover {
