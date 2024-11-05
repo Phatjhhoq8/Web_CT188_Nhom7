@@ -671,7 +671,7 @@
                             <span class="header__navbar-user-name">${userActive.fullName}</span>
                             <ul class="header__navbar-user-menu">
                                 <li class="header__navbar-user-item">
-                                    <a href="/Pages/profile.html">Tài khoản của tôi</a>
+                                    <a href="/Pages/profile.html" onclick="stateProfile('user')">Tài khoản của tôi</a>
                                 </li>
                                 <li class="header__navbar-user-item header__navbar-user-item--separate">
                                     <a href="#" onclick="logout()">Đăng xuất</a>
@@ -783,6 +783,7 @@
           let a = document.createElement('a');
           a.classList.add("header__cart-view-cart", "btn", "btn--primary");
           a.setAttribute("href", "/Pages/profile.html");
+          a.onclick=stateProfile("cart");
           a.innerText = "Xem giỏ hàng";
           cartList.appendChild(a);
           const ulCart = document.querySelector('.header__cart-list-item');
@@ -818,6 +819,9 @@
           }
         }
       }
+    }
+    var stateProfile = (sta) => {
+      localStorage.setItem("stateProflie",sta);
     }
     var delCartItem = (itemId) => {
       userList[parseInt(curUser)].data.cart = userList[parseInt(curUser)].data.cart.filter(item => item !== itemId);
@@ -869,12 +873,12 @@
       for (let i = searchData.length - 1; i >= Math.max(0, searchData.length - 5); i--) {
         let li = document.createElement('li');
         li.classList.add('header__search-history-item');
-        li.innerHTML = `<a  href="#">${searchData[i]}<i class="fas fa-times" onclick=delHistory(${i},event)></i></a>`;
+        li.innerHTML = `<a  href="#" onclick="searchItem(this)">${searchData[i]}<i class="fas fa-times" onclick=delHistory(${i},event)></i></a>`;
         ulSearch.appendChild(li);
       }
     }
     var delHistory = (index, event) => {
-      event.preventDefault();
+      event.stopPropagation();
       searchData.splice(index, 1);
       window.localStorage.setItem("searchData", JSON.stringify(searchData));
       showHistory();
@@ -901,6 +905,7 @@
           searchData.push(search.value);
           window.localStorage.setItem("searchData", JSON.stringify(searchData));
           window.localStorage.setItem("curSearch", search.value);
+          search.value="";
           window.location.href = "/Pages/product.html";
         }
       }
@@ -911,8 +916,17 @@
         searchData.push(search.value);
         window.localStorage.setItem("searchData", JSON.stringify(searchData));
         window.localStorage.setItem("curSearch", search.value);
+        search.value="";
         window.location.href = "/Pages/product.html";
       }
+    }
+    var searchItem = (item) => {
+      window.localStorage.setItem("curSearch", item.textContent);
+      window.location.href = "/Pages/product.html";
+    }
+    // đi tới trang chi tiết sản phẩm
+    var goProduct = (index) => {
+      window.open('Pages/product-items.html?id='+index,'_self');
     }
   </script>
 </body>
