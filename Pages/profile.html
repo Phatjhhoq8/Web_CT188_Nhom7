@@ -9,6 +9,9 @@
   <link rel="stylesheet" href="/sources/css/bootstrap.min.css">
   <link rel="stylesheet" href="/sources/cssFolder/index.css" />
   <link rel="stylesheet" href="/sources/fontawesome-free-5.12.1-web/css/all.min.css">
+  <link rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.8.1/font/bootstrap-icons.min.css">
+
   <style>
     /* css ngoài cấm đụng vào đụng vào là hỏng */
     .iframe-container {
@@ -57,7 +60,8 @@
       background-position: center;
       background-repeat: no-repeat;
     }
-
+  </style>
+  <style>
     /* Profile css */
 
     .container-bg-color {
@@ -88,10 +92,6 @@
       background-color: #f4f1ff !important;
       border: none !important;
       padding: 2px 13px !important;
-    }
-
-    legend {
-      margin-bottom: 0 !important;
     }
 
     #changeAvatar {
@@ -163,13 +163,6 @@
     #passwordForm {
       max-width: 400px;
       margin: 23px 0;
-    }
-
-    #passwordForm h3 {
-      text-align: center;
-      font-size: 18px;
-      font-weight: 600;
-      margin-bottom: 20px;
     }
 
     .form-content {
@@ -247,12 +240,12 @@
               <h3 class="header__search-history-heading">Lịch sử tìm kiếm</h3>
               <ul class="header__search-history-list">
                 <!-- <li class="header__search-history-item">
-                        <a href="#">
-                          BẬT MÍ 5.5 - SĂN TRƯỚC MÃ 5.5
-                          <img src="https://cf.shopee.vn/file/491389dce9eabc3510a3e8a21cc40ef7" alt="Sale" />
-                          <i class="fas fa-times"></i>
-                        </a>
-                      </li> -->
+                    <a href="#">
+                      BẬT MÍ 5.5 - SĂN TRƯỚC MÃ 5.5
+                      <img src="https://cf.shopee.vn/file/491389dce9eabc3510a3e8a21cc40ef7" alt="Sale" />
+                      <i class="fas fa-times"></i>
+                    </a>
+                  </li> -->
               </ul>
             </div>
           </div>
@@ -297,12 +290,12 @@
 
                 <div class="header__cart-list">
                   <!-- <h4 class="header__cart-heading text-center">Sản phẩm đã thêm</h4>
-                        
-                        <img src="/sources/imgs/home/cart-empty.png" alt="No cart" class="header__cart-list--no-cart header__cart-no-cart-img" />
-                        <span class="header__cart-list--no-cart header__cart-no-cart-msg">Chưa có sản phẩm</span>
-                        <ul class="header__cart-list-item"></ul>
-                        
-                        <a href="#" class="header__cart-view-cart btn btn--primary">Xem giỏ hàng</a> -->
+                    
+                    <img src="/sources/imgs/home/cart-empty.png" alt="No cart" class="header__cart-list--no-cart header__cart-no-cart-img" />
+                    <span class="header__cart-list--no-cart header__cart-no-cart-msg">Chưa có sản phẩm</span>
+                    <ul class="header__cart-list-item"></ul>
+                    
+                    <a href="#" class="header__cart-view-cart btn btn--primary">Xem giỏ hàng</a> -->
                 </div>
                 <span class="header__cart-notice"></span>
               </div>
@@ -395,7 +388,7 @@
                 </div>
                 <div class="form-group">
                   <span>Tên</span>
-                  <input type="text" id="nameFormProfile" disabled>
+                  <input type="text" id="nameFormProfile" disabled pattern="^(?!\s*$).+">
                 </div>
                 <div class="form-group">
                   <span>Email</span>
@@ -403,13 +396,14 @@
                 </div>
                 <div class="form-group">
                   <span>Số điện thoại</span>
-                  <input style="text-align: right;" value="********94" id="phoneNumFormProfile" disabled></input>
+                  <input style="text-align: right;" value="" id="phoneNumFormProfile" disabled
+                    pattern="^[0-9]{10}$"></input>
                 </div>
                 <div class="form-group">
                   <span>Giới tính</span>
                   <label><input type="radio" name="gender" value="male" disabled> Nam</label>
                   <label><input type="radio" name="gender" value="female" disabled> Nữ</label>
-                  <label><input type="radio" name="gender" value="orther" checked> Khác</label>
+                  <label><input type="radio" name="gender" value="orther" disabled> Khác</label>
                 </div>
                 <div class="form-group">
                   <span>Địa chỉ giao hàng</span>
@@ -422,28 +416,80 @@
             </fieldset>
           </form>
         </div>
+
         <!-- form đổi mật khẩu  -->
         <div id="passwordForm" class="d-none">
-          <form action="" id="password">
+          <form action="" id="oldPass">
+            <fieldset>
+              <legend>
+                <h3>Mật khẩu</h3>
+              </legend>
+              <div class="form-content">
+                <label for="oldPassword">
+                  <h6>nhập mật khẩu hiện tại</h6>
+                </label>
+                <div class="form-group">
+                  <div class="input-group">
+                    <input type="password" id="oldPassword" class="form-control" placeholder="Nhập mật khẩu" required
+                      style="border-top-left-radius: 5px; border-bottom-left-radius: 5px;">
+                    <div class="input-group-text" id="toggleOldPassword"
+                      style="cursor: pointer; background-color: #fff; border-top-right-radius: 5px; border-bottom-right-radius: 5px;">
+                      <i class="bi bi-eye-slash"></i>
+                    </div>
+                    <div class="invalid-feedback" id="oldPasswordAlert">Vui lòng nhập
+                      mật khẩu.</div>
+                  </div>
+                </div>
+                <div class="button-center">
+                  <button class="save-button" id="oldPasswordButton">Xác nhận</button>
+                </div>
+              </div>
+            </fieldset>
+          </form>
+
+          <form action="" id="changePassword" class="was-validated d-none">
             <fieldset>
               <legend>
                 <h3>Đổi mật khẩu</h3>
               </legend>
               <div class="form-content">
-                <table>
-                  <tr>
-                    <td><label for="currentPassword">Mật khẩu hiện tại</label></td>
-                    <td><input type="password" id="currentPassword" required minlength="8" maxlength="32"></td>
-                  </tr>
-                  <tr>
-                    <td><label for="newPassword">Mật khẩu mới</label></td>
-                    <td><input type="password" id="newPassword" required minlength="8" maxlength="32"></td>
-                  </tr>
-                  <tr>
-                    <td><label for="rePassword">Nhập lại mật khẩu mới</label></td>
-                    <td><input type="password" id="rePassword" required minlength="8" maxlength="32"></td>
-                  </tr>
-                </table>
+                <label for="passwordFormProfile">
+                  <h6>Mật khẩu mới</h6>
+                </label>
+                <div class="form-group">
+                  <div class="input-group">
+                    <input type="password" id="passwordFormProfile" class="form-control" placeholder="Nhập mật khẩu"
+                      required minlength="6" maxlength="18"
+                      style="border-top-left-radius: 5px; border-bottom-left-radius: 5px;">
+                    <div class="input-group-text" id="togglePasswordFormProfile"
+                      style="cursor: pointer; background-color: #fff; border-top-right-radius: 5px; border-bottom-right-radius: 5px;">
+                      <i class="bi bi-eye-slash"></i>
+                    </div>
+                    <div class="invalid-feedback" id="passwordFormProfileAlert1">Vui lòng nhập
+                      mật khẩu.</div>
+                    <div class="invalid-feedback" id="passwordFormProfileAlert2"></div>
+                    <div class="invalid-feedback" id="passwordFormProfileAlert3"></div>
+                    <div class="invalid-feedback" id="passwordFormProfileAlert4"></div>
+                    <div class="invalid-feedback" id="passwordFormProfileAlert5"></div>
+                    <div class="invalid-feedback" id="passwordFormProfileAlert6"></div>
+                  </div>
+                </div>
+                <label for="confirmNewPassword">
+                  <h6>Xác nhận mật khẩu</h6>
+                </label>
+                <div class="form-group">
+                  <div class="input-group">
+                    <input type="password" id="confirmNewPassword" class="form-control" placeholder="Nhập mật khẩu"
+                      required pattern="^$" maxlength="18"
+                      style="border-top-left-radius: 5px; border-bottom-left-radius: 5px;">
+                    <div class="input-group-text" id="toggleConfirmNewPassword"
+                      style="cursor: pointer; background-color: #fff; border-top-right-radius: 5px; border-bottom-right-radius: 5px;">
+                      <i class="bi bi-eye-slash"></i>
+                    </div>
+                    <div class="invalid-feedback" id="confirmNewPasswordAlert">Phần mật khẩu
+                      chưa hoàn thiện.</div>
+                  </div>
+                </div>
                 <div class="button-center">
                   <button class="save-button">Lưu</button>
                 </div>
@@ -467,8 +513,7 @@
     </article>
   </div>
 
-
-
+  <!-- Phần Footer -->
   <footer class="bg-dark text-center text-lg-start text-white" id="footer">
     <div class="container p-4">
       <div class="row mt-4">
@@ -622,13 +667,32 @@
     document.getElementById('vanchuyen').onclick = function () { setButon('vanchuyen'); };
   </script>
   <script>
+    // let userList = JSON.parse(localStorage.getItem('userList'));
+    let currentUser = parseInt(localStorage.getItem('currentUser'));
+
     let nameFormProfile = document.getElementById('nameFormProfile');
+    let userNameFormProfile = document.getElementById('userNameFormProfile');
+    let emailFormProfile = document.getElementById('emailFormProfile');
     let phoneNumFormProfile = document.getElementById('phoneNumFormProfile');
     let address = document.getElementById('address');
     let gender = document.getElementsByName('gender');
+
+    nameFormProfile.value = userList[currentUser].fullName;
+    userNameFormProfile.value = userList[currentUser].userName;
+    emailFormProfile.value = userList[currentUser].email;
+    for (let i = 0; i < gender.length; ++i) {
+      if (userList[currentUser].gender === gender[i].value) gender[i].disabled = false, gender[i].checked = true;
+    }
+    if (userList[currentUser].phoneNum)
+      phoneNumFormProfile.value = '0' + userList[currentUser].phoneNum[1] + '******' + userList[currentUser].phoneNum[8] + userList[currentUser].phoneNum[9];
+    else phoneNumFormProfile.value = "";
+    address.value = userList[currentUser].address;
+  </script>
+  <script>
     let buttonChange = document.getElementById('buttonChange');
     var count = 0;
-    profileForm.onsubmit = function (event) {
+    let profile = document.getElementById('profile');
+    profile.onsubmit = function (event) {
       event.preventDefault();
       count = (count + 1) & 1;
       if (count) {
@@ -636,20 +700,153 @@
         for (let i = 0; i < gender.length; ++i) {
           gender[i].disabled = false;
         }
+        phoneNumFormProfile.value = userList[currentUser].phoneNum;
         phoneNumFormProfile.disabled = false;
         address.disabled = false;
         buttonChange.innerText = 'Lưu';
       } else {
+        nameFormProfile.value = nameFormProfile.value.trim();
+        userList[currentUser].fullName = nameFormProfile.value;
         nameFormProfile.disabled = true;
         for (let i = 0; i < gender.length; ++i) {
           if (!gender[i].checked) gender[i].disabled = true;
+          else userList[currentUser].gender = gender[i].value;
         }
+        userList[currentUser].phoneNum = phoneNumFormProfile.value;
+        if (phoneNumFormProfile.value != "")
+          phoneNumFormProfile.value = '0' + userList[currentUser].phoneNum[1] + '******' + userList[currentUser].phoneNum[8] + userList[currentUser].phoneNum[9];
         phoneNumFormProfile.disabled = true;
+        address.value = address.value.trim();
+        userList[currentUser].address = address.value;
         address.disabled = true;
+        localStorage.setItem('userList', JSON.stringify(userList));
         buttonChange.innerText = 'Sửa';
       }
     }
   </script>
+
+  <script>
+    let pwd = document.getElementById('oldPassword');
+    pwd.pattern = userList[currentUser].pwd;
+    let pwdAlert = document.getElementById('oldPasswordAlert');
+    let oldPass = document.getElementById('oldPass');
+    pwd.oninput = function (event) {
+      oldPass.classList.remove('was-validated');
+      if (pwd.value.length) pwdAlert.innerText = "Mật khẩu không đúng";
+      else pwdAlert.innerText = "Vui lòng nhập mật khẩu.";
+    }
+    let oldPasswordButton = document.getElementById('oldPasswordButton');
+    oldPasswordButton.onclick = function () {
+      oldPass.classList.add('was-validated');
+      if (pwd.value.length) pwdAlert.innerText = "Mật khẩu không đúng";
+      else pwdAlert.innerText = "Vui lòng nhập mật khẩu.";
+    }
+    oldPass.onsubmit = function (event) {
+      event.preventDefault();
+
+      oldPass.classList.add('d-none');
+      document.getElementById('changePassword').classList.remove('d-none');
+    }
+  </script>
+
+  <!-- kiểm tra phần nhập mật khẩu và xác nhận mật khẩu -->
+  <script>
+    let passwordFormProfile = document.getElementById('passwordFormProfile');
+    // Thiết lập pattern cho mật khẩu
+    passwordFormProfile.setAttribute('pattern', "^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[@$!%*?&_])[A-Za-z0-9@$!%*?&_]{8,}$");
+
+    passwordFormProfile.oninput = function (event) {
+      let passVal = passwordFormProfile.value;
+
+      // Kiểm tra mật khẩu trống
+      if (passVal.length == 0) {
+        document.getElementById('passwordFormProfileAlert1').innerText = "Vui lòng nhập mật khẩu";
+        document.getElementById('passwordFormProfileAlert2').innerText = "";
+        document.getElementById('passwordFormProfileAlert3').innerText = "";
+        document.getElementById('passwordFormProfileAlert4').innerText = "";
+        document.getElementById('passwordFormProfileAlert5').innerText = "";
+        document.getElementById('passwordFormProfileAlert6').innerText = "";
+        return; // Dừng lại nếu mật khẩu trống
+      }
+
+      // Kiểm tra độ dài mật khẩu
+      if (passVal.length < 6) {
+        document.getElementById('passwordFormProfileAlert1').innerText = "Yêu cầu tối thiểu 6 ký tự";
+      } else {
+        document.getElementById('passwordFormProfileAlert1').innerText = "";
+      }
+
+      // Khởi tạo các biến kiểm tra
+      let checkinhoa = false;
+      let checkinthuong = false;
+      let checkchuso = false;
+      let checkkitudacbiet = false;
+      let checkkitukhac = false;
+
+      // Kiểm tra các điều kiện mật khẩu
+      for (let i = 0; i < passVal.length; ++i) {
+        if (/[A-Z]/.test(passVal[i])) checkinhoa = true; // Kiểm tra chữ hoa
+        if (/[a-z]/.test(passVal[i])) checkinthuong = true; // Kiểm tra chữ thường
+        if (/[0-9]/.test(passVal[i])) checkchuso = true; // Kiểm tra số
+        if (/[@$!%*?&_]/.test(passVal[i])) checkkitudacbiet = true; // Kiểm tra ký tự đặc biệt
+        if (/[^A-Za-z0-9@$!%*?&_]/.test(passVal[i])) checkkitukhac = true;
+      }
+
+      // Thêm/xóa thông báo
+      document.getElementById('passwordFormProfileAlert2').innerText = checkinhoa ? '' : 'Ít nhất một chữ cái in hoa trong bảng chữ cái tiếng Anh.';
+      document.getElementById('passwordFormProfileAlert3').innerText = checkinthuong ? '' : 'Ít nhất một chữ cái in thường trong bảng chữ cái tiếng Anh.';
+      document.getElementById('passwordFormProfileAlert4').innerText = checkchuso ? '' : 'Ít nhất một chữ số từ 0 đến 9.';
+      document.getElementById('passwordFormProfileAlert5').innerText = checkkitudacbiet ? '' : 'Ít nhất một ký tự đặc biệt thuộc @ $ ! % * ? & _';
+      document.getElementById('passwordFormProfileAlert6').innerText = !checkkitukhac ? '' : 'Không đặt bất kì ký tự nào không thuộc các nhóm trên';
+
+      // đặt thông báo cho phần xác nhận mật khẩu trong trường hợp đúng và sai ở phần mật khẩu
+      let confirmNewPassword = document.getElementById('confirmNewPassword');
+      if (passVal.length < 8 || !checkinhoa || !checkinthuong || !checkchuso || !checkkitudacbiet || checkkitukhac) {
+        document.getElementById('confirmNewPasswordAlert').innerText = "Phần mật khẩu chưa hoàn thiện";
+        confirmNewPassword.pattern = "^$";
+      } else {
+        document.getElementById('confirmNewPasswordAlert').innerText = "Mật khẩu không khớp";
+        confirmNewPassword.pattern = "^" + passwordFormProfile.value + "$";
+      }
+    };
+
+  </script>
+  <!-- xem mật khẩu và xem xác nhận mật khẩu -->
+  <script>
+    function see(event) {
+      let passwordInput;
+      if (event.currentTarget.id === 'toggleOldPassword') passwordInput = document.getElementById('oldPassword');
+      else {
+        passwordInput = event.currentTarget.id === 'togglePasswordFormProfile'
+          ? document.getElementById('passwordFormProfile')
+          : document.getElementById('confirmNewPassword');
+      }
+      const icon = event.currentTarget.querySelector('i'); // Truy cập vào icon bên trong phần tử được nhấn
+      if (passwordInput.type === 'password') {
+        passwordInput.type = 'text'; // Hiển thị mật khẩu
+        icon.classList.remove('bi-eye-slash');
+        icon.classList.add('bi-eye'); // Chuyển biểu tượng sang mắt mở
+      } else {
+        passwordInput.type = 'password'; // Ẩn mật khẩu
+        icon.classList.remove('bi-eye');
+        icon.classList.add('bi-eye-slash'); // Chuyển biểu tượng sang mắt đóng
+      }
+    }
+    document.getElementById('toggleOldPassword').addEventListener('click', see);
+    document.getElementById('togglePasswordFormProfile').addEventListener('click', see);
+    document.getElementById('toggleConfirmNewPassword').addEventListener('click', see);
+  </script>
+
+  <script>
+    let changePassword = document.getElementById('changePassword');
+    changePassword.onsubmit = function (event) {
+      let newPassword1 = document.getElementById('passwordFormProfile');
+      let newPassword2 = document.getElementById('confirmNewPassword');
+      userList[currentUser].pwd = newPassword2.value;
+      localStorage.setItem('userList', JSON.stringify(userList));
+    }
+  </script>
+
   <script>
     // Kiểm tra đã đăng nhập chưa
     window.onload = (e) => {
@@ -688,32 +885,32 @@
       var userState = document.querySelector('#stateLogin');
       if (curUser == "-1") {
         userState.innerHTML = `<i class="fas fa-user"></i>
-                  <span onclick="toLogin(event)">Sign in</span>
-                  <div class="login-container" >
-                    <h2 class="text-secondary">Sign back in to continue</h2>
-                    <button class="sign-in-btn rounded-pill "onclick="toLogin(event)">Sign in</button>
-                    <p class="text-secondary">Or register to create a new account:</p>
-                    <button class="sign-in-btn rounded-pill" onclick="toSignup(event)">Register</button>
-                    <p class="agreement">
-                      I agree to the
-                      <a href="#">TheLight.com Free Membership Agreement</a> and
-                      <a href="#">Privacy Policy.</a>
-                    </p>`;
+            <span onclick="toLogin(event)">Sign in</span>
+            <div class="login-container" >
+              <h2 class="text-secondary">Sign back in to continue</h2>
+              <button class="sign-in-btn rounded-pill "onclick="toLogin(event)">Sign in</button>
+              <p class="text-secondary">Or register to create a new account:</p>
+              <button class="sign-in-btn rounded-pill" onclick="toSignup(event)">Register</button>
+              <p class="agreement">
+                I agree to the
+                <a href="#">TheLight.com Free Membership Agreement</a> and
+                <a href="#">Privacy Policy.</a>
+              </p>`;
       }
       else {
         userState.innerHTML = `<li class="header__navbar-item header__navbar-user">
-                                <img src="https://i.pinimg.com/736x/13/2e/a7/132ea72d2bc3b85d90409c9e8f2d0f4a.jpg" alt=""
-                                    class="header__navbar-user-img">
-                                <span class="header__navbar-user-name">${userActive.fullName}</span>
-                                <ul class="header__navbar-user-menu">
-                                    <li class="header__navbar-user-item">
-                                        <a href="/Pages/profile.html" onclick="stateProfile('user')">Tài khoản của tôi</a>
-                                    </li>
-                                    <li class="header__navbar-user-item header__navbar-user-item--separate">
-                                        <a href="#" onclick="logout()">Đăng xuất</a>
-                                    </li>
-                                </ul>
-                            </li>`;
+                          <img src="https://i.pinimg.com/736x/13/2e/a7/132ea72d2bc3b85d90409c9e8f2d0f4a.jpg" alt=""
+                              class="header__navbar-user-img">
+                          <span class="header__navbar-user-name">${userActive.fullName}</span>
+                          <ul class="header__navbar-user-menu">
+                              <li class="header__navbar-user-item">
+                                  <a href="/Pages/profile.html" onclick="stateProfile('user')">Tài khoản của tôi</a>
+                              </li>
+                              <li class="header__navbar-user-item header__navbar-user-item--separate">
+                                  <a href="#" onclick="logout()">Đăng xuất</a>
+                              </li>
+                          </ul>
+                      </li>`;
       }
     })
 
@@ -754,13 +951,13 @@
           let li = document.createElement('li');
           li.classList.add("header__notify-item", "header__notify-item--viewed");
           li.innerHTML = `<a href="#" class="header__notify-link">
-                        <img src="/sources/Data/${productOfNoctify[i].id}/1.webp" alt=""
-                          class="header__notify-img" />
-                        <div class="header__notify-info">
-                          <span class="header__notify-name">${productOfNoctify[i].nameProduct}</span>
-                          <span class="header__notify-description">Đã được xác nhận</span>
-                        </div>
-                      </a>`;
+                  <img src="/sources/Data/${productOfNoctify[i].id}/1.webp" alt=""
+                    class="header__notify-img" />
+                  <div class="header__notify-info">
+                    <span class="header__notify-name">${productOfNoctify[i].nameProduct}</span>
+                    <span class="header__notify-description">Đã được xác nhận</span>
+                  </div>
+                </a>`;
           ulMess.appendChild(li);
         }
 
@@ -768,13 +965,13 @@
           let li = document.createElement('li');
           li.classList.add("header__notify-item", "header__notify-item--viewed");
           li.innerHTML = `<a href="#" class="header__notify-link">
-                        <img src="/sources/imgs/home/notice_welcom.webp" alt=""
-                          class="header__notify-img" />
-                        <div class="header__notify-info">
-                          <span class="header__notify-name">Chào mừng bạn đến với The Light Shop</span>
-                          <span class="header__notify-description">Rất vui được phục vụ bạn</span>
-                        </div>
-                      </a>`;
+                  <img src="/sources/imgs/home/notice_welcom.webp" alt=""
+                    class="header__notify-img" />
+                  <div class="header__notify-info">
+                    <span class="header__notify-name">Chào mừng bạn đến với The Light Shop</span>
+                    <span class="header__notify-description">Rất vui được phục vụ bạn</span>
+                  </div>
+                </a>`;
           ulMess.appendChild(li);
         }
 
@@ -809,8 +1006,8 @@
         const divCart = document.querySelector('.header__cart-wrap');
         if (productOfCart.length == 0) {
           cartList.innerHTML = `<h4 class="header__cart-heading text-center">Sản phẩm đã thêm</h4>
-                      <img src="/sources/imgs/home/cart-empty.png" alt="No cart" class="header__cart-list--no-cart header__cart-no-cart-img" />
-                      <span class="header__cart-list--no-cart header__cart-no-cart-msg">Chưa có sản phẩm</span>`
+                <img src="/sources/imgs/home/cart-empty.png" alt="No cart" class="header__cart-list--no-cart header__cart-no-cart-img" />
+                <span class="header__cart-list--no-cart header__cart-no-cart-msg">Chưa có sản phẩm</span>`
           document.querySelector('.header__cart-notice').style.display = "none";
         } else {
           let ul = document.createElement('ul');
@@ -831,26 +1028,26 @@
             let li = document.createElement('li');
             li.classList.add("header__cart-item");
             li.innerHTML = `<img
-                                src="/sources/Data/${productOfCart[i].id}/1.webp"
-                                alt="" class="header__cart-img" />
-                              <div class="header__cart-item-info">
-                                <div class="header__cart-item-head">
-                                  <h5 class="header__cart-item-name">
-                                    ${productOfCart[i].nameProduct}
-                                  </h5>
-                                  <div class="divheader__cart-item-price-wrap">
-                                    <span class="header__cart-item-price">${formatNumber(productOfCart[i].price)} VND</span>
-                                    <span class="header__cart-item-multiply">x</span>
-                                    <span class="header__cart-item-cnt">1</span>
-                                  </div>
-                                </div>
-                                <div class="header__cart-item-body">
-                                  <span class="header__cart-item-description">
-                                    Phân loại: ${productOfCart[i].type}
-                                    </span>
-                                    <span class="header__cart-item-remove" onclick="delCartItem('${productOfCart[i].id}')">Xóa</span>
-                                </div>
-                              </div>`;
+                          src="/sources/Data/${productOfCart[i].id}/1.webp"
+                          alt="" class="header__cart-img" />
+                        <div class="header__cart-item-info">
+                          <div class="header__cart-item-head">
+                            <h5 class="header__cart-item-name">
+                              ${productOfCart[i].nameProduct}
+                            </h5>
+                            <div class="divheader__cart-item-price-wrap">
+                              <span class="header__cart-item-price">${formatNumber(productOfCart[i].price)} VND</span>
+                              <span class="header__cart-item-multiply">x</span>
+                              <span class="header__cart-item-cnt">1</span>
+                            </div>
+                          </div>
+                          <div class="header__cart-item-body">
+                            <span class="header__cart-item-description">
+                              Phân loại: ${productOfCart[i].type}
+                              </span>
+                              <span class="header__cart-item-remove" onclick="delCartItem('${productOfCart[i].id}')">Xóa</span>
+                          </div>
+                        </div>`;
             ulCart.appendChild(li);
           }
         }
