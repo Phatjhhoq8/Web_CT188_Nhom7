@@ -480,7 +480,8 @@
       if (typeof localStorage["currentUser"] === "undefined") {
         localStorage.setItem("currentUser", "-1");
       }
-      let temp = productInfoList.filter(product => userActive.data.cart.includes(product.id)).length
+      let temp = productInfoList.filter(product =>
+        userActive.data.cart.some(cartItem => cartItem.item === product.id)).length;
       const headerNotice = document.querySelector('.header__cart-notice');
       if (temp > 0) {
         headerNotice.style.display = "block";
@@ -524,7 +525,7 @@
                             <span class="header__navbar-user-name">${userActive.fullName}</span>
                             <ul class="header__navbar-user-menu">
                                 <li class="header__navbar-user-item">
-                                    <a href="/Pages/profile.html">Tài khoản của tôi</a>
+                                    <a href="/Pages/profile.html" onclick="stateProfile('user')">Tài khoản của tôi</a>
                                 </li>
                                 <li class="header__navbar-user-item header__navbar-user-item--separate">
                                     <a href="#" onclick="logout()">Đăng xuất</a>
@@ -605,7 +606,7 @@
     });
     //  Giỏ hàng 
     var goProfile = () => {
-      if(curUser!="-1") window.location.href="Pages/profile.html"
+      if (curUser != "-1") window.location.href = "Pages/profile.html"
     }
     var showCart = (e) => {
       const cartContainer = document.querySelector('.header__cart-wrap');
@@ -625,7 +626,7 @@
         }
       } else {
         let productOfCart = productInfoList.filter(product =>
-          userActive.data.cart.includes(product.id));
+          userActive.data.cart.some(cartItem => cartItem.item === product.id));
         const divCart = document.querySelector('.header__cart-wrap');
         if (productOfCart.length == 0) {
           cartList.innerHTML = `<h4 class="header__cart-heading text-center">Sản phẩm đã thêm</h4>
@@ -640,7 +641,7 @@
           a.classList.add("header__cart-view-cart", "btn", "btn--primary");
           a.setAttribute("href", "/Pages/profile.html");
           a.innerText = "Xem giỏ hàng";
-          a.onclick=stateProfile("cart");
+          a.onclick = stateProfile("cart",event);
           cartList.appendChild(a);
           const ulCart = document.querySelector('.header__cart-list-item');
           ulCart.innerHTML = "";
@@ -676,8 +677,8 @@
         }
       }
     }
-    var stateProfile = (sta) => {
-      localStorage.setItem("stateProflie",sta);
+    var stateProfile = (sta,event) => {
+      localStorage.setItem("stateProflie", sta);
     }
     var delCartItem = (itemId) => {
       userList[parseInt(curUser)].data.cart = userList[parseInt(curUser)].data.cart.filter(item => item !== itemId);
@@ -792,7 +793,7 @@
           searchData.push(search.value);
           window.localStorage.setItem("searchData", JSON.stringify(searchData));
           window.localStorage.setItem("curSearch", search.value);
-          search.value="";
+          search.value = "";
           window.location.href = "/Pages/product.html";
         }
       }
@@ -803,7 +804,7 @@
         searchData.push(search.value);
         window.localStorage.setItem("searchData", JSON.stringify(searchData));
         window.localStorage.setItem("curSearch", search.value);
-        search.value="";
+        search.value = "";
         window.location.href = "/Pages/product.html";
       }
     }
@@ -813,7 +814,7 @@
     }
     // đi tới trang chi tiết sản phẩm
     var goProduct = (index) => {
-      window.open('Pages/product-items.html?id='+index,'_self');
+      window.open('Pages/product-items.html?id=' + index, '_self');
     }
   </script>
 </body>
