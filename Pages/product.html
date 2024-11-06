@@ -156,7 +156,7 @@
             </li>
             <li onmouseenter="showCart()" class="list-group-item text-secondary boder-none text-white">
               <div class="header__cart-wrap">
-                <i class="header__cart-icon fas fa-shopping-cart"></i>
+                <i onclick="goProfile()" class="header__cart-icon fas fa-shopping-cart"></i>
 
                 <div class="header__cart-list">
                   <!-- <h4 class="header__cart-heading text-center">Sản phẩm đã thêm</h4>
@@ -671,7 +671,7 @@
                             <span class="header__navbar-user-name">${userActive.fullName}</span>
                             <ul class="header__navbar-user-menu">
                                 <li class="header__navbar-user-item">
-                                    <a href="/Pages/profile.html" onclick="stateProfile('user')">Tài khoản của tôi</a>
+                                    <a href="/Pages/profile.html">Tài khoản của tôi</a>
                                 </li>
                                 <li class="header__navbar-user-item header__navbar-user-item--separate">
                                     <a href="#" onclick="logout()">Đăng xuất</a>
@@ -751,6 +751,9 @@
       showListNotice();
     });
     //  Giỏ hàng 
+    var goProfile = () => {
+      if(curUser!="-1") window.location.href="profile.html"
+    }
     var showCart = (e) => {
       const cartContainer = document.querySelector('.header__cart-wrap');
       const cartList = document.querySelector('.header__cart-list');

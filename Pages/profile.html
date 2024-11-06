@@ -292,7 +292,7 @@
             </li>
             <li onmouseenter="showCart()" class="list-group-item text-secondary boder-none text-white">
               <div class="header__cart-wrap">
-                <i class="header__cart-icon fas fa-shopping-cart"></i>
+                <i onclick="goProfile()" class="header__cart-icon fas fa-shopping-cart"></i>
 
                 <div class="header__cart-list">
                   <!-- <h4 class="header__cart-heading text-center">Sản phẩm đã thêm</h4>
@@ -339,7 +339,7 @@
       <div class="d-flex align-items-center gap-3">
         <div class="avatar-tab"></div>
         <div>
-          <div class="fw-bold"><span>naruto123</span></div>
+          <div class="fw-bold"><span id="nameInTab"></span></div>
           <div>
             <i class="fas fa-pen" style="color: #9897a2;"></i>
             <a class="profile-edit">Sửa Hồ Sơ</a>
@@ -678,12 +678,13 @@
 
     let nameFormProfile = document.getElementById('nameFormProfile');
     let userNameFormProfile = document.getElementById('userNameFormProfile');
+    let nameInTab = document.getElementById('nameInTab');
     let emailFormProfile = document.getElementById('emailFormProfile');
     let phoneNumFormProfile = document.getElementById('phoneNumFormProfile');
     let address = document.getElementById('address');
     let gender = document.getElementsByName('gender');
 
-    nameFormProfile.value = userList[currentUser].fullName;
+    nameInTab.innerText = nameFormProfile.value = userList[currentUser].fullName;
     userNameFormProfile.value = userList[currentUser].userName;
     emailFormProfile.value = userList[currentUser].email;
     for (let i = 0; i < gender.length; ++i) {
@@ -711,7 +712,7 @@
         address.disabled = false;
         buttonChange.innerText = 'Lưu';
       } else {
-        nameFormProfile.value = nameFormProfile.value.trim();
+        nameInTab.innerText = nameFormProfile.value = nameFormProfile.value.trim();
         userList[currentUser].fullName = nameFormProfile.value;
         nameFormProfile.disabled = true;
         for (let i = 0; i < gender.length; ++i) {
@@ -909,7 +910,7 @@
                             <span class="header__navbar-user-name">${userActive.fullName}</span>
                             <ul class="header__navbar-user-menu">
                                 <li class="header__navbar-user-item">
-                                    <a href="/Pages/profile.html" onclick="stateProfile('user')">Tài khoản của tôi</a>
+                                    <a href="/Pages/profile.html" >Tài khoản của tôi</a>
                                 </li>
                                 <li class="header__navbar-user-item header__navbar-user-item--separate">
                                     <a href="#" onclick="logout()">Đăng xuất</a>
@@ -989,6 +990,9 @@
       showListNotice();
     });
     //  Giỏ hàng 
+    var goProfile = () => {
+      if(curUser!="-1") window.location.href="profile.html"
+    }
     var showCart = (e) => {
       const cartContainer = document.querySelector('.header__cart-wrap');
       const cartList = document.querySelector('.header__cart-list');
