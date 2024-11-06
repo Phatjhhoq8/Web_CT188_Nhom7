@@ -11,7 +11,13 @@
   <link rel="stylesheet" href="/sources/fontawesome-free-5.12.1-web/css/all.min.css">
   <link rel="stylesheet"
     href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.8.1/font/bootstrap-icons.min.css">
-
+  <script>
+    let currentUser = parseInt(localStorage.getItem('currentUser'));
+    if(currentUser=="-1") {
+      if(typeof localStorage["currentPage"]=="undefined") localStorage.setItem("currentPage","profile.html"); 
+      window.location.replace("login.html");
+    }
+  </script>
   <style>
     /* css ngoài cấm đụng vào đụng vào là hỏng */
     .iframe-container {
@@ -667,8 +673,8 @@
     document.getElementById('vanchuyen').onclick = function () { setButon('vanchuyen'); };
   </script>
   <script>
-    // let userList = JSON.parse(localStorage.getItem('userList'));
-    let currentUser = parseInt(localStorage.getItem('currentUser'));
+    let userList = JSON.parse(localStorage.getItem('userList'));
+    
 
     let nameFormProfile = document.getElementById('nameFormProfile');
     let userNameFormProfile = document.getElementById('userNameFormProfile');
@@ -846,7 +852,6 @@
       localStorage.setItem('userList', JSON.stringify(userList));
     }
   </script>
-
   <script>
     // Kiểm tra đã đăng nhập chưa
     window.onload = (e) => {
@@ -874,7 +879,7 @@
 
 
     // Lấy danh sách user và sản phẩm
-    const userList = JSON.parse(window.localStorage.getItem("userList")) || [];
+    // const userList = JSON.parse(window.localStorage.getItem("userList")) || [];
     const productList = JSON.parse(localStorage.getItem('productList')) || [];
     let userActive = userList[parseInt(curUser)];
 
@@ -885,32 +890,32 @@
       var userState = document.querySelector('#stateLogin');
       if (curUser == "-1") {
         userState.innerHTML = `<i class="fas fa-user"></i>
-            <span onclick="toLogin(event)">Sign in</span>
-            <div class="login-container" >
-              <h2 class="text-secondary">Sign back in to continue</h2>
-              <button class="sign-in-btn rounded-pill "onclick="toLogin(event)">Sign in</button>
-              <p class="text-secondary">Or register to create a new account:</p>
-              <button class="sign-in-btn rounded-pill" onclick="toSignup(event)">Register</button>
-              <p class="agreement">
-                I agree to the
-                <a href="#">TheLight.com Free Membership Agreement</a> and
-                <a href="#">Privacy Policy.</a>
-              </p>`;
+              <span onclick="toLogin(event)">Sign in</span>
+              <div class="login-container" >
+                <h2 class="text-secondary">Sign back in to continue</h2>
+                <button class="sign-in-btn rounded-pill "onclick="toLogin(event)">Sign in</button>
+                <p class="text-secondary">Or register to create a new account:</p>
+                <button class="sign-in-btn rounded-pill" onclick="toSignup(event)">Register</button>
+                <p class="agreement">
+                  I agree to the
+                  <a href="#">TheLight.com Free Membership Agreement</a> and
+                  <a href="#">Privacy Policy.</a>
+                </p>`;
       }
       else {
         userState.innerHTML = `<li class="header__navbar-item header__navbar-user">
-                          <img src="https://i.pinimg.com/736x/13/2e/a7/132ea72d2bc3b85d90409c9e8f2d0f4a.jpg" alt=""
-                              class="header__navbar-user-img">
-                          <span class="header__navbar-user-name">${userActive.fullName}</span>
-                          <ul class="header__navbar-user-menu">
-                              <li class="header__navbar-user-item">
-                                  <a href="/Pages/profile.html" onclick="stateProfile('user')">Tài khoản của tôi</a>
-                              </li>
-                              <li class="header__navbar-user-item header__navbar-user-item--separate">
-                                  <a href="#" onclick="logout()">Đăng xuất</a>
-                              </li>
-                          </ul>
-                      </li>`;
+                            <img src="https://i.pinimg.com/736x/13/2e/a7/132ea72d2bc3b85d90409c9e8f2d0f4a.jpg" alt=""
+                                class="header__navbar-user-img">
+                            <span class="header__navbar-user-name">${userActive.fullName}</span>
+                            <ul class="header__navbar-user-menu">
+                                <li class="header__navbar-user-item">
+                                    <a href="/Pages/profile.html" onclick="stateProfile('user')">Tài khoản của tôi</a>
+                                </li>
+                                <li class="header__navbar-user-item header__navbar-user-item--separate">
+                                    <a href="#" onclick="logout()">Đăng xuất</a>
+                                </li>
+                            </ul>
+                        </li>`;
       }
     })
 
@@ -951,13 +956,13 @@
           let li = document.createElement('li');
           li.classList.add("header__notify-item", "header__notify-item--viewed");
           li.innerHTML = `<a href="#" class="header__notify-link">
-                  <img src="/sources/Data/${productOfNoctify[i].id}/1.webp" alt=""
-                    class="header__notify-img" />
-                  <div class="header__notify-info">
-                    <span class="header__notify-name">${productOfNoctify[i].nameProduct}</span>
-                    <span class="header__notify-description">Đã được xác nhận</span>
-                  </div>
-                </a>`;
+                    <img src="/sources/Data/${productOfNoctify[i].id}/1.webp" alt=""
+                      class="header__notify-img" />
+                    <div class="header__notify-info">
+                      <span class="header__notify-name">${productOfNoctify[i].nameProduct}</span>
+                      <span class="header__notify-description">Đã được xác nhận</span>
+                    </div>
+                  </a>`;
           ulMess.appendChild(li);
         }
 
@@ -965,13 +970,13 @@
           let li = document.createElement('li');
           li.classList.add("header__notify-item", "header__notify-item--viewed");
           li.innerHTML = `<a href="#" class="header__notify-link">
-                  <img src="/sources/imgs/home/notice_welcom.webp" alt=""
-                    class="header__notify-img" />
-                  <div class="header__notify-info">
-                    <span class="header__notify-name">Chào mừng bạn đến với The Light Shop</span>
-                    <span class="header__notify-description">Rất vui được phục vụ bạn</span>
-                  </div>
-                </a>`;
+                    <img src="/sources/imgs/home/notice_welcom.webp" alt=""
+                      class="header__notify-img" />
+                    <div class="header__notify-info">
+                      <span class="header__notify-name">Chào mừng bạn đến với The Light Shop</span>
+                      <span class="header__notify-description">Rất vui được phục vụ bạn</span>
+                    </div>
+                  </a>`;
           ulMess.appendChild(li);
         }
 
@@ -1006,8 +1011,8 @@
         const divCart = document.querySelector('.header__cart-wrap');
         if (productOfCart.length == 0) {
           cartList.innerHTML = `<h4 class="header__cart-heading text-center">Sản phẩm đã thêm</h4>
-                <img src="/sources/imgs/home/cart-empty.png" alt="No cart" class="header__cart-list--no-cart header__cart-no-cart-img" />
-                <span class="header__cart-list--no-cart header__cart-no-cart-msg">Chưa có sản phẩm</span>`
+                  <img src="/sources/imgs/home/cart-empty.png" alt="No cart" class="header__cart-list--no-cart header__cart-no-cart-img" />
+                  <span class="header__cart-list--no-cart header__cart-no-cart-msg">Chưa có sản phẩm</span>`
           document.querySelector('.header__cart-notice').style.display = "none";
         } else {
           let ul = document.createElement('ul');
@@ -1016,7 +1021,7 @@
           let a = document.createElement('a');
           a.classList.add("header__cart-view-cart", "btn", "btn--primary");
           a.setAttribute("href", "/Pages/profile.html");
-          a.onclick = stateProfile("cart");
+          a.onclick=stateProfile("cart");
           a.innerText = "Xem giỏ hàng";
           cartList.appendChild(a);
           const ulCart = document.querySelector('.header__cart-list-item');
@@ -1028,33 +1033,33 @@
             let li = document.createElement('li');
             li.classList.add("header__cart-item");
             li.innerHTML = `<img
-                          src="/sources/Data/${productOfCart[i].id}/1.webp"
-                          alt="" class="header__cart-img" />
-                        <div class="header__cart-item-info">
-                          <div class="header__cart-item-head">
-                            <h5 class="header__cart-item-name">
-                              ${productOfCart[i].nameProduct}
-                            </h5>
-                            <div class="divheader__cart-item-price-wrap">
-                              <span class="header__cart-item-price">${formatNumber(productOfCart[i].price)} VND</span>
-                              <span class="header__cart-item-multiply">x</span>
-                              <span class="header__cart-item-cnt">1</span>
+                            src="/sources/Data/${productOfCart[i].id}/1.webp"
+                            alt="" class="header__cart-img" />
+                          <div class="header__cart-item-info">
+                            <div class="header__cart-item-head">
+                              <h5 class="header__cart-item-name">
+                                ${productOfCart[i].nameProduct}
+                              </h5>
+                              <div class="divheader__cart-item-price-wrap">
+                                <span class="header__cart-item-price">${formatNumber(productOfCart[i].price)} VND</span>
+                                <span class="header__cart-item-multiply">x</span>
+                                <span class="header__cart-item-cnt">1</span>
+                              </div>
                             </div>
-                          </div>
-                          <div class="header__cart-item-body">
-                            <span class="header__cart-item-description">
-                              Phân loại: ${productOfCart[i].type}
-                              </span>
-                              <span class="header__cart-item-remove" onclick="delCartItem('${productOfCart[i].id}')">Xóa</span>
-                          </div>
-                        </div>`;
+                            <div class="header__cart-item-body">
+                              <span class="header__cart-item-description">
+                                Phân loại: ${productOfCart[i].type}
+                                </span>
+                                <span class="header__cart-item-remove" onclick="delCartItem('${productOfCart[i].id}')">Xóa</span>
+                            </div>
+                          </div>`;
             ulCart.appendChild(li);
           }
         }
       }
     }
     var stateProfile = (sta) => {
-      localStorage.setItem("stateProflie", sta);
+      localStorage.setItem("stateProflie",sta);
     }
     var delCartItem = (itemId) => {
       userList[parseInt(curUser)].data.cart = userList[parseInt(curUser)].data.cart.filter(item => item !== itemId);
@@ -1138,7 +1143,7 @@
           searchData.push(search.value);
           window.localStorage.setItem("searchData", JSON.stringify(searchData));
           window.localStorage.setItem("curSearch", search.value);
-          search.value = "";
+          search.value="";
           window.location.href = "/Pages/product.html";
         }
       }
@@ -1149,7 +1154,7 @@
         searchData.push(search.value);
         window.localStorage.setItem("searchData", JSON.stringify(searchData));
         window.localStorage.setItem("curSearch", search.value);
-        search.value = "";
+        search.value="";
         window.location.href = "/Pages/product.html";
       }
     }
@@ -1159,9 +1164,13 @@
     }
     // đi tới trang chi tiết sản phẩm
     var goProduct = (index) => {
-      window.open('Pages/product-items.html?id=' + index, '_self');
+      window.open('Pages/product-items.html?id='+index,'_self');
     }
   </script>
+
+
+  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.min.js"></script>
 </body>
 
 </html>
