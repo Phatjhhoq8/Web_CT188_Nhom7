@@ -286,10 +286,10 @@
         <button class="arrow-button fas fa-chevron-left" onclick="buttonLeft()"></button>
         <div class="row featurette">
           <div class="col-md-7">
-            <h2 class="featurette-heading lh-1">
+            <h4 class="featurette-heading lh-1">
               Cristiano Ronaldo
               <div class="text-body-secondary fw-normal">Cầu thủ bóng đá, The Liêm, không vấp, !GOAT</div>
-            </h2>
+            </h4>
             <p class="lead" style="text-align: justify;">
               "Đèn năng lượng mặt trời của The Light thật sự vượt qua mong đợi của tôi! Ánh sáng ổn định không khiến
               tôi chói mắt và vấp cỏ,
@@ -314,11 +314,11 @@
         </div>
         <div class="row featurette">
           <div class="col-md-7">
-            <h2 class="featurette-heading lh-1">
+            <h4 class="featurette-heading lh-1">
               Tào Tháo
               <div class="text-body-secondary fw-normal">Vị tướng vĩ đại, thua kèo Lưu Bị, bị Tư Mã Ý cướp chổ ngồi
               </div>
-            </h2>
+            </h4>
             <p class="lead" style="text-align: justify;">
               "Phàm những chuyện đại sự trong thiên hạ nên về nhà hỏi vợ, vợ bảo sao cứ làm ngược lại ắt sẽ thành
               công. Và vợ ta, 5 người thì đã có 7 không tin tưởng vào The Light. Và triết lý truyền đời của ta không
@@ -341,10 +341,10 @@
         </div>
         <div class="row featurette active">
           <div class="col-md-7">
-            <h2 class="featurette-heading lh-1">
+            <h4 class="featurette-heading lh-1">
               Mr Lê Văn Quan
               <div class="text-body-secondary fw-normal">Người mẫu, Diễn viên, Nam Vương Thế Giới năm 2030</span>
-            </h2>
+            </h4>
             <p class="lead" style="text-align: justify;">
               "Đèn năng lượng mặt trời của The Light là sản phẩm tuyệt vời! Nó không chỉ mang lại ánh sáng đầy đủ cho
               sân vườn của tôi mà còn giúp tôi tiết kiệm chi phí điện. Tôi cũng rất thích thiết kế đẹp mắt của đèn,
@@ -742,6 +742,7 @@
     var logout = () => {
       window.localStorage.setItem('currentUser', "-1");
       if (typeof localStorage["adClosedDate"] !== "undefined") localStorage.removeItem("adClosedDate");
+      window.localStorage.setItem('searchData', JSON.stringify([]));
       location.reload();
     }
     // xư kiện đăng nhập đăng xuất
@@ -760,7 +761,8 @@
     const ulSearch = document.querySelector('.header__search-history-list');
     var showHistory = (e) => {
       ulSearch.innerHTML = "";
-      searchData = JSON.parse(localStorage.getItem("searchData"));
+      if(curUser=="-1") searchData = JSON.parse(localStorage.getItem("searchData"));
+      else searchData = userActive.data.historySearch;
       for (let i = searchData.length - 1; i >= Math.max(0, searchData.length - 5); i--) {
         let li = document.createElement('li');
         li.classList.add('header__search-history-item');
@@ -770,8 +772,14 @@
     }
     var delHistory = (index, event) => {
       event.stopPropagation();
-      searchData.splice(index, 1);
-      window.localStorage.setItem("searchData", JSON.stringify(searchData));
+      if(curUser=="-1") {
+        searchData.splice(index, 1);
+        window.localStorage.setItem("searchData", JSON.stringify(searchData));
+      }
+      else {
+        userList[parseInt(curUser)].data.historySearch.splice(index,1);
+        window.localStorage.setItem("userList", JSON.stringify(userList));
+      }
       showHistory();
     }
 
@@ -793,8 +801,13 @@
       if (e.key === "Enter") {
         search.value = search.value.trim();
         if (search.value !== "") {
-          searchData.push(search.value);
-          window.localStorage.setItem("searchData", JSON.stringify(searchData));
+          if(curUser=="-1") {
+            searchData.push(search.value);
+            window.localStorage.setItem("searchData", JSON.stringify(searchData));
+          }else {
+            userList[parseInt(curUser)].data.historySearch.push(search.value);
+            window.localStorage.setItem("userList", JSON.stringify(userList));
+          }
           window.localStorage.setItem("curSearch", search.value);
           search.value = "";
           window.location.href = "/Pages/product.html";
@@ -804,12 +817,17 @@
     var searchClick = (e) => {
       search.value = search.value.trim();
       if (search.value !== "") {
-        searchData.push(search.value);
-        window.localStorage.setItem("searchData", JSON.stringify(searchData));
-        window.localStorage.setItem("curSearch", search.value);
-        search.value = "";
-        window.location.href = "/Pages/product.html";
-      }
+          if(curUser=="-1") {
+            searchData.push(search.value);
+            window.localStorage.setItem("searchData", JSON.stringify(searchData));
+          }else {
+            userList[parseInt(curUser)].data.historySearch.push(search.value);
+            window.localStorage.setItem("userList", JSON.stringify(userList));
+          }
+          window.localStorage.setItem("curSearch", search.value);
+          search.value = "";
+          window.location.href = "/Pages/product.html";
+        }
     }
     var searchItem = (item) => {
       window.localStorage.setItem("curSearch", item.textContent);

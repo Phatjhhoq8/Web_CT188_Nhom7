@@ -1096,6 +1096,7 @@
     var logout = () => {
       window.localStorage.setItem('currentUser', "-1");
       if (typeof localStorage["adClosedDate"] !== "undefined") localStorage.removeItem("adClosedDate");
+      window.localStorage.setItem('searchData', JSON.stringify([]));
       location.reload();
     }
     // xư kiện đăng nhập đăng xuất
@@ -1114,7 +1115,8 @@
     const ulSearch = document.querySelector('.header__search-history-list');
     var showHistory = (e) => {
       ulSearch.innerHTML = "";
-      searchData = JSON.parse(localStorage.getItem("searchData"));
+      if(curUser=="-1") searchData = JSON.parse(localStorage.getItem("searchData"));
+      else searchData = userActive.data.historySearch;
       for (let i = searchData.length - 1; i >= Math.max(0, searchData.length - 5); i--) {
         let li = document.createElement('li');
         li.classList.add('header__search-history-item');
@@ -1124,8 +1126,14 @@
     }
     var delHistory = (index, event) => {
       event.stopPropagation();
-      searchData.splice(index, 1);
-      window.localStorage.setItem("searchData", JSON.stringify(searchData));
+      if(curUser=="-1") {
+        searchData.splice(index, 1);
+        window.localStorage.setItem("searchData", JSON.stringify(searchData));
+      }
+      else {
+        userList[parseInt(curUser)].data.historySearch.splice(index,1);
+        window.localStorage.setItem("userList", JSON.stringify(userList));
+      }
       showHistory();
     }
 
@@ -1147,23 +1155,33 @@
       if (e.key === "Enter") {
         search.value = search.value.trim();
         if (search.value !== "") {
-          searchData.push(search.value);
-          window.localStorage.setItem("searchData", JSON.stringify(searchData));
+          if(curUser=="-1") {
+            searchData.push(search.value);
+            window.localStorage.setItem("searchData", JSON.stringify(searchData));
+          }else {
+            userList[parseInt(curUser)].data.historySearch.push(search.value);
+            window.localStorage.setItem("userList", JSON.stringify(userList));
+          }
           window.localStorage.setItem("curSearch", search.value);
           search.value = "";
-          window.location.href = "product.html";
+          window.location.href = "/Pages/product.html";
         }
       }
     }
     var searchClick = (e) => {
       search.value = search.value.trim();
       if (search.value !== "") {
-        searchData.push(search.value);
-        window.localStorage.setItem("searchData", JSON.stringify(searchData));
-        window.localStorage.setItem("curSearch", search.value);
-        search.value = "";
-        window.location.href = "product.html";
-      }
+          if(curUser=="-1") {
+            searchData.push(search.value);
+            window.localStorage.setItem("searchData", JSON.stringify(searchData));
+          }else {
+            userList[parseInt(curUser)].data.historySearch.push(search.value);
+            window.localStorage.setItem("userList", JSON.stringify(userList));
+          }
+          window.localStorage.setItem("curSearch", search.value);
+          search.value = "";
+          window.location.href = "/Pages/product.html";
+        }
     }
     var searchItem = (item) => {
       window.localStorage.setItem("curSearch", item.textContent);
