@@ -582,7 +582,7 @@
           ulMess.appendChild(li);
         }
 
-        if (currentNoticeCount <= 5) {
+        if (productOfNoctify.length <= 5) {
           let li = document.createElement('li');
           li.classList.add("header__notify-item", "header__notify-item--viewed");
           li.innerHTML = `<a href="#" class="header__notify-link">
@@ -606,7 +606,10 @@
     });
     //  Giỏ hàng 
     var goProfile = () => {
-      if (curUser != "-1") window.location.href = "Pages/profile.html"
+      if (curUser != "-1") {
+        localStorage.setItem("stateProfile", "cart")
+        window.location.href = "Pages/profile.html"
+      }
     }
     var showCart = (e) => {
       const cartContainer = document.querySelector('.header__cart-wrap');
@@ -641,7 +644,7 @@
           a.classList.add("header__cart-view-cart", "btn", "btn--primary");
           a.setAttribute("href", "/Pages/profile.html");
           a.innerText = "Xem giỏ hàng";
-          a.onclick = stateProfile("cart",event);
+          a.onclick = stateProfile("cart", event);
           cartList.appendChild(a);
           const ulCart = document.querySelector('.header__cart-list-item');
           ulCart.innerHTML = "";
@@ -662,7 +665,7 @@
                               <div class="divheader__cart-item-price-wrap">
                                 <span class="header__cart-item-price">${formatNumber(productOfCart[i].price)} VND</span>
                                 <span class="header__cart-item-multiply">x</span>
-                                <span class="header__cart-item-cnt">1</span>
+                                <span class="header__cart-item-cnt">${userActive.data.cart.find(cartItem => cartItem.item === productOfCart[i].id).quantity}</span>
                               </div>
                             </div>
                             <div class="header__cart-item-body">
@@ -677,15 +680,15 @@
         }
       }
     }
-    var stateProfile = (sta,event) => {
-      localStorage.setItem("stateProflie", sta);
+    var stateProfile = (sta, event) => {
+      localStorage.setItem("stateProfile", sta);
     }
     var delCartItem = (itemId) => {
-      userList[parseInt(curUser)].data.cart = userList[parseInt(curUser)].data.cart.filter(item => item !== itemId);
+      userList[parseInt(curUser)].data.cart = userList[parseInt(curUser)].data.cart.filter(item => item.item !== itemId);
       localStorage.setItem("userList", JSON.stringify(userList));
       location.reload();
       return;
-    }
+    };
 
     function formatNumber(num) {
       return num.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".");
