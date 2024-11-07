@@ -10,6 +10,7 @@
     <link rel="stylesheet" href="/sources/cssFolder/index.css" />
     <link rel="stylesheet" href="/sources/fontawesome-free-5.12.1-web/css/all.min.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css">
+    <script src="/sources/js/bootstrap.bundle.min.js"></script>
     <style>
         .price {
             font-size: 20px;
@@ -71,15 +72,17 @@
             <!-- Phần logo và tính năng header -->
             <div
                 class="header_top d-flex flex-row align-items-center justify-content-around text-center text-secondary">
-                <div class="header_top_logo" style="padding-left: 25px;">
-                    <a href="../index.html"><img src="/sources/imgs/home/logo.png" width="80px" alt=""></a>
+                <div class="header_top_logo" style="padding-left: 25px" id="top">
+                    <a href="../index.html"><img src="/sources/imgs/home/logo.png" width="150px" alt="" /></a>
                 </div>
                 <div class="col-md-7 mx-auto">
                     <div class="input-group">
-                        <input class="form-control border-end-0 border rounded-pill header__search-input" type="search"
-                            placeholder="Vui lòng nhập sản phẩm tìm kiếm" id="example-search-input">
+                        <input onkeypress="searchHandle(event)" id="header-search"
+                            class="form-control border-end-0 border rounded-pill header__search-input" type="search"
+                            placeholder="Vui lòng nhập sản phẩm tìm kiếm" />
                         <span class="input-group-append">
-                            <button class="btn btn-outline-secondary bg-white border-bottom-0 border rounded-pill ms-n5"
+                            <button onclick="searchClick(event)"
+                                class="btn btn-outline-secondary bg-white border-bottom-0 border rounded-pill ms-n5"
                                 type="button">
                                 <i class="fa fa-search"></i>
                             </button>
@@ -88,468 +91,398 @@
                         <div class="header__search-history">
                             <h3 class="header__search-history-heading">Lịch sử tìm kiếm</h3>
                             <ul class="header__search-history-list">
-                                <li class="header__search-history-item">
-                                    <a href="#">
-                                        BẬT MÍ 5.5 - SĂN TRƯỚC MÃ 5.5
-                                        <img src="https://cf.shopee.vn/file/491389dce9eabc3510a3e8a21cc40ef7"
-                                            alt="Sale">
-                                    </a>
-                                </li>
-                                <li class="header__search-history-item">
-                                    <a href="#">Kem trị mụn</a>
-                                </li>
-                                <li class="header__search-history-item">
-                                    <a href="#">Iphone 13 Pro Max</a>
-                                </li>
-                                <li class="header__search-history-item">
-                                    <a href="#">Máy tính xách tay</a>
-                                </li>
+                                <!-- <li class="header__search-history-item">
+                        <a href="#">
+                          BẬT MÍ 5.5 - SĂN TRƯỚC MÃ 5.5
+                          <img src="https://cf.shopee.vn/file/491389dce9eabc3510a3e8a21cc40ef7" alt="Sale" />
+                          <i class="fas fa-times"></i>
+                        </a>
+                      </li> -->
                             </ul>
                         </div>
                     </div>
                 </div>
                 <div class="header_top_function">
-                    <ul class="d-flex flex-row list-group" style="margin-right: 20px;">
-                        <li class="list-group-item text-secondary boder-none text-white">
-                            <div class="tnh-country-flag"><img
-                                    src="https://s.alicdn.com/@u/mobile/g/common/flags/1.0.0/assets/vn.png"
-                                    height="20px" loading="lazy">
+                    <ul class="d-flex flex-row list-group" style="margin-right: 20px">
+                        <li class="list-group-item text-secondary boder-none text-white poiter">
+                            <div class="tnh-country-flag">
+                                <img src="https://s.alicdn.com/@u/mobile/g/common/flags/1.0.0/assets/vn.png"
+                                    height="20px" loading="lazy" />
                                 <span> VN <i class="fas fa-angle-down"></i></span>
                             </div>
                         </li>
-                        <li class="list-group-item text-secondary boder-none text-white"><span><i
-                                    class="fas fa-comments"></i></span></li>
-                        <li
-                            class="list-group-item text-secondary boder-none text-white header__navbar-item--has-notify">
+                        <li onmouseenter="showListMess()"
+                            class="list-group-item text-secondary boder-none text-white poiter mess-icon-container">
+                            <span><i class="fas fa-comments"></i></span>
+                            <div class="mess-container">
+                                <h2 class="text-secondary" style="margin-bottom: 8px;">Tin nhắn</h2>
+                                <!-- <p class="text-secondary">Không có tin nhắn nào</p> -->
+                                <ul class="mess-box"></ul>
+                            </div>
+                        </li>
+                        <li onmouseenter="showListNotice()"
+                            class="list-group-item text-secondary boder-none text-white header__navbar-item--has-notify poiter">
                             <span><i class="fas fa-bell"></i></span>
                             <!-- Header Notification  -->
                             <div class="header__notify">
                                 <header class="header__notify-header">
                                     <h3>Thông báo mới nhận</h3>
                                 </header>
-                                <ul class="header__notify-list">
-                                    <li class="header__notify-item header__notify-item--viewed">
-                                        <a href="" class="header__notify-link">
-                                            <img src="https://www.vietskin.vn/wp-content/uploads/2020/08/image-skincare-9.jpg"
-                                                alt="" class="header__notify-img">
-                                            <div class="header__notify-info">
-                                                <span class="header__notify-name">Xác thực chính hãng nguồn gốc các sản
-                                                    phẩm Ohui</span>
-                                                <span class="header__notify-description">Xác thực chính hãng nguồn gốc
-                                                    các sản phẩm Ohui</span>
-                                            </div>
-                                        </a>
-                                    </li>
-                                </ul>
+                                <ul class="header__notify-list"></ul>
                                 <footer class="header__notify-footer">
                                     <a href="#" class="header__notify-footer-btn">
-                                        Xem tất cả
+                                        Xem thêm
                                     </a>
                                 </footer>
                             </div>
                         </li>
-                        <li class="list-group-item text-secondary boder-none text-white">
-                            <!-- <span><i class="fas fa-shopping-cart"></i></span> -->
+                        <li onmouseenter="showCart()" class="list-group-item text-secondary boder-none text-white">
                             <div class="header__cart-wrap">
-                                <i class="header__cart-icon fas fa-shopping-cart"></i>
+                                <i onclick="goProfile()" class="header__cart-icon fas fa-shopping-cart"></i>
 
-                                <span class="header__cart-notice">3</span>
-
-                                <!-- No cart: header__cart-list--no-cart -->
                                 <div class="header__cart-list">
-                                    <img src="./assets/img/no_cart.png" alt="No cart" class="header__cart-no-cart-img">
-                                    <span class="header__cart-no-cart-msg">Chưa có sản phẩm</span>
-
-                                    <h4 class="header__cart-heading">Sản phẩm đã thêm</h4>
-                                    <ul class="header__cart-list-item">
-                                        <!-- Cart item -->
-                                        <li class="header__cart-item">
-                                            <img src="https://runningwithmiles.boardingarea.com/wp-content/uploads/2015/02/Screen-Shot-2015-02-26-at-3.57.06-PM.png"
-                                                alt="" class="header__cart-img">
-                                            <div class="header__cart-item-info">
-                                                <div class="header__cart-item-head">
-                                                    <h5 class="header__cart-item-name">Máy ảnh samsung DSLR 3D</h5>
-                                                    <div class="divheader__cart-item-price-wrap">
-                                                        <span class="header__cart-item-price">2.000.000đ</span>
-                                                        <span class="header__cart-item-multiply">x</span>
-                                                        <span class="header__cart-item-cnt">2</span>
-                                                    </div>
-                                                </div>
-                                                <div class="header__cart-item-body">
-                                                    <span class="header__cart-item-description">
-                                                        Phân loại: Bạc
-                                                    </span>
-                                                    <span class="header__cart-item-remove">
-                                                        Xóa
-                                                    </span>
-                                                </div>
-                                            </div>
-                                        </li>
-
-                                        <!-- Cart item -->
-                                        <li class="header__cart-item">
-                                            <img src="http://scontent.webpluscnd.net/photos-df/a-0/3764-2194538-1/laptop-asus-gaming-rog-strix-g-g731gth7114t.png?atk=4eb081075dd7d7faad048034c002a610"
-                                                alt="" class="header__cart-img">
-                                            <div class="header__cart-item-info">
-                                                <div class="header__cart-item-head">
-                                                    <h5 class="header__cart-item-name">
-                                                        Laptop Asus Gaming ROG Strix</h5>
-                                                    <div class="divheader__cart-item-price-wrap">
-                                                        <span class="header__cart-item-price">29.000.000đ</span>
-                                                        <span class="header__cart-item-multiply">x</span>
-                                                        <span class="header__cart-item-qnt">1</span>
-                                                    </div>
-                                                </div>
-                                                <div class="header__cart-item-body">
-                                                    <span class="header__cart-item-description">
-                                                        Phân loại: Laptop Gaming
-                                                    </span>
-                                                    <span class="header__cart-item-remove">
-                                                        Xóa
-                                                    </span>
-                                                </div>
-                                            </div>
-                                        </li>
-
-                                        <!-- Cart item -->
-                                        <li class="header__cart-item">
-                                            <img src="data:image/jpeg;base64,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"
-                                                alt="" class="header__cart-img">
-                                            <div class="header__cart-item-info">
-                                                <div class="header__cart-item-head">
-                                                    <h5 class="header__cart-item-name">
-                                                        Chuột không dây Logitech G903
-                                                    </h5>
-                                                    <div class="divheader__cart-item-price-wrap">
-                                                        <span class="header__cart-item-price">1.999.000đ</span>
-                                                        <span class="header__cart-item-multiply">x</span>
-                                                        <span class="header__cart-item-qnt">1</span>
-                                                    </div>
-                                                </div>
-                                                <div class="header__cart-item-body">
-                                                    <span class="header__cart-item-description">
-                                                        Phân loại: Chuột gaming
-                                                    </span>
-                                                    <span class="header__cart-item-remove">
-                                                        Xóa
-                                                    </span>
-                                                </div>
-                                            </div>
-                                        </li>
-                                    </ul>
-
-                                    <a href="#" class="header__cart-view-cart btn btn--primary">Xem giỏ hàng</a>
+                                    <!-- <h4 class="header__cart-heading text-center">Sản phẩm đã thêm</h4>
+                        
+                        <img src="/sources/imgs/home/cart-empty.png" alt="No cart" class="header__cart-list--no-cart header__cart-no-cart-img" />
+                        <span class="header__cart-list--no-cart header__cart-no-cart-msg">Chưa có sản phẩm</span>
+                        <ul class="header__cart-list-item"></ul>
+                        
+                        <a href="#" class="header__cart-view-cart btn btn--primary">Xem giỏ hàng</a> -->
                                 </div>
+                                <span class="header__cart-notice"></span>
                             </div>
                         </li>
-                        <li class="list-group-item text-secondary rounded-pill bg-orange text-white">
-                            <i class="fas fa-user"></i>
-                            <span>Sign in</span>
-                        </li>
-                    </ul>
+                        <li id="stateLogin"
+                            class="list-group-item text-secondary rounded-pill bg-orange text-white user-icon-container poiter">
+                </div>
+                </li>
+                </ul>
+            </div>
+    </div>
+    <!-- Phần navbar -->
+    <nav class="navbar navbar-expand-lg navbar-dark ftco_navbar bg-dark ftco-navbar-light" id="ftco-navbar">
+        <div class="container-fluid">
+            <div class="collapse navbar-collapse" id="ftco-nav">
+                <ul class="navbar-nav m-auto">
+                    <li class="nav-item active">
+                        <a href="../index.html" class="nav-link">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="product.html" class="nav-link">Product</a>
+                    </li>
+                    <!-- <li class="nav-item"><a href="#information" class="nav-link">Blog</a></li> -->
+                    <li class="nav-item">
+                        <a href="#footer" class="nav-link">Contact</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+    </header>
+    <!-- Toast add/ remove cart -->
+    <div class="toast-container position-fixed bottom-0 end-0 p-3" style="z-index: 20;">
+        <div id="liveToast" class="toast" role="alert" aria-live="assertive" aria-atomic="true">
+            <div class="toast-header">
+                <img id="stateToast" src="/sources/imgs/home/success.png" class="rounded me-2" alt="..." width="15px">
+                <strong class="me-auto">Thông báo</strong>
+                <small>Vừa xong</small>
+                <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
+            </div>
+            <div class="toast-body"></div>
+        </div>
+    </div>
+    <div class="container-fluid mt-5 mb-5">
+        <div class="row">
+            <!-- Phần 1 (4/12) -->
+            <div class="col-md-4">
+                <div class="container" style="display: flow-root;">
+                    <div id="demo" class="carousel slide" data-bs-ride="carousel">
+
+                        <!-- Indicators/dots -->
+                        <div class="carousel-indicators">
+                            <img src="https://bizweb.dktcdn.net/thumb/grande/100/415/961/products/22.png?v=1723082599053"
+                                data-bs-target="#demo" data-bs-slide-to="0" class="active"
+                                style="width: 20%; height: 20%;"></img>
+                            <img src="https://bizweb.dktcdn.net/thumb/1024x1024/100/415/961/products/2-310799bb-c280-4368-aa7d-0363dafa87b3.png?v=1723082589210"
+                                data-bs-target="#demo" data-bs-slide-to="1" style="width: 20%; height: 20%;"></img>
+                            <img src="https://bizweb.dktcdn.net/thumb/1024x1024/100/415/961/products/3-1446a642-b335-4609-867b-228216145c05.png?v=1723082607577"
+                                data-bs-target="#demo" data-bs-slide-to="2" style="width: 20%; height: 20%;"></img>
+                            <img src="https://bizweb.dktcdn.net/thumb/1024x1024/100/415/961/products/5-03b8debc-e3e5-4f56-a99b-7aebb0332909.png?v=1723082577977"
+                                data-bs-target="#demo" data-bs-slide-to="3" style="width: 20%; height: 20%;"></img>
+                            <img src="https://bizweb.dktcdn.net/thumb/1024x1024/100/415/961/products/7-d73009ef-ac20-4b2d-aec0-8717fdd23d20.png?v=1723082577977"
+                                data-bs-target="#demo" data-bs-slide-to="4" style="width: 20%; height: 20%;"></img>
+                            <img src="https://bizweb.dktcdn.net/thumb/1024x1024/100/415/961/products/a-ba760834-2c6f-4222-bf3a-c5a7e062e67a.png?v=1723082577977"
+                                data-bs-target="#demo" data-bs-slide-to="5" style="width: 20%; height: 20%;"></img>
+                        </div>
+
+                        <!-- The slideshow/carousel -->
+                        <div class="carousel-inner">
+                            <div class="carousel-item active">
+                                <img src="https://bizweb.dktcdn.net/thumb/grande/100/415/961/products/22.png?v=1723082599053"
+                                    alt="" class="d-block w-100" style="padding-bottom: 25%;">
+                            </div>
+                            <div class="carousel-item">
+                                <img src="https://bizweb.dktcdn.net/thumb/1024x1024/100/415/961/products/2-310799bb-c280-4368-aa7d-0363dafa87b3.png?v=1723082589210"
+                                    alt="" class="d-block w-100" style="padding-bottom: 25%;">
+                            </div>
+                            <div class="carousel-item">
+                                <img src="https://bizweb.dktcdn.net/thumb/1024x1024/100/415/961/products/3-1446a642-b335-4609-867b-228216145c05.png?v=1723082607577"
+                                    alt="" class="d-block w-100" style="padding-bottom: 25%;">
+                            </div>
+                            <div class="carousel-item">
+                                <img src="https://bizweb.dktcdn.net/thumb/1024x1024/100/415/961/products/5-03b8debc-e3e5-4f56-a99b-7aebb0332909.png?v=1723082577977"
+                                    alt="" class="d-block w-100" style="padding-bottom: 25%;">
+                            </div>
+                            <div class="carousel-item">
+                                <img src="https://bizweb.dktcdn.net/thumb/1024x1024/100/415/961/products/7-d73009ef-ac20-4b2d-aec0-8717fdd23d20.png?v=1723082577977"
+                                    alt="" class="d-block w-100" style="padding-bottom: 25%;">
+                            </div>
+                            <div class="carousel-item">
+                                <img src="https://bizweb.dktcdn.net/thumb/1024x1024/100/415/961/products/a-ba760834-2c6f-4222-bf3a-c5a7e062e67a.png?v=1723082577977"
+                                    alt="" class="d-block w-100" style="padding-bottom: 25%;">
+                            </div>
+                        </div>
+
+                        <!-- Left and right controls/icons -->
+                        <button class="carousel-control-prev" type="button" data-bs-target="#demo" data-bs-slide="prev"
+                            style="padding-bottom: 25%;">
+                            <span class="carousel-control-prev-icon"></span>
+                        </button>
+                        <button class="carousel-control-next" type="button" data-bs-target="#demo" data-bs-slide="next"
+                            style="padding-bottom: 25%;">
+                            <span class="carousel-control-next-icon"></span>
+                        </button>
+                    </div>
                 </div>
             </div>
-            <!-- Phần navbar -->
-            <nav class="navbar navbar-expand-lg navbar-dark ftco_navbar bg-dark ftco-navbar-light" id="ftco-navbar">
-                <div class="container-fluid">
-                    <div class="collapse navbar-collapse" id="ftco-nav">
-                        <ul class="navbar-nav m-auto">
-                            <li class="nav-item active"><a href="#" class="nav-link">Home</a></li>
-                            <li class="nav-item"><a href="#" class="nav-link">Product</a></li>
-                            <li class="nav-item"><a href="#" class="nav-link">Blog</a></li>
-                            <li class="nav-item"><a href="#" class="nav-link">Contact</a></li>
+            <!-- Phần 2 (4/12) -->
+            <div class="col-md-4">
+                <div class="container">
+                    <div>
+                        <h5>[120W] Đèn Đường Năng Lượng Mặt Trời Liền Thể LT6120 Nhiều Khoang Kitawa</h5>
+                    </div>
+                    <div>
+                        <span>Thương hiệu: <a href="">KITAWA</a></span>
+                        <span>Mã sản phẩm: <a href="">LT6120</a></span>
+                        <br>
+                        <span>Loại sản phẩm: <a href="">KITAWA</a></span>
+                        <span>Vị trí lắp đặt: <a href="">LT6120</a></span>
+                    </div>
+                    <div><span class="price">599.000 VND</span></div>
+
+                    <div style="padding-top: 14px; border: 1px dashed; padding: 10px; margin-top: 10px;">
+                        <div>
+                            <span
+                                style="padding: 5px 4px; background-color: #66728b; color: #fff;font-size: 14px; font-weight: 700; border-radius: 3px;">TIÊU
+                                CHUẨN ISO 9001 : 2015</span>
+                        </div>
+                        <div style="padding-top: 10px; border-radius: 3px;">
+                            <ul style="background-color: #EEEEEE; border-radius: 3px;">
+                                <li>
+                                    <span style="font-size: 14px;">
+                                        Xem hướng dẫn lắp đặt
+                                        <a href="">(Xem chi tiết)</a>
+                                    </span>
+                                </li>
+                                <li>
+                                    <span style="font-size: 14px;">
+                                        Hình ảnh 10.000 khách hàng
+                                        <a href="">(Xem chi tiết)</a>
+                                    </span>
+                                </li>
+                                <li>
+                                    <span style="font-size: 14px;">
+                                        Dự án thi công lớn đã triển khai
+                                        <a href="">(Xem chi tiết)</a>
+                                    </span>
+                                </li>
+                                <li>
+                                    <span style="font-size: 14px;">
+                                        Hồ sơ năng lực KITAWA
+                                        <a href="">(Xem chi tiết)</a>
+                                    </span>
+                                </li>
+                                <li>
+                                    <span style="font-size: 14px;">
+                                        Thiết kế chiếu sáng miễn phí
+                                        <a href="">(Xem chi tiết)</a>
+                                    </span>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="container mt-5 d-flex">
+                        <div class="text-center fs-5">Số&nbsp;lượng</div>
+
+                        <div class="d-flex justify-content-center">
+                            <div class="input-group" style="max-width: 70%; height: 50%;">
+                                <button class="btn btn-outline-secondary" type="button" onclick="decreaseQuantity()"><i
+                                        class="bi bi-dash"></i></button>
+                                <input type="text" class="form-control text-center" id="productQuantity" value="1">
+                                <button class="btn btn-outline-secondary" type="button" onclick="increaseQuantity()"><i
+                                        class="bi bi-plus"></i></button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div
+                        style="background-color: #061b48; border-radius: 3px; padding: 4px 15px; margin-top: 10px; text-align: center;">
+                        <a class="custom-link" href="#" style="font-weight: 700;padding: 7px 0;">
+                            <span>MUA NGAY</span>
+                           
+                        </a>
+                    </div>
+
+                    <div class="mt-2"
+                        style="background-color: #fff; border-radius: 3px;padding: 11px 15px; border: 1px solid; text-align: center;">
+                        <a href="#" style="color: #061b48;text-decoration: none; font-weight: 700;">
+                            <span>THÊM VÀO GIỎ</span>
+                        </a>
+                    </div>
+
+                </div>
+            </div>
+            <!-- Phần 3 (2/12) -->
+            <div class="col-md-4">
+                <div class="container">
+                    <div style="background-color: #EEEEEE; border-radius: 3px;">
+                        <ul class="product-policises" style="padding: 10px;">
+                            <li>Giao hàng miễn phí toàn quốc (Kiểm tra hàng trước khi thanh toán)</li>
+                            <li>Lỗi kỹ thuật được đổi mới trong thời gian 30 ngày kể từ ngày nhận</li>
+                            <li>Bảo hành toàn quốc 3 năm về đèn & 5 năm tấm quang điện</li>
+                            <li>Dịch vụ chăm sóc khách hàng miễn phí hỗ trợ 8h00 - 21h00 tất cả các ngày trong tuần
+                            </li>
                         </ul>
                     </div>
-                </div>
-            </nav>
-        </header>
-        <div class="container-fluid mt-5 mb-5">
-            <div class="row">
-                <!-- Phần 1 (4/12) -->
-                <div class="col-md-4">
-                    <div class="container" style="display: flow-root;">
-                        <div id="demo" class="carousel slide" data-bs-ride="carousel">
-
-                            <!-- Indicators/dots -->
-                            <div class="carousel-indicators">
-                                <img src="https://bizweb.dktcdn.net/thumb/grande/100/415/961/products/22.png?v=1723082599053" data-bs-target="#demo" data-bs-slide-to="0" class="active"
-                                    style="width: 20%; height: 20%;"></img>
-                                <img src="https://bizweb.dktcdn.net/thumb/1024x1024/100/415/961/products/2-310799bb-c280-4368-aa7d-0363dafa87b3.png?v=1723082589210" data-bs-target="#demo" data-bs-slide-to="1"
-                                    style="width: 20%; height: 20%;"></img>
-                                <img src="https://bizweb.dktcdn.net/thumb/1024x1024/100/415/961/products/3-1446a642-b335-4609-867b-228216145c05.png?v=1723082607577" data-bs-target="#demo" data-bs-slide-to="2"
-                                    style="width: 20%; height: 20%;"></img>
-                                <img src="https://bizweb.dktcdn.net/thumb/1024x1024/100/415/961/products/5-03b8debc-e3e5-4f56-a99b-7aebb0332909.png?v=1723082577977" data-bs-target="#demo" data-bs-slide-to="3"
-                                    style="width: 20%; height: 20%;"></img>
-                                <img src="https://bizweb.dktcdn.net/thumb/1024x1024/100/415/961/products/7-d73009ef-ac20-4b2d-aec0-8717fdd23d20.png?v=1723082577977" data-bs-target="#demo" data-bs-slide-to="4"
-                                    style="width: 20%; height: 20%;"></img>
-                                <img src="https://bizweb.dktcdn.net/thumb/1024x1024/100/415/961/products/a-ba760834-2c6f-4222-bf3a-c5a7e062e67a.png?v=1723082577977" data-bs-target="#demo" data-bs-slide-to="5"
-                                    style="width: 20%; height: 20%;"></img>
-                            </div>
-
-                            <!-- The slideshow/carousel -->
-                            <div class="carousel-inner">
-                                <div class="carousel-item active">
-                                    <img src="https://bizweb.dktcdn.net/thumb/grande/100/415/961/products/22.png?v=1723082599053" alt="" class="d-block w-100"
-                                        style="padding-bottom: 25%;">
-                                </div>
-                                <div class="carousel-item">
-                                    <img src="https://bizweb.dktcdn.net/thumb/1024x1024/100/415/961/products/2-310799bb-c280-4368-aa7d-0363dafa87b3.png?v=1723082589210" alt="" class="d-block w-100"
-                                        style="padding-bottom: 25%;">
-                                </div>
-                                <div class="carousel-item">
-                                    <img src="https://bizweb.dktcdn.net/thumb/1024x1024/100/415/961/products/3-1446a642-b335-4609-867b-228216145c05.png?v=1723082607577" alt="" class="d-block w-100"
-                                        style="padding-bottom: 25%;">
-                                </div>
-                                <div class="carousel-item">
-                                    <img src="https://bizweb.dktcdn.net/thumb/1024x1024/100/415/961/products/5-03b8debc-e3e5-4f56-a99b-7aebb0332909.png?v=1723082577977" alt="" class="d-block w-100"
-                                        style="padding-bottom: 25%;">
-                                </div>
-                                <div class="carousel-item">
-                                    <img src="https://bizweb.dktcdn.net/thumb/1024x1024/100/415/961/products/7-d73009ef-ac20-4b2d-aec0-8717fdd23d20.png?v=1723082577977" alt="" class="d-block w-100"
-                                        style="padding-bottom: 25%;">
-                                </div>
-                                <div class="carousel-item">
-                                    <img src="https://bizweb.dktcdn.net/thumb/1024x1024/100/415/961/products/a-ba760834-2c6f-4222-bf3a-c5a7e062e67a.png?v=1723082577977" alt="" class="d-block w-100"
-                                        style="padding-bottom: 25%;">
-                                </div>
-                            </div>
-
-                            <!-- Left and right controls/icons -->
-                            <button class="carousel-control-prev" type="button" data-bs-target="#demo"
-                                data-bs-slide="prev" style="padding-bottom: 25%;">
-                                <span class="carousel-control-prev-icon"></span>
-                            </button>
-                            <button class="carousel-control-next" type="button" data-bs-target="#demo"
-                                data-bs-slide="next" style="padding-bottom: 25%;">
-                                <span class="carousel-control-next-icon"></span>
-                            </button>
-                        </div>
-                    </div>
-                </div>
-                <!-- Phần 2 (4/12) -->
-                <div class="col-md-4">
-                    <div class="container">
-                        <div>
-                            <h5>[120W] Đèn Đường Năng Lượng Mặt Trời Liền Thể LT6120 Nhiều Khoang Kitawa</h5>
-                        </div>
-                        <div>
-                            <span>Thương hiệu: <a href="">KITAWA</a></span>
-                            <span>Mã sản phẩm: <a href="">LT6120</a></span>
-                        </div>
-                        <div style="padding-bottom: 16px;">
-                            <span><a style="text-decoration: none; color: #0054b8;" href="">Đã thêm so sánh</a></span>
-                        </div>
-                        <div><span class="price">599.000 VND</span></div>
-
-                        <div style="padding-top: 14px; border: 1px dashed; padding: 10px; margin-top: 10px;">
-                            <div>
-                                <span
-                                    style="padding: 5px 4px; background-color: #66728b; color: #fff;font-size: 14px; font-weight: 700; border-radius: 3px;">TIÊU
-                                    CHUẨN ISO 9001 : 2015</span>
-                            </div>
-                            <div style="padding-top: 10px; border-radius: 3px;">
-                                <ul style="background-color: #EEEEEE; border-radius: 3px;">
-                                    <li>
-                                        <span style="font-size: 14px;">
-                                            Xem hướng dẫn lắp đặt
-                                            <a href="">(Xem chi tiết)</a>
-                                        </span>
-                                    </li>
-                                    <li>
-                                        <span style="font-size: 14px;">
-                                            Hình ảnh 10.000 khách hàng
-                                            <a href="">(Xem chi tiết)</a>
-                                        </span>
-                                    </li>
-                                    <li>
-                                        <span style="font-size: 14px;">
-                                            Dự án thi công lớn đã triển khai
-                                            <a href="">(Xem chi tiết)</a>
-                                        </span>
-                                    </li>
-                                    <li>
-                                        <span style="font-size: 14px;">
-                                            Hồ sơ năng lực KITAWA
-                                            <a href="">(Xem chi tiết)</a>
-                                        </span>
-                                    </li>
-                                    <li>
-                                        <span style="font-size: 14px;">
-                                            Thiết kế chiếu sáng miễn phí
-                                            <a href="">(Xem chi tiết)</a>
-                                        </span>
-                                    </li>
-                                </ul>
-                            </div>
-                        </div>
-
-                        <div class="container mt-5 d-flex">
-                            <div class="text-center fs-5">Số&nbsp;lượng</div>
-
-                            <div class="d-flex justify-content-center">
-                                <div class="input-group" style="max-width: 70%; height: 50%;">
-                                    <button class="btn btn-outline-secondary" type="button"
-                                        onclick="decreaseQuantity()"><i class="bi bi-dash"></i></button>
-                                    <input type="text" class="form-control text-center" id="productQuantity" value="1">
-                                    <button class="btn btn-outline-secondary" type="button"
-                                        onclick="increaseQuantity()"><i class="bi bi-plus"></i></button>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div
-                            style="background-color: #061b48; border-radius: 3px; padding: 4px 15px; margin-top: 10px; text-align: center;">
-                            <a class="custom-link" href="#">
-                                <span>MUA NGAY</span>
-                                <span>Giao hàng tận nơi hoặc nhận tại cửa hàng</span>
-                            </a>
-                        </div>
-
-                        <div class="mt-2"
-                            style="background-color: #fff; border-radius: 3px;padding: 11px 15px; border: 1px solid; text-align: center;">
-                            <a href="#" style="color: #061b48;text-decoration: none; font-weight: 700;">
-                                <span>THÊM VÀO GIỎ</span>
-                            </a>
-                        </div>
-
-                    </div>
-                </div>
-                <!-- Phần 3 (2/12) -->
-                <div class="col-md-4">
-                    <div class="container">
-                        <div style="background-color: #EEEEEE; border-radius: 3px;">
-                            <ul class="product-policises" style="padding: 10px;">
-                                <li>Giao hàng miễn phí toàn quốc (Kiểm tra hàng trước khi thanh toán)</li>
-                                <li>Lỗi kỹ thuật được đổi mới trong thời gian 30 ngày kể từ ngày nhận</li>
-                                <li>Bảo hành toàn quốc 3 năm về đèn & 5 năm tấm quang điện</li>
-                                <li>Dịch vụ chăm sóc khách hàng miễn phí hỗ trợ 8h00 - 21h00 tất cả các ngày trong tuần
+                    <div style="background-color: #EEEEEE; border-radius: 3px;">
+                        <ul class="hotline-pro" style="padding: 10px;">
+                            <li class="custom-li">
+                                <span>Tổng đài hỗ trợ bán hàng</span>
+                                <span style="color: #d0aa05">0943 999 539</span>
+                                <span>(08:00-22:00 tất cả các ngày trong tuần)</span>
+                            </li>
+                            <li class="custom-li">
+                                <span>Tổng đài hỗ trợ kênh sỉ - phân phối</span>
+                                <span style="color: #d0aa05">0943 999 539</span>
+                            </li>
+                            <li class="custom-li">
+                                <span>Tổng đài hỗ trợ dự án - công trình</span>
+                                <span style="color: #d0aa05">0943 999 539</span>
+                            </li>
+                            <li? class="custom-li">
+                                <span>Tổng đài bảo hành - khiếu nại</span>
+                                <span style="color: #d0aa05">0943 999 539</span>
+                                <span>Hỗ trợ cước phí 1.000đ/phút</span>
                                 </li>
-                            </ul>
-                        </div>
-                        <div style="background-color: #EEEEEE; border-radius: 3px;">
-                            <ul class="hotline-pro" style="padding: 10px;">
-                                <li class="custom-li">
-                                    <span>Tổng đài hỗ trợ bán hàng</span>
-                                    <span style="color: #d0aa05">0943 999 539</span>
-                                    <span>(08:00-22:00 tất cả các ngày trong tuần)</span>
-                                </li>
-                                <li class="custom-li">
-                                    <span>Tổng đài hỗ trợ kênh sỉ - phân phối</span>
-                                    <span style="color: #d0aa05">0943 999 539</span>
-                                </li>
-                                <li class="custom-li">
-                                    <span>Tổng đài hỗ trợ dự án - công trình</span>
-                                    <span style="color: #d0aa05">0943 999 539</span>
-                                </li>
-                                <li? class="custom-li">
-                                    <span>Tổng đài bảo hành - khiếu nại</span>
-                                    <span style="color: #d0aa05">0943 999 539</span>
-                                    <span>Hỗ trợ cước phí 1.000đ/phút</span>
-                                </li>
-                            </ul>
-                        </div>
+                        </ul>
                     </div>
                 </div>
             </div>
         </div>
+    </div>
 
-        <!-- Phần Footer -->
-        <footer class="bg-dark text-center text-lg-start text-white">
+    <!-- Phần Footer -->
+    <footer class="bg-dark text-center text-lg-start text-white" id="footer">
+        <div class="container p-4">
+            <div class="row mt-4">
+                <div class="col-lg-3 col-md-6 mb-4 mb-md-0">
+                    <h5 class="text-uppercase">Chính sách</h5>
 
-            <div class="container p-4">
+                    <ul class="list-unstyled mb-0">
+                        <li>
+                            <a href="#!" class="text-white text-decoration-none"><i
+                                    class="fas fa-user-lock fa-fw fa-sm me-2"></i>Chính sách bảo mật</a>
+                        </li>
+                        <li>
+                            <a href="#!" class="text-white text-decoration-none"><i
+                                    class="fas fa-shipping-fast fa-fw fa-sm me-2"></i>Chính sách vận chuyển</a>
+                        </li>
+                        <li>
+                            <a href="#!" class="text-white text-decoration-none"><i
+                                    class="fas fa-hands-helping fa-fw fa-sm me-2"></i>Chính sách đổi trả</a>
+                        </li>
+                        <li>
+                            <a href="#!" class="text-white text-decoration-none"><i
+                                    class="fas fa-book fa-fw fa-sm me-2"></i>Điều
+                                khoản sử dụng</a>
+                        </li>
+                    </ul>
+                </div>
 
-                <div class="row mt-4">
+                <div class="col-lg-3 col-md-6 mb-4 mb-md-0">
+                    <h5 class="text-uppercase">Kết nối với chúng tôi</h5>
 
-                    <div class="col-lg-3 col-md-6 mb-4 mb-md-0">
-                        <h5 class="text-uppercase">See other books</h5>
+                    <ul class="list-unstyled">
+                        <li>
+                            <a href="#!" class="text-white text-decoration-none"><i
+                                    class="fab fa-facebook-f fa-fw fa-sm me-2"></i>Facebook</a>
+                        </li>
+                        <li>
+                            <a href="#!" class="text-white text-decoration-none"><i
+                                    class="fab fa-instagram fa-fw fa-sm me-2"></i>Instagram</a>
+                        </li>
+                        <li>
+                            <a href="#!" class="text-white text-decoration-none"><i
+                                    class="fab fa-twitter fa-fw fa-sm me-2"></i>Twitter</a>
+                        </li>
+                        <li>
+                            <a href="#!" class="text-white text-decoration-none"><i
+                                    class="fab fa-youtube fa-fw fa-sm me-2"></i>YouTube</a>
+                        </li>
+                    </ul>
+                </div>
 
-                        <ul class="list-unstyled mb-0">
-                            <li>
-                                <a href="#!" class="text-white"><i
-                                        class="fas fa-book fa-fw fa-sm me-2"></i>Bestsellers</a>
-                            </li>
-                            <li>
-                                <a href="#!" class="text-white"><i class="fas fa-book fa-fw fa-sm me-2"></i>All
-                                    books</a>
-                            </li>
-                            <li>
-                                <a href="#!" class="text-white"><i class="fas fa-user-edit fa-fw fa-sm me-2"></i>Our
-                                    authors</a>
-                            </li>
-                        </ul>
-                    </div>
+                <div class="col-lg-3 col-md-6 mb-4 mb-md-0">
+                    <h5 class="text-uppercase">Thông tin liên hệ</h5>
 
+                    <ul class="list-unstyled">
+                        <li>
+                            <a href="#!" class="text-white text-decoration-none"><i
+                                    class="fas fa-school fa-fw fa-sm me-2"></i>Trường
+                                đại học Cần Thơ</a>
+                        </li>
+                        <li>
+                            <a href="#!" class="text-white text-decoration-none"><i
+                                    class="fas fa-road fa-fw fa-sm me-2"></i>Khu II,
+                                Đ. 3 Tháng 2, Xuân Khánh, Ninh Kiều, Cần Thơ</a>
+                        </li>
+                        <li>
+                            <a href="#!" class="text-white text-decoration-none"><i
+                                    class="fas fa-map-marker-alt fa-fw fa-sm me-2"></i>Trường CNTT-TT</a>
+                        </li>
+                    </ul>
+                </div>
 
-                    <div class="col-lg-3 col-md-6 mb-4 mb-md-0">
-                        <h5 class="text-uppercase">Execution of the contract</h5>
+                <div class="col-lg-3 col-md-6 mb-4 mb-md-0">
+                    <h5 class="text-uppercase">Hỗ trợ khách hàng</h5>
 
-                        <ul class="list-unstyled">
-                            <li>
-                                <a href="#!" class="text-white"><i
-                                        class="fas fa-shipping-fast fa-fw fa-sm me-2"></i>Supply</a>
-                            </li>
-                            <li>
-                                <a href="#!" class="text-white"><i
-                                        class="fas fa-backspace fa-fw fa-sm me-2"></i>Returns</a>
-                            </li>
-                            <li>
-                                <a href="#!" class="text-white"><i
-                                        class="far fa-file-alt fa-fw fa-sm me-2"></i>Regulations</a>
-                            </li>
-                            <li>
-                                <a href="#!" class="text-white"><i class="far fa-file-alt fa-fw fa-sm me-2"></i>Privacy
-                                    policy</a>
-                            </li>
-                        </ul>
-                    </div>
-
-
-                    <div class="col-lg-3 col-md-6 mb-4 mb-md-0">
-                        <h5 class="text-uppercase">Publishing house</h5>
-
-                        <ul class="list-unstyled">
-                            <li>
-                                <a href="#!" class="text-white">The BookStore</a>
-                            </li>
-                            <li>
-                                <a href="#!" class="text-white">123 Street</a>
-                            </li>
-                            <li>
-                                <a href="#!" class="text-white">05765 NY</a>
-                            </li>
-                            <li>
-                                <a href="#!" class="text-white"><i class="fas fa-briefcase fa-fw fa-sm me-2"></i>Send us
-                                    a book</a>
-                            </li>
-                        </ul>
-                    </div>
-
-
-                    <div class="col-lg-3 col-md-6 mb-4 mb-md-0">
-                        <h5 class="text-uppercase">Write to us</h5>
-
-                        <ul class="list-unstyled">
-                            <li>
-                                <a href="#!" class="text-white"><i class="fas fa-at fa-fw fa-sm me-2"></i>Help in
-                                    purchasing</a>
-                            </li>
-                            <li>
-                                <a href="#!" class="text-white"><i
-                                        class="fas fa-shipping-fast fa-fw fa-sm me-2"></i>Check the order status</a>
-                            </li>
-                            <li>
-                                <a href="#!" class="text-white"><i class="fas fa-envelope fa-fw fa-sm me-2"></i>Join the
-                                    newsletter</a>
-                            </li>
-                        </ul>
-                    </div>
+                    <ul class="list-unstyled">
+                        <li>
+                            <a href="#!" class="text-white text-decoration-none"><i
+                                    class="fas fa-phone-alt fa-fw fa-sm me-2"></i>Hotline: +84 123 456 789 (24/7)</a>
+                        </li>
+                        <li>
+                            <a href="#!" class="text-white text-decoration-none"><i
+                                    class="fas fa-envelope fa-fw fa-sm me-2"></i>Email: thelightshop@gmail.com</a>
+                        </li>
+                        <li>
+                            <a href="#!" class="text-white text-decoration-none"><i
+                                    class="fas fa-question fa-fw fa-sm me-2"></i>Câu
+                                hỏi thường gặp (FAQ)</a>
+                        </li>
+                    </ul>
                 </div>
             </div>
-            <div class="text-center p-3" style="background-color: rgba(0, 0, 0, 0.2)">
-                © 2024 CT188:
-                <a class="text-white" href="#">Nhóm 7</a>
-            </div>
-        </footer>
+        </div>
+        <a href="#top" class="scroll-top-btn" id="top-button">
+            <i class="fas fa-arrow-alt-circle-up"></i>
+        </a>
+        <div class="text-center p-3" style="background-color: rgba(0, 0, 0, 0.2)">
+            © 2024 CT188:
+            <a class="text-white" href="#">Nhóm 7</a>
+        </div>
+    </footer>
     </div>
     <script>
         function increaseQuantity() {
@@ -562,6 +495,398 @@
             if (parseInt(quantityInput.value) > 1) {
                 quantityInput.value = parseInt(quantityInput.value) - 1;
             }
+        }
+    </script>
+    <script>
+        // Kiểm tra đã đăng nhập chưa
+        window.onload = (e) => {
+            if (typeof localStorage["searchData"] === "undefined") {
+                localStorage.setItem("searchData", JSON.stringify([]));
+            }
+            if (typeof localStorage["curSearch"] === "undefined") {
+                localStorage.setItem("curSearch", "");
+            }
+            if (typeof localStorage["currentUser"] === "undefined") {
+                localStorage.setItem("currentUser", "-1");
+            }
+            let temp = productInfoList.filter(product =>
+                userActive.data.cart.some(cartItem => cartItem.item === product.id)).length;
+            const headerNotice = document.querySelector('.header__cart-notice');
+            if (temp > 0) {
+                headerNotice.style.display = "block";
+                headerNotice.innerText = `${temp}`;
+            } else headerNotice.style.display = "none";
+        }
+        const curUser = window.localStorage.getItem("currentUser");
+        // reset trang khi đổi trạng thái đăng nhập
+        window.addEventListener("storage", (event) => {
+            if (event.key === 'currentUser' && event.newValue !== curUser) location.reload();
+        });
+
+
+        // Lấy danh sách user và sản phẩm
+        const userList = JSON.parse(window.localStorage.getItem("userList")) || [];
+        const productInfoList = JSON.parse(localStorage.getItem('productList')) || [];
+        let userActive = userList[parseInt(curUser)];
+
+
+        // Trạng thái đăng nhập
+        document.addEventListener('DOMContentLoaded', () => {
+            var userState = document.querySelector('#stateLogin');
+            if (curUser == "-1") {
+                userState.innerHTML = `<i class="fas fa-user"></i>
+                  <span onclick="toLogin(event)">Sign in</span>
+                  <div class="login-container" >
+                    <h2 class="text-secondary">Sign back in to continue</h2>
+                    <button class="sign-in-btn rounded-pill "onclick="toLogin(event)">Sign in</button>
+                    <p class="text-secondary">Or register to create a new account:</p>
+                    <button class="sign-in-btn rounded-pill" onclick="toSignup(event)">Register</button>
+                    <p class="agreement">
+                      I agree to the
+                      <a href="#">TheLight.com Free Membership Agreement</a> and
+                      <a href="#">Privacy Policy.</a>
+                    </p>`;
+            }
+            else {
+                userState.innerHTML = `<li class="header__navbar-item header__navbar-user">
+                                <img src="https://i.pinimg.com/736x/13/2e/a7/132ea72d2bc3b85d90409c9e8f2d0f4a.jpg" alt=""
+                                    class="header__navbar-user-img">
+                                <span class="header__navbar-user-name">${userActive.fullName}</span>
+                                <ul class="header__navbar-user-menu">
+                                    <li class="header__navbar-user-item">
+                                        <a href="profile.html" onclick="stateProfile('user')">Tài khoản của tôi</a>
+                                    </li>
+                                    <li class="header__navbar-user-item header__navbar-user-item--separate">
+                                        <a href="#" onclick="logout()">Đăng xuất</a>
+                                    </li>
+                                </ul>
+                            </li>`;
+            }
+        })
+
+        // Tin nhắn
+        var showListMess = (e) => {
+            const ulMess = document.querySelector('.mess-box');
+            if (curUser == "-1") {
+                if (!ulMess.querySelector('.header__mess-item')) {
+                    let li = document.createElement('li');
+                    li.classList.add("header__mess-item", "header__mess-item--viewed");
+                    li.innerHTML = `<a onclick="toLogin(event)" class='header__mess-link justify-content-center' href='login.html'>Vui lòng đăng nhập để xem tin nhắn</a>`;
+                    ulMess.appendChild(li);
+                }
+            } else {
+                if (!ulMess.querySelector('p')) ulMess.innerHTML = `<p class="text-secondary">Không có tin nhắn nào</p>`;
+            }
+        }
+        // Thông báo
+        let currentNoticeCount = 5;
+        var showListNotice = (e) => {
+            const ulMess = document.querySelector('.header__notify-list');
+            const messFooter = document.querySelector(".header__notify-footer-btn");
+
+            if (curUser == "-1") {
+                messFooter.classList.remove("show");
+                if (!ulMess.querySelector('.header__notify-item')) {
+                    let li = document.createElement('li');
+                    li.classList.add("header__notify-item", "header__notify-item--viewed");
+                    li.innerHTML = `<a onclick="toLogin(event)" class='header__notify-link justify-content-center' href='login.html'>Vui lòng đăng nhập để xem thông báo</a>`;
+                    ulMess.appendChild(li);
+                }
+            } else {
+                ulMess.innerHTML = "";
+                let productOfNoctify = productInfoList.filter(product =>
+                    userActive.data.notificationsReceived.includes(product.id)
+                );
+                for (let i = productOfNoctify.length - 1; i >= Math.max(0, productOfNoctify.length - currentNoticeCount); i--) {
+                    let li = document.createElement('li');
+                    li.classList.add("header__notify-item", "header__notify-item--viewed");
+                    li.innerHTML = `<a href="#" class="header__notify-link">
+                        <img src="/sources/Data/${productOfNoctify[i].id}/1.webp" alt=""
+                          class="header__notify-img" />
+                        <div class="header__notify-info">
+                          <span class="header__notify-name">${productOfNoctify[i].nameProduct}</span>
+                          <span class="header__notify-description">Đã được xác nhận</span>
+                        </div>
+                      </a>`;
+                    ulMess.appendChild(li);
+                }
+
+                if (productOfNoctify.length <= 5) {
+                    let li = document.createElement('li');
+                    li.classList.add("header__notify-item", "header__notify-item--viewed");
+                    li.innerHTML = `<a href="#" class="header__notify-link">
+                        <img src="/sources/imgs/home/notice_welcom.webp" alt=""
+                          class="header__notify-img" />
+                        <div class="header__notify-info">
+                          <span class="header__notify-name">Chào mừng bạn đến với The Light Shop</span>
+                          <span class="header__notify-description">Rất vui được phục vụ bạn</span>
+                        </div>
+                      </a>`;
+                    ulMess.appendChild(li);
+                }
+
+                messFooter.classList.add("show");
+            }
+        };
+        document.querySelector('.header__notify-footer-btn').addEventListener('click', (event) => {
+            event.preventDefault();
+            currentNoticeCount += 5;
+            showListNotice();
+        });
+        //  Giỏ hàng 
+        var goProfile = () => {
+            if (curUser != "-1") {
+                localStorage.setItem("stateProfile", "cart")
+                window.location.href = "profile.html"
+            }
+        }
+        var showCart = () => {
+            const cartContainer = document.querySelector('.header__cart-wrap');
+            const cartList = document.querySelector('.header__cart-list');
+            cartList.innerHTML = `<h4 class="header__cart-heading text-center">Sản phẩm đã thêm</h4>`;
+
+            if (curUser == "-1") {
+                let ul = document.createElement('ul');
+                ul.classList.add("header__cart-list-item");
+                cartList.appendChild(ul);
+
+                let li = document.createElement('li');
+                li.classList.add("header__notify-item", "header__notify-item--viewed");
+                li.innerHTML = `<a onclick="toLogin(event)" class='header__notify-link justify-content-center' href='login.html'>Vui lòng đăng nhập để xem sản phẩm</a>`;
+                ul.appendChild(li);
+
+                document.querySelector('.header__cart-notice').style.display = "none";
+            } else {
+                let productOfCart = productInfoList.filter(product =>
+                    userActive.data.cart.some(cartItem => cartItem.item === product.id)
+                );
+
+                if (productOfCart.length === 0) {
+                    cartList.innerHTML = `<h4 class="header__cart-heading text-center">Sản phẩm đã thêm</h4>
+              <img src="/sources/imgs/home/cart-empty.png" alt="No cart" class="header__cart-list--no-cart header__cart-no-cart-img" />
+              <span class="header__cart-list--no-cart header__cart-no-cart-msg">Chưa có sản phẩm</span>`;
+                    document.querySelector('.header__cart-notice').style.display = "none";
+                } else {
+                    let ul = document.createElement('ul');
+                    ul.classList.add("header__cart-list-item");
+                    cartList.appendChild(ul);
+
+                    let a = document.createElement('a');
+                    a.classList.add("header__cart-view-cart", "btn", "btn--primary");
+                    a.setAttribute("href", "profile.html");
+                    a.innerText = "Xem giỏ hàng";
+                    a.onclick = (event) => stateProfile("cart", event);
+                    cartList.appendChild(a);
+
+                    const ulCart = document.querySelector('.header__cart-list-item');
+                    ulCart.innerHTML = "";
+
+                    const headerNotice = document.querySelector('.header__cart-notice');
+                    headerNotice.style.display = "block";
+                    headerNotice.innerText = `${productOfCart.length}`;
+
+                    for (let i = productOfCart.length - 1; i >= Math.max(0, productOfCart.length - 5); i--) {
+                        let li = document.createElement('li');
+                        li.classList.add("header__cart-item");
+                        li.onclick = (event) => goProduct(productOfCart[i].id)
+                        li.innerHTML = `
+              <img src="/sources/Data/${productOfCart[i].id}/1.webp" alt="" class="header__cart-img" />
+              <div class="header__cart-item-info">
+                <div class="header__cart-item-head">
+                  <h5 class="header__cart-item-name">${productOfCart[i].nameProduct}</h5>
+                  <div class="header__cart-item-price-wrap">
+                    <span class="header__cart-item-price">${formatNumber(productOfCart[i].price)} VND</span>
+                    <span class="header__cart-item-multiply">x</span>
+                    <span class="header__cart-item-cnt">${userActive.data.cart.find(cartItem => cartItem.item === productOfCart[i].id).quantity}</span>
+                  </div>
+                </div>
+                <div class="header__cart-item-body">
+                  <span class="header__cart-item-description">Phân loại: ${productOfCart[i].type}</span>
+                  <span class="header__cart-item-remove" onclick="delCartItem('${productOfCart[i].id}','${productOfCart[i].nameProduct}',event)">Xóa</span>
+                </div>
+              </div>`;
+                        ulCart.appendChild(li);
+                    }
+                }
+            }
+        };
+        var stateProfile = (sta, event) => {
+            localStorage.setItem("stateProfile", sta);
+        }
+        var addCartItem = (itemId, itemName, event) => {
+            event.preventDefault();
+            event.stopPropagation();
+            if (curUser == "-1") {
+                const stateToast = document.querySelector("#stateToast");
+                stateToast.src = "/sources/imgs/home/error.png"
+                const toastNotice = document.querySelector(".toast-body");
+                toastNotice.textContent = `Vui lòng đăng nhập để sử dụng tính năng này!`;
+                const toast = new bootstrap.Toast(document.getElementById('liveToast'))
+                toast.show();
+            } else {
+                const stateToast = document.querySelector("#stateToast");
+                stateToast.src = "/sources/imgs/home/success.png"
+                const toastNotice = document.querySelector(".toast-body");
+                toastNotice.textContent = `Thêm ${itemName} thành công!`;
+                const toast = new bootstrap.Toast(document.getElementById('liveToast'))
+                toast.show();
+                userList[parseInt(curUser)].data.cart.push({ item: itemId, quantity: 1 });
+                let temp = productInfoList.filter(product =>
+                    userActive.data.cart.some(cartItem => cartItem.item === product.id)).length;
+                const headerNotice = document.querySelector('.header__cart-notice');
+                if (temp > 0) {
+                    headerNotice.style.display = "block";
+                    headerNotice.innerText = `${temp}`;
+                } else headerNotice.style.display = "none";
+                localStorage.setItem("userList", JSON.stringify(userList));
+            }
+        }
+        var delCartItem = (itemId, itemName, event) => {
+            event.preventDefault();
+            event.stopPropagation();
+            if (curUser == "-1") {
+                const stateToast = document.querySelector("#stateToast");
+                stateToast.src = "/sources/imgs/home/error.png"
+                const toastNotice = document.querySelector(".toast-body");
+                toastNotice.textContent = `Vui lòng đăng nhập để sử dụng tính năng này!`;
+                const toast = new bootstrap.Toast(document.getElementById('liveToast'))
+                toast.show();
+            } else {
+                const stateToast = document.querySelector("#stateToast");
+                stateToast.src = "/sources/imgs/home/success.png"
+                const toastNotice = document.querySelector(".toast-body");
+                toastNotice.textContent = `Xóa ${itemName} thành công!`;
+                const toast = new bootstrap.Toast(document.getElementById('liveToast'))
+                toast.show();
+                userList[parseInt(curUser)].data.cart = userList[parseInt(curUser)].data.cart.filter(item => item.item !== itemId);
+                localStorage.setItem("userList", JSON.stringify(userList));
+                let temp = productInfoList.filter(product =>
+                    userActive.data.cart.some(cartItem => cartItem.item === product.id)).length;
+                const headerNotice = document.querySelector('.header__cart-notice');
+                if (temp > 0) {
+                    headerNotice.style.display = "block";
+                    headerNotice.innerText = `${temp}`;
+                } else headerNotice.style.display = "none";
+                showCart();
+            }
+        };
+
+        function formatNumber(num) {
+            return num.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".");
+        }
+
+        // Lắng nghe sự kiện cuộn lên
+        window.onscroll = function () {
+            let topButton = document.getElementById("top-button");
+            if (
+                document.body.scrollTop > 200 ||
+                document.documentElement.scrollTop > 200
+            ) {
+                topButton.classList.add("show");
+            } else {
+                topButton.classList.remove("show");
+            }
+        };
+
+        // Đăng xuất
+        var logout = () => {
+            window.localStorage.setItem('currentUser', "-1");
+            if (typeof localStorage["adClosedDate"] !== "undefined") localStorage.removeItem("adClosedDate");
+            if (typeof localStorage["currentPage"] !== "undefined") localStorage.removeItem("currentPage");
+            window.localStorage.setItem('searchData', JSON.stringify([]));
+            location.reload();
+        }
+        // xư kiện đăng nhập đăng xuất
+        var toLogin = (e) => {
+            window.localStorage.setItem("currentPage", location.pathname);
+            window.location.href = "login.html";
+        }
+        var toSignup = (e) => {
+            window.localStorage.setItem("currentPage", location.pathname);
+            window.location.href = "signup.html";
+        }
+
+        // Search input
+        var searchData;
+        const search = document.querySelector('#header-search');
+        const ulSearch = document.querySelector('.header__search-history-list');
+        var showHistory = (e) => {
+            ulSearch.innerHTML = "";
+            if (curUser == "-1") searchData = JSON.parse(localStorage.getItem("searchData"));
+            else searchData = userActive.data.historySearch;
+            for (let i = searchData.length - 1; i >= Math.max(0, searchData.length - 5); i--) {
+                let li = document.createElement('li');
+                li.classList.add('header__search-history-item');
+                li.innerHTML = `<a  href="#" onclick="searchItem(this)">${searchData[i]}<i class="fas fa-times" onclick=delHistory(${i},event)></i></a>`;
+                ulSearch.appendChild(li);
+            }
+        }
+        var delHistory = (index, event) => {
+            event.stopPropagation();
+            if (curUser == "-1") {
+                searchData.splice(index, 1);
+                window.localStorage.setItem("searchData", JSON.stringify(searchData));
+            }
+            else {
+                userList[parseInt(curUser)].data.historySearch.splice(index, 1);
+                window.localStorage.setItem("userList", JSON.stringify(userList));
+            }
+            showHistory();
+        }
+
+
+        const searchHistory = document.querySelector('.header__search-history');
+        search.addEventListener('focus', () => {
+            searchHistory.style.display = 'block';
+        });
+
+        document.addEventListener('click', (event) => {
+            if (!event.target.closest('.header__search-input') && !event.target.closest('.header__search-history') && !event.target.closest('.header__search-history-item')) {
+                searchHistory.style.display = 'none';
+            }
+        });
+        search.onfocus = showHistory();
+
+
+        var searchHandle = (e) => {
+            if (e.key === "Enter") {
+                search.value = search.value.trim();
+                if (search.value !== "") {
+                    if (curUser == "-1") {
+                        searchData.push(search.value);
+                        window.localStorage.setItem("searchData", JSON.stringify(searchData));
+                    } else {
+                        userList[parseInt(curUser)].data.historySearch.push(search.value);
+                        window.localStorage.setItem("userList", JSON.stringify(userList));
+                    }
+                    window.localStorage.setItem("curSearch", search.value);
+                    search.value = "";
+                    window.location.href = "product.html";
+                }
+            }
+        }
+        var searchClick = (e) => {
+            search.value = search.value.trim();
+            if (search.value !== "") {
+                if (curUser == "-1") {
+                    searchData.push(search.value);
+                    window.localStorage.setItem("searchData", JSON.stringify(searchData));
+                } else {
+                    userList[parseInt(curUser)].data.historySearch.push(search.value);
+                    window.localStorage.setItem("userList", JSON.stringify(userList));
+                }
+                window.localStorage.setItem("curSearch", search.value);
+                search.value = "";
+                window.location.href = "product.html";
+            }
+        }
+        var searchItem = (item) => {
+            window.localStorage.setItem("curSearch", item.textContent);
+            window.location.href = "product.html";
+        }
+        // đi tới trang chi tiết sản phẩm
+        var goProduct = (index) => {
+            window.open('product-items.html?id=' + index, '_self');
         }
     </script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>

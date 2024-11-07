@@ -9,6 +9,7 @@
   <link rel="stylesheet" href="/sources/css/bootstrap.min.css">
   <link rel="stylesheet" href="/sources/cssFolder/index.css" />
   <link rel="stylesheet" href="/sources/fontawesome-free-5.12.1-web/css/all.min.css">
+  <script src="/sources/js/bootstrap.bundle.min.js"></script>
   <link rel="stylesheet"
     href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.8.1/font/bootstrap-icons.min.css">
   <script>
@@ -333,6 +334,18 @@
     </div>
   </nav>
   </header>
+  <!-- Toast add/ remove cart -->
+  <div class="toast-container position-fixed bottom-0 end-0 p-3" style="z-index: 20;">
+    <div id="liveToast" class="toast" role="alert" aria-live="assertive" aria-atomic="true">
+      <div class="toast-header">
+        <img src="/sources/imgs/home/success.png" class="rounded me-2" alt="..." width="15px">
+        <strong class="me-auto">Thông báo</strong>
+        <small>Vừa xong</small>
+        <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
+      </div>
+      <div class="toast-body"></div>
+    </div>
+  </div>
   <div class="container pb-5 row gx-0 container-bg-color" style="height: 120vh;">
     <!-- phần tab chọn  -->
     <article class="col-sm-3 left-nav">
@@ -627,13 +640,13 @@
       myAcc.classList.add('d-none');
       myOder.classList.add('d-none');
 
-      if ('myAcc' === my){ 
+      if ('myAcc' === my) {
         myAcc.classList.remove('d-none');
-        localStorage.setItem('stateProfile','user');
+        localStorage.setItem('stateProfile', 'user');
       }
-      if ('myOder' === my){ 
+      if ('myOder' === my) {
         myOder.classList.remove('d-none');
-        localStorage.setItem('stateProfile','cart');
+        localStorage.setItem('stateProfile', 'cart');
       }
     }
     document.getElementById('TK').addEventListener("click", function () {
@@ -661,7 +674,7 @@
       switchTabMy('passwordForm');
     });
 
-    if(localStorage.getItem('stateProfile') === 'cart'){
+    if (localStorage.getItem('stateProfile') === 'cart') {
       switchTab('myOder');
       document.getElementById('TKList').classList.add('d-none');
     }
@@ -1070,7 +1083,7 @@
             </div>
             <div class="header__cart-item-body">
               <span class="header__cart-item-description">Phân loại: ${productOfCart[i].type}</span>
-              <span class="header__cart-item-remove" onclick="delCartItem('${productOfCart[i].id}',event)">Xóa</span>
+              <span class="header__cart-item-remove" onclick="delCartItem('${productOfCart[i].id}','${productOfCart[i].nameProduct}',event)">Xóa</span>
             </div>
           </div>`;
             ulCart.appendChild(li);
@@ -1081,9 +1094,13 @@
     var stateProfile = (sta, event) => {
       localStorage.setItem("stateProfile", sta);
     }
-    var delCartItem = (itemId, event) => {
+    var delCartItem = (itemId, itemName, event) => {
       event.preventDefault();
       event.stopPropagation();
+      const toastNotice = document.querySelector(".toast-body");
+      toastNotice.textContent = `Xóa ${itemName} thành công!`;
+      const toast = new bootstrap.Toast(document.getElementById('liveToast'))
+      toast.show();
       userList[parseInt(curUser)].data.cart = userList[parseInt(curUser)].data.cart.filter(item => item.item !== itemId);
       localStorage.setItem("userList", JSON.stringify(userList));
       showCart();
@@ -1105,7 +1122,7 @@
         topButton.classList.remove("show");
       }
     };
-    
+
     // Đăng xuất
     var logout = () => {
       window.localStorage.setItem('currentUser', "-1");
@@ -1130,7 +1147,7 @@
     const ulSearch = document.querySelector('.header__search-history-list');
     var showHistory = (e) => {
       ulSearch.innerHTML = "";
-      if(curUser=="-1") searchData = JSON.parse(localStorage.getItem("searchData"));
+      if (curUser == "-1") searchData = JSON.parse(localStorage.getItem("searchData"));
       else searchData = userActive.data.historySearch;
       for (let i = searchData.length - 1; i >= Math.max(0, searchData.length - 5); i--) {
         let li = document.createElement('li');
@@ -1141,12 +1158,12 @@
     }
     var delHistory = (index, event) => {
       event.stopPropagation();
-      if(curUser=="-1") {
+      if (curUser == "-1") {
         searchData.splice(index, 1);
         window.localStorage.setItem("searchData", JSON.stringify(searchData));
       }
       else {
-        userList[parseInt(curUser)].data.historySearch.splice(index,1);
+        userList[parseInt(curUser)].data.historySearch.splice(index, 1);
         window.localStorage.setItem("userList", JSON.stringify(userList));
       }
       showHistory();
@@ -1170,10 +1187,10 @@
       if (e.key === "Enter") {
         search.value = search.value.trim();
         if (search.value !== "") {
-          if(curUser=="-1") {
+          if (curUser == "-1") {
             searchData.push(search.value);
             window.localStorage.setItem("searchData", JSON.stringify(searchData));
-          }else {
+          } else {
             userList[parseInt(curUser)].data.historySearch.push(search.value);
             window.localStorage.setItem("userList", JSON.stringify(userList));
           }
@@ -1186,17 +1203,17 @@
     var searchClick = (e) => {
       search.value = search.value.trim();
       if (search.value !== "") {
-          if(curUser=="-1") {
-            searchData.push(search.value);
-            window.localStorage.setItem("searchData", JSON.stringify(searchData));
-          }else {
-            userList[parseInt(curUser)].data.historySearch.push(search.value);
-            window.localStorage.setItem("userList", JSON.stringify(userList));
-          }
-          window.localStorage.setItem("curSearch", search.value);
-          search.value = "";
-          window.location.href = "product.html";
+        if (curUser == "-1") {
+          searchData.push(search.value);
+          window.localStorage.setItem("searchData", JSON.stringify(searchData));
+        } else {
+          userList[parseInt(curUser)].data.historySearch.push(search.value);
+          window.localStorage.setItem("userList", JSON.stringify(userList));
         }
+        window.localStorage.setItem("curSearch", search.value);
+        search.value = "";
+        window.location.href = "product.html";
+      }
     }
     var searchItem = (item) => {
       window.localStorage.setItem("curSearch", item.textContent);

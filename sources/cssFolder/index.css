@@ -23,7 +23,9 @@
   height: 80px;
   background-color: #484848
 }
-
+#top-button {
+  z-index: 25;
+}
 .ms-n5 {
   margin-left: -40px;
 }
