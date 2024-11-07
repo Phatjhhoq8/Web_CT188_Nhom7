@@ -14,7 +14,7 @@
   <script>
     let currentUser = parseInt(localStorage.getItem('currentUser'));
     if (currentUser == "-1") {
-      if (typeof localStorage["currentPage"] == "undefined") localStorage.setItem("currentPage", "profile.html");
+      localStorage.setItem("currentPage", "profile.html");
       window.location.replace("login.html");
     }
   </script>
@@ -627,15 +627,21 @@
       myAcc.classList.add('d-none');
       myOder.classList.add('d-none');
 
-      if (myAcc === my) myAcc.classList.remove('d-none');
-      if (myOder === my) myOder.classList.remove('d-none');
+      if ('myAcc' === my){ 
+        myAcc.classList.remove('d-none');
+        localStorage.setItem('stateProfile','user');
+      }
+      if ('myOder' === my){ 
+        myOder.classList.remove('d-none');
+        localStorage.setItem('stateProfile','cart');
+      }
     }
     document.getElementById('TK').addEventListener("click", function () {
-      switchTab(myAcc);
+      switchTab('myAcc');
       document.getElementById('TKList').classList.remove('d-none');
     });
     document.getElementById('DH').addEventListener("click", function () {
-      switchTab(myOder);
+      switchTab('myOder');
       document.getElementById('TKList').classList.add('d-none');
     });
 
@@ -645,15 +651,21 @@
       profileForm.classList.add('d-none');
       passwordForm.classList.add('d-none');
 
-      if (profileForm === formInfo) profileForm.classList.remove('d-none');
-      if (passwordForm === formInfo) passwordForm.classList.remove('d-none');
+      if ('profileForm' === formInfo) profileForm.classList.remove('d-none');
+      if ('passwordForm' === formInfo) passwordForm.classList.remove('d-none');
     }
     document.getElementById('HS').addEventListener("click", function () {
-      switchTabMy(profileForm);
+      switchTabMy('profileForm');
     });
     document.getElementById('MK').addEventListener("click", function () {
-      switchTabMy(passwordForm);
+      switchTabMy('passwordForm');
     });
+
+    if(localStorage.getItem('stateProfile') === 'cart'){
+      switchTab('myOder');
+      document.getElementById('TKList').classList.add('d-none');
+    }
+
   </script>
   <!-- bắt lỗi form hồ sơ -->
   <script>
@@ -1098,6 +1110,7 @@
     var logout = () => {
       window.localStorage.setItem('currentUser', "-1");
       if (typeof localStorage["adClosedDate"] !== "undefined") localStorage.removeItem("adClosedDate");
+      if (typeof localStorage["currentPage"] !== "undefined") localStorage.removeItem("currentPage");
       window.localStorage.setItem('searchData', JSON.stringify([]));
       location.reload();
     }

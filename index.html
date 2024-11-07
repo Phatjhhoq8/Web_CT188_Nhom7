@@ -746,6 +746,7 @@
     var logout = () => {
       window.localStorage.setItem('currentUser', "-1");
       if (typeof localStorage["adClosedDate"] !== "undefined") localStorage.removeItem("adClosedDate");
+      if (typeof localStorage["currentPage"] !== "undefined") localStorage.removeItem("currentPage");
       window.localStorage.setItem('searchData', JSON.stringify([]));
       location.reload();
     }

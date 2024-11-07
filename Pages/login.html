@@ -12,23 +12,30 @@
     <link rel="stylesheet" href="/sources/css/bootstrap.min.css">
     <link rel="stylesheet" href="/sources/cssFolder/index.css">
     <link rel="stylesheet" href="/sources/fontawesome-free-5.12.1-web/css/all.min.css" />
+    <script>
+        if(localStorage.getItem('currentUser') != -1) window.location.assign('../index.html');
+    </script>
     <style>
         .login_container {
             display: flex;
             justify-content: center;
             align-items: center;
-            height: 100vh;
         }
     </style>
 </head>
 
-<body style="background-color: #eae5d6;">
+<body style="height: 1200px; background-image: url(https://media.loveitopcdn.com/5002/uu-nhuoc-diem-cua-viec-lap-dat-nang-luong-mat-troi-03.jpg); background-position: center; background-repeat: no-repeat; background-size: cover;">
+
+    <nav>
+        <img src="../sources/imgs/home/logo.png" alt="" style="width: 250px; height: 250px; margin-left: 150px; margin-top: -50px; cursor: pointer" onclick="window.location.assign('../index.html')">
+    </nav>
+
     <div class="container">
         <div class="login_container">
             <main class="bg-white p-4 rounded shadow">
                 <form action="" method="post" enctype="application/x-www-form-urlencoded" target="_blank"
                     class="was-validated" id="loginForm">
-                    <fieldset class="border-0" style="width: 25vw;">
+                    <fieldset class="border-0" style="width: 350px;">
                         <legend class="font-weight-bold mb-3">ĐĂNG NHẬP</legend>
                         <div>
                             <div class="alert alert-danger d-none" id="warning">
@@ -124,7 +131,8 @@
                     document.getElementById('success').classList.remove('d-none');
                     let currentUser = i;
                     localStorage.setItem('currentUser', currentUser);
-                    window.location.assign(localStorage.getItem('currentPage'));
+                    if(localStorage.getItem('currentPage')) window.location.assign(localStorage.getItem('currentPage'));
+                    else window.location.assign('../index.html'); 
                     return;
                 }
             }
