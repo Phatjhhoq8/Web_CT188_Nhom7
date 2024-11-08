@@ -523,8 +523,8 @@
         <div class="btn-group" style="width: 100%;">
           <button id="giohang" class="btn btn-outline-warning">Giỏ hàng</button>
           <button id="dondadat" class="btn btn-outline-warning">Đơn đã đặt</button>
-          <button id="vanchuyen" class="btn btn-outline-warning">vận chuyển</button>
-          <button id="hoanthanh" class="btn btn-outline-warning">hoàn thành</button>
+          <button id="vanchuyen" class="btn btn-outline-warning">Vận chuyển</button>
+          <button id="hoanthanh" class="btn btn-outline-warning">Chờ xác nhận</button>
         </div>
         <div class="iframe-container mt-3"><iframe class="iframe-content" src="donhang/giohang.html"
             id="orderInformation"></iframe></div>
@@ -890,13 +890,6 @@
       if (typeof localStorage["currentUser"] === "undefined") {
         localStorage.setItem("currentUser", "-1");
       }
-      let temp = productInfoList.filter(product =>
-        userActive.data.cart.some(cartItem => cartItem.item === product.id)).length;
-      const headerNotice = document.querySelector('.header__cart-notice');
-      if (temp > 0) {
-        headerNotice.style.display = "block";
-        headerNotice.innerText = `${temp}`;
-      } else headerNotice.style.display = "none";
     }
     const curUser = window.localStorage.getItem("currentUser");
     // reset trang khi đổi trạng thái đăng nhập
@@ -909,7 +902,14 @@
     // const userList = JSON.parse(window.localStorage.getItem("userList")) || [];
     const productInfoList = JSON.parse(localStorage.getItem('productList')) || [];
     let userActive = userList[parseInt(curUser)];
-
+    if (userActive) {
+      let temp = userActive.data.cart.length;
+      const headerNotice = document.querySelector('.header__cart-notice');
+      if (temp > 0) {
+        headerNotice.style.display = "block";
+        headerNotice.innerText = `${temp}`;
+      } else headerNotice.style.display = "none";
+    }
 
     // Trạng thái đăng nhập
     document.addEventListener('DOMContentLoaded', () => {
@@ -976,26 +976,38 @@
       } else {
         ulMess.innerHTML = "";
         let productOfNoctify = productInfoList.filter(product =>
-          userActive.data.notificationsReceived.includes(product.id)
+          userActive.data.notificationsReceived.some(noticeItem => noticeItem.item === product.id)
         );
-        for (let i = productOfNoctify.length - 1; i >= Math.max(0, productOfNoctify.length - currentNoticeCount); i--) {
+        for (let i = userActive.data.notificationsReceived.length - 1; i >= Math.max(0, userActive.data.notificationsReceived.length - currentNoticeCount); i--) {
           let li = document.createElement('li');
           li.classList.add("header__notify-item", "header__notify-item--viewed");
-          li.innerHTML = `<a href="#" class="header__notify-link">
-                    <img src="/sources/Data/${productOfNoctify[i].id}/1.webp" alt=""
-                      class="header__notify-img" />
-                    <div class="header__notify-info">
-                      <span class="header__notify-name">${productOfNoctify[i].nameProduct}</span>
-                      <span class="header__notify-description">Đã được xác nhận</span>
-                    </div>
-                  </a>`;
-          ulMess.appendChild(li);
+          let temp = productOfNoctify.find(product => product.id == userActive.data.notificationsReceived[i].item);
+          if (userActive.data.notificationsReceived[i].state == 1) {
+            li.innerHTML = `<a href="#" class="header__notify-link">
+                      <img src="/sources/Data/${temp.id}/1.webp" alt=""
+                        class="header__notify-img" />
+                      <div class="header__notify-info">
+                        <span class="header__notify-name">${temp.nameProduct}</span>
+                        <span class="header__notify-description">Đang trên đường vận chuyển!</span>
+                      </div>
+                    </a>`;
+            ulMess.appendChild(li);
+          } else {
+            li.innerHTML = `<a href="#" class="header__notify-link">
+                      <img src="/sources/Data/${temp.id}/1.webp" alt=""
+                        class="header__notify-img" />
+                      <div class="header__notify-info">
+                        <span class="header__notify-name">${temp.nameProduct}</span>
+                        <span class="header__notify-description">Hiện không thể đáp ứng đơn hàng!</span>
+                      </div>
+                    </a>`;
+            ulMess.appendChild(li);
+          }
         }
 
-        if (productOfNoctify.length <= 5) {
-          let li = document.createElement('li');
-          li.classList.add("header__notify-item", "header__notify-item--viewed");
-          li.innerHTML = `<a href="#" class="header__notify-link">
+        let li = document.createElement('li');
+        li.classList.add("header__notify-item", "header__notify-item--viewed");
+        li.innerHTML = `<a href="#" class="header__notify-link">
                     <img src="/sources/imgs/home/notice_welcom.webp" alt=""
                       class="header__notify-img" />
                     <div class="header__notify-info">
@@ -1003,8 +1015,7 @@
                       <span class="header__notify-description">Rất vui được phục vụ bạn</span>
                     </div>
                   </a>`;
-          ulMess.appendChild(li);
-        }
+        ulMess.appendChild(li);
 
         messFooter.classList.add("show");
       }
@@ -1064,26 +1075,27 @@
 
           const headerNotice = document.querySelector('.header__cart-notice');
           headerNotice.style.display = "block";
-          headerNotice.innerText = `${productOfCart.length}`;
+          headerNotice.innerText = `${userActive.data.cart.length}`;
 
-          for (let i = productOfCart.length - 1; i >= Math.max(0, productOfCart.length - 5); i--) {
+          for (let i = userActive.data.cart.length - 1; i >= Math.max(0, userActive.data.cart.length - 5); i--) {
+            let temp = productOfCart.find(product => product.id == userActive.data.cart[i].item);
             let li = document.createElement('li');
             li.classList.add("header__cart-item");
-            li.onclick = (event) => goProduct(productOfCart[i].id)
+            li.onclick = (event) => goProduct(temp.id)
             li.innerHTML = `
-          <img src="/sources/Data/${productOfCart[i].id}/1.webp" alt="" class="header__cart-img" />
+          <img src="/sources/Data/${temp.id}/1.webp" alt="" class="header__cart-img" />
           <div class="header__cart-item-info">
             <div class="header__cart-item-head">
-              <h5 class="header__cart-item-name">${productOfCart[i].nameProduct}</h5>
+              <h5 class="header__cart-item-name">${temp.nameProduct}</h5>
               <div class="header__cart-item-price-wrap">
-                <span class="header__cart-item-price">${formatNumber(productOfCart[i].price)} VND</span>
+                <span class="header__cart-item-price">${formatNumber(temp.price)} VND</span>
                 <span class="header__cart-item-multiply">x</span>
-                <span class="header__cart-item-cnt">${userActive.data.cart.find(cartItem => cartItem.item === productOfCart[i].id).quantity}</span>
+                <span class="header__cart-item-cnt">${userActive.data.cart[i].quantity}</span>
               </div>
             </div>
             <div class="header__cart-item-body">
-              <span class="header__cart-item-description">Phân loại: ${productOfCart[i].type}</span>
-              <span class="header__cart-item-remove" onclick="delCartItem('${productOfCart[i].id}','${productOfCart[i].nameProduct}',event)">Xóa</span>
+              <span class="header__cart-item-description">Phân loại: ${temp.type}</span>
+              <span class="header__cart-item-remove" onclick="delCartItem('${temp.id}','${temp.nameProduct}',event)">Xóa</span>
             </div>
           </div>`;
             ulCart.appendChild(li);
