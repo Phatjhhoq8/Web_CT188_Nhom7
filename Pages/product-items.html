@@ -66,7 +66,25 @@
     </style>
 </head>
 
-<body>
+<body style="background-color: #eae5d6;">
+    <!-- Custom Modal -->
+    <div class="modal fade" id="confirmModal" tabindex="-1" aria-labelledby="confirmModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered"> <!-- modal-dialog-centered để modal xuất hiện giữa màn hình -->
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="confirmModalLabel">Xác nhận mua hàng</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    Bạn có chắc chắn muốn mua sản phẩm này không?
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Hủy</button>
+                    <button type="button" class="btn btn-primary" id="confirmBuy">Xác nhận</button>
+                </div>
+            </div>
+        </div>
+    </div>
     <div class="app">
         <header class="header_content">
             <!-- Phần logo và tính năng header -->
@@ -154,7 +172,6 @@
                         </li>
                         <li id="stateLogin"
                             class="list-group-item text-secondary rounded-pill bg-orange text-white user-icon-container poiter">
-                </div>
                 </li>
                 </ul>
             </div>
@@ -282,19 +299,16 @@
                         </div>
                     </div>
 
-                    <div
+                    <div id="buyButton"
                         style="background-color: #061b48; border-radius: 3px; padding: 4px 15px; margin-top: 10px; text-align: center;">
-                        <a class="custom-link" href="#" style="font-weight: 700;padding: 7px 0;">
-                            <span>MUA NGAY</span>
-
-                        </a>
+                        <span class="custom-link" href="#" style="font-weight: 700;padding: 7px 0;cursor: pointer;">MUA
+                            NGAY</span>
                     </div>
 
-                    <div class="mt-2"
-                        style="background-color: #fff; border-radius: 3px;padding: 11px 15px; border: 1px solid; text-align: center;">
-                        <a href="#" style="color: #061b48;text-decoration: none; font-weight: 700;">
-                            <span>THÊM VÀO GIỎ</span>
-                        </a>
+                    <div class="mt-2" id="addCartButton"
+                        style="background-color: #fff; border-radius: 3px;padding: 11px 15px; border: 1px solid; text-align: center;cursor: pointer;">
+                        <span style="color: #061b48;text-decoration: none; font-weight: 700;">THÊM VÀO GIỎ</span>
+
                     </div>
 
                 </div>
@@ -505,7 +519,7 @@
             }
             else {
                 userState.innerHTML = `<li class="header__navbar-item header__navbar-user">
-                                <img src="https://i.pinimg.com/736x/13/2e/a7/132ea72d2bc3b85d90409c9e8f2d0f4a.jpg" alt=""
+                                <img src="../sources/imgs/home/user.jpg" alt=""
                                     class="header__navbar-user-img">
                                 <span class="header__navbar-user-name">${userActive.fullName}</span>
                                 <ul class="header__navbar-user-menu">
@@ -680,7 +694,7 @@
         var stateProfile = (sta, event) => {
             localStorage.setItem("stateProfile", sta);
         }
-        var addCartItem = (itemId, itemName, event) => {
+        var addCartItem = (itemId, itemName, event, increase = 1) => {
             event.preventDefault();
             event.stopPropagation();
             if (curUser == "-1") {
@@ -699,15 +713,13 @@
                 toast.show();
                 const userCart = userList[parseInt(curUser)].data.cart;
                 const existingItem = userCart.find(item => item.item === itemId);
-
                 if (existingItem) {
-                    existingItem.quantity += 1;
+                    existingItem.quantity += parseInt(increase);
                 } else {
-                    userCart.push({ item: itemId, quantity: 1 });
+                    userCart.push({ item: itemId, quantity: parseInt(increase) });
                 }
 
                 localStorage.setItem("userList", JSON.stringify(userList));
-
                 if (userActive) {
                     let temp = userActive.data.cart.length;
                     const headerNotice = document.querySelector('.header__cart-notice');
@@ -791,7 +803,37 @@
                 showCart();
             }
         };
+        var addShopItem = (itemId, itemName, event, increase = 1) => {
+            event.preventDefault();
+            event.stopPropagation();
+            if (curUser == "-1") {
+                const stateToast = document.querySelector("#stateToast");
+                stateToast.src = "/sources/imgs/home/error.png"
+                const toastNotice = document.querySelector(".toast-body");
+                toastNotice.textContent = `Vui lòng đăng nhập để sử dụng tính năng này!`;
+                const toast = new bootstrap.Toast(document.getElementById('liveToast'))
+                toast.show();
+            } else {
+                const stateToast = document.querySelector("#stateToast");
+                stateToast.src = "/sources/imgs/home/success.png"
+                const toastNotice = document.querySelector(".toast-body");
+                toastNotice.textContent = `Đang chờ ${itemName} được xác nhận!`;
+                const toast = new bootstrap.Toast(document.getElementById('liveToast'))
+                toast.show();
+                const userCart = userList[parseInt(curUser)].data.wait;
+                userCart.push({ item: itemId, quantity: parseInt(increase) });
 
+                localStorage.setItem("userList", JSON.stringify(userList));
+                if (userActive) {
+                    let temp = userActive.data.cart.length;
+                    const headerNotice = document.querySelector('.header__cart-notice');
+                    if (temp > 0) {
+                        headerNotice.style.display = "block";
+                        headerNotice.innerText = `${temp}`;
+                    } else headerNotice.style.display = "none";
+                }
+            }
+        }
         function formatNumber(num) {
             return num.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".");
         }
@@ -915,7 +957,7 @@
         let dataItem = productInfoList.find(product => product.id == idItem)
         const carouselIndicators = document.querySelector('.carousel-indicators');
         const carouselInner = document.querySelector('.carousel-inner');
-
+        
         carouselIndicators.innerHTML = `
         <img src="../sources/Data/${idItem}/1.webp"
                                 data-bs-target="#slice-container" data-bs-slide-to="0" class="active"
@@ -954,11 +996,33 @@
                                 <img src="../sources/Data/${idItem}/6.webp"
                                     alt="" class="d-block w-100" style="padding-bottom: 25%;">
                             </div>`
-        const info=document.querySelector("#info");
-        info.innerHTML=`<h5>[120W] Đèn Đường Năng Lượng Mặt Trời Liền Thể LT6120 Nhiều Khoang Kitawa</h5>
-            <span>Loại sản phẩm: <a href="">KITAWA</a></span>
-            <span>Vị trí lắp đặt: <a href="">LT6120</a></span>
-            <div><span class="price">599.000 VND</span></div>`;
+
+        const info = document.querySelector("#info");
+        info.innerHTML = `<h5>${dataItem.nameProduct}</h5>
+            <span>Loại sản phẩm: <a href="">${dataItem.type}</a></span>
+            <span>Vị trí lắp đặt: <a href="">${dataItem.view}</a></span>
+            <div><span class="price">${formatNumber(dataItem.price)} VND</span></div>`;
+        const productQuantity = document.querySelector("#productQuantity");
+        const buyButton = document.querySelector("#buyButton");
+        const addCartButton = document.querySelector("#addCartButton");
+        addCartButton.onclick = (event) => addCartItem(idItem, dataItem.nameProduct, event, productQuantity.value);
+        const confirmModal = new bootstrap.Modal(document.getElementById('confirmModal'));
+
+        buyButton.onclick = (event) => {
+            if(curUser=="-1") {
+                const stateToast = document.querySelector("#stateToast");
+                stateToast.src = "/sources/imgs/home/error.png"
+                const toastNotice = document.querySelector(".toast-body");
+                toastNotice.textContent = `Vui lòng đăng nhập để sử dụng tính năng này!`;
+                const toast = new bootstrap.Toast(document.getElementById('liveToast'))
+                toast.show();
+            }  else confirmModal.show();
+        };
+
+        document.getElementById('confirmBuy').onclick = (event) => {
+            addShopItem(idItem, dataItem.nameProduct, event, productQuantity.value)
+            confirmModal.hide();
+        };
     </script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 </body>
