@@ -83,7 +83,7 @@
             <div class="header__cart-item-body">
               <span class="header__cart-item-description">Phân loại: ${temp.type}</span>
               <div class="button-container">
-    <button class="custom-button" onclick="showConfirmModal('${temp.id}','${temp.nameProduct}',event)">Hủy đơn hàng</button>
+    <button class="custom-button" onclick="showConfirmModal('${temp.id}','${temp.nameProduct}',event,${i})">Hủy đơn hàng</button>
               </div>
             </div>
 
@@ -93,7 +93,7 @@
       }
     };
     showCart()
-    var delCartItem = (itemId, itemName, event) => {
+    var delCartItem = (itemId, itemName, event,index) => {
       event.preventDefault();
       event.stopPropagation();
       const stateToast = document.querySelector("#stateToast");
@@ -102,7 +102,7 @@
       toastNotice.textContent = `Hủy đặt hàng thành công!`;
       const toast = new bootstrap.Toast(document.getElementById('liveToast'))
       toast.show();
-      userList[parseInt(curUser)].data.wait = userList[parseInt(curUser)].data.wait.filter(item => item.item !== itemId);
+      userList[parseInt(curUser)].data.wait.splice(parseInt(index),1);
       localStorage.setItem("userList", JSON.stringify(userList));
       showCart();
     };
@@ -112,11 +112,11 @@
       return num.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".");
     }
 
-    function showConfirmModal(idItem, nameProduct, event) {
+    function showConfirmModal(idItem, nameProduct, event,index) {
       const confirmModal = new bootstrap.Modal(document.getElementById('confirmModal'));
       confirmModal.show();
       document.getElementById('confirmBuy').onclick = () => {
-        delCartItem(idItem, nameProduct, event);
+        delCartItem(idItem, nameProduct, event,index);
         confirmModal.hide();
       };
     }
