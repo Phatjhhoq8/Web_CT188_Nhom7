@@ -59,7 +59,7 @@
             let huyGiaoHang = sanphamInGioHang.querySelector('#huyGiaoHang');
             huyGiaoHang.id = "";
             huyGiaoHang.onclick = function () {
-                userList[i].data.NotificationRecieved.push({ item: userList[i].data.wait[j].item, state: 0 });
+                userList[i].data.notificationsReceived.push({ item: userList[i].data.wait[j].item, state: 0 });
                 userList[i].data.wait.splice(j, 1);
                 giohangcuaUser.removeChild(sanphamInGioHang);
                 localStorage.setItem('userList', JSON.stringify(userList));

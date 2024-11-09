@@ -234,4 +234,3 @@ crudProduct[1].onclick = function () {
         
     };
 }
-

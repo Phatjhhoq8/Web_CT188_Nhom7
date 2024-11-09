@@ -50,15 +50,17 @@
                                 <td><input class="form-control" type="date" value="" disabled></td>
                                 <td><input class="form-control" type="number" min="0" value="" disabled></td>
                                 <td><select class="form-select" disabled>
-                                        <option value="sell">bán Hàng</option>
+                                        <option value="sell">Bán hàng</option>
                                         <option value="mkt">Marketing</option>
-                                        <option value="help">Chăm sóc khách Hàng</option>
+                                        <option value="help">Chăm sóc khách hàng</option>
                                     </select></td>
                                 <td><input class="form-control" type="number" min="0" value="0" disabled></td>
                                 <td>
-                                    <button class="btn btn-danger btn-sm" style="width: 100%;">Sa thải</button>
-                                    <button class="btn btn-warning btn-sm ms-2" onclick="editEmployee(this)"
-                                        style="width: 100%;">Chỉnh sửa</button>
+                                    <div class="d-flex flex-column gap-2">
+                                        <button class="btn btn-danger btn-sm" style="width: 100%;">Sa thải</button>
+                                        <button class="btn btn-warning btn-sm " onclick="editEmployee(this)"
+                                            style="width: 100%;">Chỉnh sửa</button>
+                                    </div>
                                 </td>
                             </tr>
                         </tbody>
@@ -92,9 +94,9 @@
                         <div class="col-12 col-md-4">
                             <label for="bophan" class="form-label">Bộ phận</label>
                             <select class="form-select" name="bophan" required style="text-align: center;">
-                                <option value="sell">Bán Hàng</option>
+                                <option value="sell">Bán hàng</option>
                                 <option value="mkt">Marketing</option>
-                                <option value="help">Chăm sóc khách Hàng</option>
+                                <option value="help">Chăm sóc khách hàng</option>
                             </select>
                             <div class="invalid-feedback">Vui lòng chọn bộ phận.</div>
                         </div>
@@ -118,13 +120,17 @@
                 <div style="display: flex; align-items: center; text-align: left; gap: 7.94061099453vw;">
                     <div style="display: inline-block;">
                         <div>
-                            <input type="radio" name="crud" checked id="read">
-                            <label for="read">Xem</label>
-                            <input type="radio" name="crud" id="edit">
-                            <label for="edit">Thêm sản phẩm</label>
+                            <div>
+                                <input type="radio" name="crud" checked id="read">
+                                <label for="read">Xem</label>
+                            </div>
+                            <div>
+                                <input type="radio" name="crud" id="edit">
+                                <label for="edit">Thêm sản phẩm</label>
+                            </div>
                         </div>
-                        <label for="searchSP">Tìm kiếm sản phẩm</label>
-                        <input type="text" name="searchSP" id="searchSP">
+                        <!-- <label for="searchSP">Tìm kiếm sản phẩm</label>
+                        <input type="text" name="searchSP" id="searchSP"> -->
                     </div>
                     <div style="display: inline-block;">
                         <div>* Phần chi tiết vui lòng đặt đường dẫn folder có chứa hình ảnh và các
@@ -173,8 +179,8 @@
                                         <option value="Ngoài trời" style="text-align: center;">Ngoài trời</option>
                                     </select></td>
                                 <td><input type="text" id="addDetail" style="width: 100%;"></td>
-                                <td><input type="button" value="submit" id="submitAdd"
-                                        style="width: 100%;" class="d-none"></td>
+                                <td><input type="button" value="submit" id="submitAdd" style="width: 100%;"
+                                        class="d-none"></td>
                             </tr>
 
                         </tfoot>
@@ -301,7 +307,6 @@
             document.getElementById(sectionId).classList.remove('d-none');
         }
     </script>
-
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 

@@ -69,6 +69,12 @@ function showdsnv(nv, i) {
             editEmployee(clone, false);
         } else {
             editEmployee(clone, true);
+            let inputs = clone.querySelectorAll('input, select');
+            nv.tennhanvien = inputs[1].value;
+            nv.ngaysinh = inputs[2].value;
+            nv.luong = inputs[3].value;
+            nv.bophan = inputs[4].value;
+
             localStorage.setItem('dsnhanvien', JSON.stringify(dsnhanvien));
         }
     };
