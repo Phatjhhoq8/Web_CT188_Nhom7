@@ -584,8 +584,9 @@
     // đẩy sản phẩm lên web
     import { addDatasp, addDataUser } from '../sources/Data/data.js'
     const listProduct = document.querySelector('#product-container');
-    var productInfoList = addDatasp();
+    // var productInfoList = addDatasp();
     // localStorage.setItem("productList",JSON.stringify(productInfoList));
+    var productInfoList = JSON.parse(localStorage.getItem("productList"));
     let pagProduct = document.querySelector("#pagination-Product");
     const searchInput = document.querySelector("#header-search");
     searchInput.addEventListener("input", () => filterProducts(searchInput.value));
