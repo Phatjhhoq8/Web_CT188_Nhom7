@@ -774,16 +774,15 @@
       var userState = document.querySelector('#stateLogin');
       if (curUser == "-1") {
         userState.innerHTML = `<i class="fas fa-user"></i>
-              <span onclick="toLogin(event)">Sign in</span>
+                <span onclick="toLogin(event)">Login</span>
               <div class="login-container" >
-                <h2 class="text-secondary">Sign back in to continue</h2>
+                <h2 class="text-secondary">Đăng nhập để tiếp tục</h2>
                 <button class="sign-in-btn rounded-pill "onclick="toLogin(event)">Đăng nhập</button>
-                <p class="text-secondary">Hoặc đăng kí acc mới:</p>
+                <p class="text-secondary">Hoặc đăng kí tài khoản mới:</p>
                 <button class="sign-in-btn rounded-pill" onclick="toSignup(event)">Đăng kí</button>
                 <p class="agreement">
-                  I agree to the
-                  <a href="#">TheLight.com Free Membership Agreement</a> and
-                  <a href="#">Privacy Policy.</a>
+                  <a href="#">Chính sách thành viên </a> và
+                  <a href="#">chính sách quyền riêng tư của TheLight.com.</a>
                 </p>`;
       }
       else {
