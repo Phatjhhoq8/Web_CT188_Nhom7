@@ -77,7 +77,7 @@
                 <span class="header__cart-item-price">${formatNumber(temp.price)} VND</span>
                 <span class="header__cart-item-multiply">x</span>
                 <span class="header__cart-item-cnt">${userActive.data.cart[i].quantity}</span>
-                <span class="header__cart-item-price"> = ${formatNumber(temp.price*userActive.data.cart[i].quantity)} VND</span>
+                <span class="header__cart-item-price"> = ${formatNumber(temp.price * userActive.data.cart[i].quantity)} VND</span>
               </div>
             </div>
             <div class="header__cart-item-body">
@@ -85,7 +85,7 @@
               <div class="button-container">
     <button class="custom-button" onclick="subCartItem('${temp.id}','${temp.nameProduct}',event)"><i class="fas fa-arrow-down"></i></button>
     <button class="custom-button" onclick="addCartItem('${temp.id}','${temp.nameProduct}',event)"><i class="fas fa-arrow-up"></i></button>
-    <button  class="custom-button" onclick="showConfirmModal('${temp.id}','${temp.nameProduct}',event,${userActive.data.cart[i].quantity})">Mua</button>
+    <button  class="custom-button" onclick="showConfirmModal('${temp.id}','${temp.nameProduct}',event,${userActive.data.cart[i].quantity},${temp.price})">Mua</button>
     <button class="custom-button" onclick="delCartItem('${temp.id}','${temp.nameProduct}',event)">Xóa</button>
   </div>
             </div>
@@ -168,22 +168,61 @@
       const userCart = userList[parseInt(curUser)].data.wait;
       userCart.push({ item: itemId, quantity: parseInt(increase) });
       localStorage.setItem("userList", JSON.stringify(userList));
-      delCartItem(itemId,itemName,event);
+      delCartItem(itemId, itemName, event);
       showCart()
     }
 
     function formatNumber(num) {
       return num.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".");
     }
-    
-    function showConfirmModal(idItem, nameProduct,event,quantity) {
-    const confirmModal = new bootstrap.Modal(document.getElementById('confirmModal'));
-    confirmModal.show();
-    document.getElementById('confirmBuy').onclick = () => {
-        addShopItem(idItem, nameProduct,event, quantity);
+
+    function showConfirmModal(idItem, nameProduct, event, quantity, price) {
+      const confirmModal = new bootstrap.Modal(document.getElementById('confirmModal'));
+      confirmModal.show();
+      const modal = document.querySelector(".modal-body");
+      modal.innerHTML = `<div class="invoice-container">
+      <div class="invoice-header">
+          <h1>Hóa Đơn Mua Hàng</h1>
+          <img src="/sources/imgs/home/logo.ico.png" alt="Logo">
+      </div>
+      <div class="customer-info">
+          <p><strong>Tên Khách Hàng:</strong> ${userActive.fullName}</p>
+          <p><strong>Địa Chỉ:</strong> ${userActive.address}</p>
+          <p><strong>Số Điện Thoại:</strong> ${userActive.phoneNum}</p>
+          <p><strong>Email:</strong>  ${userActive.email}</p>
+      </div>
+
+      <!-- Bảng Sản Phẩm -->
+      <table class="table table-bordered">
+          <thead>
+              <tr>
+                  <th>Tên Sản Phẩm</th>
+                  <th>Số Lượng</th>
+                  <th>Giá Tiền</th>
+                  <th>Thành Tiền</th>
+              </tr>
+          </thead>
+          <tbody>
+              <tr>
+                  <td>${nameProduct}</td>
+                  <td>${quantity}</td>
+                  <td>${formatNumber(price)}</td>
+                  <td>${formatNumber(parseInt(price) * quantity)}</td>
+              </tr>
+          </tbody>
+          <tfoot>
+              <tr>
+                  <td colspan="3" class="text-end total">Tổng cộng</td>
+                  <td class="total">${formatNumber(parseInt(price) * quantity)}</td>
+              </tr>
+          </tfoot>
+      </table>
+  </div>`
+      document.getElementById('confirmBuy').onclick = () => {
+        addShopItem(idItem, nameProduct, event, quantity);
         confirmModal.hide();
-    };
-}
+      };
+    }
   </script>
 </body>
 
