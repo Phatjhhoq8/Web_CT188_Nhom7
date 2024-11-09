@@ -23,6 +23,8 @@ function displayCustomerTable() {
 
 // Hàm xóa khách hàng theo chỉ số trong mảng
 function deleteCustomer(index) {
+    if(localStorage.getItem('currentUser')==index) localStorage.setItem('currentUser', "-1");
+    else if(localStorage.getItem('currentUser') > index) localStorage.setItem('currentUser', `${parseInt(localStorage.getItem('currentUser'))-1}`);
     customerList.splice(index, 1); // Xóa phần tử tại vị trí index
     localStorage.setItem('userList', JSON.stringify(customerList));
     displayCustomerTable(); // Cập nhật lại bảng
