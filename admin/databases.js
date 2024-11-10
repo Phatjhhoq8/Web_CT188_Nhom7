@@ -61,24 +61,24 @@ function addDatatoTable(product) {
                         if (j == 6) {
                             let val = item[j].innerText;
                             if (val === "Trong nhà")
-                                item[j].innerHTML = '<select class="cell-table"><option value="none" disabled style="text-align: center;">---Chọn---</option><option value="Trong nhà" selected style="text-align: center;">Trong nhà</option><option value="Ngoài trời" style="text-align: center;">Ngoài trời</option></select>';
+                                item[j].innerHTML = '<select class="cell-table" style="width: 100%;"><option value="none" disabled style="text-align: center;">---Chọn---</option><option value="Trong nhà" selected style="text-align: center;">Trong nhà</option><option value="Ngoài trời" style="text-align: center;">Ngoài trời</option></select>';
                             else
-                                item[j].innerHTML = '<select class="cell-table"><option value="none" disabled style="text-align: center;">---Chọn---</option><option value="Trong nhà" style="text-align: center;">Trong nhà</option><option value="Ngoài trời" selected style="text-align: center;">Ngoài trời</option></select>';
+                                item[j].innerHTML = '<select class="cell-table" style="width: 100%;"><option value="none" disabled style="text-align: center;">---Chọn---</option><option value="Trong nhà" style="text-align: center;">Trong nhà</option><option value="Ngoài trời" selected style="text-align: center;">Ngoài trời</option></select>';
                         }
                         else if (j == 3) {
                             let val = item[j].innerText;
                             if (val === "Đèn Pha")
-                                item[j].innerHTML = '<select class="cell-table"><option value="none" disabled style="text-align: center;">---Chọn---</option><option value="Đèn Pha" selected>Đèn Pha</option><option value="Đèn LED">Đèn LED</option><option value="Đèn UFO">Đèn UFO</option><option value="Đèn ốp trần">Đèn ốp trần</option>';
+                                item[j].innerHTML = '<select style="width: 100%;" class="cell-table"><option value="none" disabled style="text-align: center;">---Chọn---</option><option value="Đèn Pha" selected>Đèn Pha</option><option value="Đèn LED">Đèn LED</option><option value="Đèn UFO">Đèn UFO</option><option value="Đèn ốp trần">Đèn ốp trần</option>';
                             else if (val == "Đèn LED")
-                                item[j].innerHTML = '<select class="cell-table"><option value="none" disabled style="text-align: center;">---Chọn---</option><option value="Đèn Pha">Đèn Pha</option><option value="Đèn LED" selected>Đèn LED</option><option value="Đèn UFO">Đèn UFO</option><option value="Đèn ốp trần">Đèn ốp trần</option>';
+                                item[j].innerHTML = '<select style="width: 100%;" class="cell-table"><option value="none" disabled style="text-align: center;">---Chọn---</option><option value="Đèn Pha">Đèn Pha</option><option value="Đèn LED" selected>Đèn LED</option><option value="Đèn UFO">Đèn UFO</option><option value="Đèn ốp trần">Đèn ốp trần</option>';
                             else if (val == "Đèn UFO")
-                                item[j].innerHTML = '<select class="cell-table"><option value="none" disabled style="text-align: center;">---Chọn---</option><option value="Đèn Pha">Đèn Pha</option><option value="Đèn LED">Đèn LED</option><option value="Đèn UFO" selected>Đèn UFO</option><option value="Đèn ốp trần">Đèn ốp trần</option>';
+                                item[j].innerHTML = '<select style="width: 100%;" class="cell-table"><option value="none" disabled style="text-align: center;">---Chọn---</option><option value="Đèn Pha">Đèn Pha</option><option value="Đèn LED">Đèn LED</option><option value="Đèn UFO" selected>Đèn UFO</option><option value="Đèn ốp trần">Đèn ốp trần</option>';
                             else if (val == "Đèn ốp trần")
-                                item[j].innerHTML = '<select class="cell-table"><option value="none" disabled style="text-align: center;">---Chọn---</option><option value="Đèn Pha">Đèn Pha</option><option value="Đèn LED">Đèn LED</option><option value="Đèn UFO">Đèn UFO</option><option value="Đèn ốp trần" selected>Đèn ốp trần</option>';
+                                item[j].innerHTML = '<select style="width: 100%;" class="cell-table"><option value="none" disabled style="text-align: center;">---Chọn---</option><option value="Đèn Pha">Đèn Pha</option><option value="Đèn LED">Đèn LED</option><option value="Đèn UFO">Đèn UFO</option><option value="Đèn ốp trần" selected>Đèn ốp trần</option>';
                         }
                         else {
                             let val = item[j].innerText;
-                            item[j].innerHTML = '<input type="text" class="cell-table">';
+                            item[j].innerHTML = '<input type="text" style="width: 100%;" class="cell-table">';
                             if (j == 0) item[j].querySelector('input').disabled = true;
                             item[j].querySelector('input').value = val;
 

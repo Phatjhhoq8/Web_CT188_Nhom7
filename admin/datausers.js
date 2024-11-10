@@ -1,4 +1,3 @@
-
 let productInfoList = JSON.parse(localStorage.getItem('productList'));
 let userList = JSON.parse(localStorage.getItem('userList'));
 
@@ -14,9 +13,11 @@ for (let i = 0; i < userList.length; ++i) {
 
     let giohangcuaUser = addRowUserWait.querySelector('#giohangcuaUser').cloneNode(false);
     giohangcuaUser.id = "";
+    let showGioHangCuaUser = addRowUserWait.querySelector('#showGioHangCuaUser');
+    showGioHangCuaUser.id = "";
     for (let j = 0; j < userList[i].data.wait.length; ++j) {
 
-        let sanphamInGioHang = addRowUserWait.querySelector('#sanphamInGioHang').cloneNode(true);
+        let sanphamInGioHang = showGioHangCuaUser.querySelector('#sanphamInGioHang').cloneNode(true);
         sanphamInGioHang.id = "";
 
         let IDSPInGioHang = sanphamInGioHang.querySelector('#IDSPInGioHang');
@@ -55,6 +56,7 @@ for (let i = 0; i < userList.length; ++i) {
             giohangcuaUser.removeChild(sanphamInGioHang);
             if(userList[i].data.wait.length == 0) showGioHang.removeChild(addRowUserWait);
             localStorage.setItem('userList', JSON.stringify(userList));
+            location.reload();
         }
 
         let huyGiaoHang = sanphamInGioHang.querySelector('#huyGiaoHang');
@@ -65,14 +67,17 @@ for (let i = 0; i < userList.length; ++i) {
             giohangcuaUser.removeChild(sanphamInGioHang);
             if(userList[i].data.wait.length == 0) showGioHang.removeChild(addRowUserWait);
             localStorage.setItem('userList', JSON.stringify(userList));
+            location.reload();
         }
 
         giohangcuaUser.appendChild(sanphamInGioHang);
     }
 
-    let showGioHangCuaUser = addRowUserWait.querySelector('#showGioHangCuaUser');
-    showGioHangCuaUser.id = "";
+    
+    
     showGioHangCuaUser.removeChild(addRowUserWait.querySelector('#giohangcuaUser'));
-    showGioHangCuaUser.appendChild(giohangcuaUser);
-    showGioHang.appendChild(addRowUserWait);
+    if(userList[i].data.wait.length != 0){
+        showGioHangCuaUser.appendChild(giohangcuaUser);
+        showGioHang.appendChild(addRowUserWait);
+    }
 }
