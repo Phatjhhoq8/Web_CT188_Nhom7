@@ -1,15 +1,18 @@
 // nhận và đọc data có sẵn
 var productInfoList = [];
 import { addDatasp } from "./Data/datasp.js";
-productInfoList = addDatasp();
+// productInfoList = addDatasp();
+if(typeof localStorage["productList"] === "undefined") productInfoList = addDatasp();
+else productInfoList =  JSON.parse(localStorage.getItem('productList'));
+
 // kiểm tra mảng
 localStorage.setItem('productList', JSON.stringify(productInfoList));
 
 // set giá trị cho lần đầu tiên nhập id ở phần thêm sản phẩm
-if(parseInt(productInfoList[productInfoList.length - 1].id.slice(2,5)) < 9) document.getElementById('addId').value = "SP00" + (parseInt(productInfoList[productInfoList.length - 1].id.slice(2,5)) + 1);
-else document.getElementById('addId').value = "SP" + (parseInt(productInfoList[productInfoList.length - 1].id.slice(2,5)) > 98 ? (parseInt(productInfoList[productInfoList.length - 1].id.slice(2,5)) + 1) : ("0" + (parseInt(productInfoList[productInfoList.length - 1].id.slice(2,5)) + 1)));
+if (parseInt(productInfoList[productInfoList.length - 1].id.slice(2, 5)) < 9) document.getElementById('addId').value = "SP00" + (parseInt(productInfoList[productInfoList.length - 1].id.slice(2, 5)) + 1);
+else document.getElementById('addId').value = "SP" + (parseInt(productInfoList[productInfoList.length - 1].id.slice(2, 5)) > 98 ? (parseInt(productInfoList[productInfoList.length - 1].id.slice(2, 5)) + 1) : ("0" + (parseInt(productInfoList[productInfoList.length - 1].id.slice(2, 5)) + 1)));
 // hàm thêm dữ liệu vào bảng
-function addDatatoTable(product){
+function addDatatoTable(product) {
     // PHẦN THÊM DỮ LIỆU VÀO BẢNG TRÊN HỆ THỐNG ADMIN
 
     var tableProduct = document.getElementById('listProduct');
@@ -25,17 +28,17 @@ function addDatatoTable(product){
     // set onclick cho nút xóa
     let deleteButton = info.querySelector('input[name="ers"]');
     deleteButton.id = 'ers_' + product.id;
-    deleteButton.onclick = function (e){
+    deleteButton.onclick = function (e) {
         e.stopPropagation();
         for (let i = 0; i < productInfoList.length; i++) {
-            if (deleteButton.id == 'ers_' + productInfoList[i].id){
+            if (deleteButton.id == 'ers_' + productInfoList[i].id) {
                 // xóa dữ liệu khỏi mảng
                 productInfoList.splice(i, 1);
                 localStorage.setItem('productList', JSON.stringify(productInfoList));
                 // xóa dữ liệu khỏi bảng
                 tableProduct.removeChild(showProduct);
                 // kiểm tra mảng 
-                
+
                 break;
             }
         }
@@ -134,7 +137,7 @@ function addDatatoTable(product){
                         }
                         ++j;
                     }
-                    
+
                     localStorage.setItem('productList', JSON.stringify(productInfoList));
                     changeButton.value = "sửa";
                     break;
@@ -150,14 +153,25 @@ function addDatatoTable(product){
 
 }
 // hàm in data vào bảng
-function printDataFromOriginalArray() {
-    for (let i = 0; i < productInfoList.length; ++i) {
-        let product = productInfoList[i];
+function printDataFromOriginalArray(filteredProducts) {
+    const tableProduct = document.getElementById('listProduct');
+    tableProduct.innerHTML=""
+    for (let i = 0; i < filteredProducts.length; ++i) {
+        let product = filteredProducts[i];
         addDatatoTable(product);
     }
 }
-printDataFromOriginalArray();
+printDataFromOriginalArray(productInfoList);
+const searchSP = document.querySelector("#searchSP");
+searchSP.addEventListener("input", () => filterProducts(searchSP.value));
+const filterProducts = (searchTerm) => {
 
+    const filteredProducts = productInfoList.filter(product => {
+        const matchesSearchTerm = product.nameProduct.toLowerCase().includes(searchTerm.toLowerCase())||product.id.toLowerCase().includes(searchTerm.toLowerCase());
+        return matchesSearchTerm;
+    });
+    printDataFromOriginalArray(filteredProducts);
+};
 // hàm đọc dữ liệu từ bảng 
 function readData() {
     const product = {
@@ -220,8 +234,8 @@ crudProduct[1].onclick = function () {
         //thêm dữ liệu vào sever
         localStorage.setItem('productList', JSON.stringify(productInfoList));
         // xóa phần đã nhập
-        if(parseInt(productInfoList[productInfoList.length - 1].id.slice(2,5)) < 9) document.getElementById('addId').value = "SP00" + (parseInt(productInfoList[productInfoList.length - 1].id.slice(2,5)) + 1);
-        else document.getElementById('addId').value = "SP" + (parseInt(productInfoList[productInfoList.length - 1].id.slice(2,5)) > 98 ? (parseInt(productInfoList[productInfoList.length - 1].id.slice(2,5)) + 1) : ("0" + (parseInt(productInfoList[productInfoList.length - 1].id.slice(2,5)) + 1)));
+        if (parseInt(productInfoList[productInfoList.length - 1].id.slice(2, 5)) < 9) document.getElementById('addId').value = "SP00" + (parseInt(productInfoList[productInfoList.length - 1].id.slice(2, 5)) + 1);
+        else document.getElementById('addId').value = "SP" + (parseInt(productInfoList[productInfoList.length - 1].id.slice(2, 5)) > 98 ? (parseInt(productInfoList[productInfoList.length - 1].id.slice(2, 5)) + 1) : ("0" + (parseInt(productInfoList[productInfoList.length - 1].id.slice(2, 5)) + 1)));
         document.getElementById('addId').placeholder = "SP";
         document.getElementById('addName').value = "";
         document.getElementById('addPrice').value = "";
@@ -231,6 +245,6 @@ crudProduct[1].onclick = function () {
         document.getElementById('addView').value = "none";
         document.getElementById('addDetail').value = "";
 
-        
+
     };
 }

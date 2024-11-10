@@ -617,7 +617,7 @@
       const selectedLocation = Array.from(document.querySelectorAll('input[name="location"]:checked')).map(checkbox => checkbox.value);
 
       const filteredProducts = productInfoList.filter(product => {
-        const matchesSearchTerm = product.nameProduct.toLowerCase().includes(searchTerm.toLowerCase());
+        const matchesSearchTerm = product.nameProduct.toLowerCase().includes(searchTerm.toLowerCase())||product.type.toLowerCase().includes(searchTerm.toLowerCase())||product.view.toLowerCase().includes(searchTerm.toLowerCase());
 
         const matchesPower = selectedPower.length === 0 || selectedPower.some(value => product.nameProduct.toLowerCase().includes(value.toLowerCase()));
         const matchesPrice = selectedPrice.length === 0 || selectedPrice.some(value => {

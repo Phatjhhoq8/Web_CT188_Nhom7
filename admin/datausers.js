@@ -53,7 +53,6 @@ for (let i = 0; i < userList.length; ++i) {
             userList[i].data.notificationsReceived.push({ item: userList[i].data.wait[j].item, state: 1 });
             userList[i].data.wait.splice(j, 1);
             giohangcuaUser.removeChild(sanphamInGioHang);
-            giohangcuaUser.removeChild(sanphamInGioHang);
             if(userList[i].data.wait.length == 0) showGioHang.removeChild(addRowUserWait);
             localStorage.setItem('userList', JSON.stringify(userList));
         }
