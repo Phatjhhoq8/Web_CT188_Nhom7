@@ -9,6 +9,7 @@ export function addDatasp() {
             capacity: "120",
             view: "Ngoài trời",
             detail: "SP001",
+            state: 1,
         },
         {
             id: "SP002",
@@ -19,6 +20,7 @@ export function addDatasp() {
             capacity: "40",
             view: "Ngoài trời",
             detail: "SP002",
+            state: 1,
         },
         {
             id: "SP003",
@@ -29,6 +31,7 @@ export function addDatasp() {
             capacity: "100",
             view: "Ngoài trời",
             detail: "SP003",
+            state: 1,
         },
         {
             id: "SP004",
@@ -39,6 +42,7 @@ export function addDatasp() {
             capacity: "300",
             view: "Ngoài trời",
             detail: "SP004",
+            state: 1,
         },
         {
             id: "SP005",
@@ -49,6 +53,7 @@ export function addDatasp() {
             capacity: "150",
             view: "Ngoài trời",
             detail: "SP005",
+            state: 1,
         },
         {
             id: "SP006",
@@ -59,6 +64,7 @@ export function addDatasp() {
             capacity: "200",
             view: "Ngoài trời",
             detail: "SP006",
+            state: 1,
         },
         {
             id: "SP007",
@@ -69,6 +75,7 @@ export function addDatasp() {
             capacity: "600",
             view: "Trong nhà",
             detail: "SP007",
+            state: 1,
         },
         {
             id: "SP008",
@@ -79,6 +86,7 @@ export function addDatasp() {
             capacity: "300",
             view: "Ngoài trời",
             detail: "SP008",
+            state: 1,
         },
         {
             id: "SP009",
@@ -89,6 +97,7 @@ export function addDatasp() {
             capacity: "100",
             view: "Ngoài trời",
             detail: "SP009",
+            state: 1,
         },
         {
             id: "SP010",
@@ -99,6 +108,7 @@ export function addDatasp() {
             capacity: "300",
             view: "Ngoài trời",
             detail: "SP010",
+            state: 1,
         },
         {
             id: "SP011",
@@ -109,6 +119,7 @@ export function addDatasp() {
             capacity: "200",
             view: "Ngoài trời",
             detail: "SP011",
+            state: 1,
         },
         {
             id: "SP012",
@@ -119,6 +130,7 @@ export function addDatasp() {
             capacity: "300",
             view: "Ngoài trời",
             detail: "SP012",
+            state: 1,
         },
         {
             id: "SP013",
@@ -129,6 +141,7 @@ export function addDatasp() {
             capacity: "1000",
             view: "Ngoài trời",
             detail: "SP013",
+            state: 1,
         },
         {
             id: "SP014",
@@ -139,6 +152,7 @@ export function addDatasp() {
             capacity: "800",
             view: "Ngoài trời",
             detail: "SP014",
+            state: 1,
         },
         {
             id: "SP015",
@@ -149,6 +163,7 @@ export function addDatasp() {
             capacity: "500",
             view: "Ngoài trời",
             detail: "SP015",
+            state: 1,
         },
         {
             id: "SP016",
@@ -159,6 +174,7 @@ export function addDatasp() {
             capacity: "500",
             view: "Ngoài trời",
             detail: "SP016",
+            state: 1,
         },
         {
             id: "SP017",
@@ -169,6 +185,7 @@ export function addDatasp() {
             capacity: "500",
             view: "Trong nhà",
             detail: "SP017",
+            state: 1,
         },
         {
             id: "SP018",
@@ -179,6 +196,7 @@ export function addDatasp() {
             capacity: "50",
             view: "Trong nhà",
             detail: "SP018",
+            state: 1,
         },
         {
             id: "SP019",
@@ -189,6 +207,7 @@ export function addDatasp() {
             capacity: "100",
             view: "Ngoài trời",
             detail: "SP019",
+            state: 1,
         },
         {
             id: "SP020",
@@ -199,6 +218,7 @@ export function addDatasp() {
             capacity: "150",
             view: "Ngoài trời",
             detail: "SP020",
+            state: 1,
         },
         {
             id: "SP021",
@@ -209,6 +229,7 @@ export function addDatasp() {
             capacity: "200",
             view: "Ngoài trời",
             detail: "SP021",
+            state: 1,
         },
         {
             id: "SP022",
@@ -219,6 +240,7 @@ export function addDatasp() {
             capacity: "36",
             view: "Trong nhà",
             detail: "SP022",
+            state: 1,
         },
         {
             id: "SP023",
@@ -229,6 +251,7 @@ export function addDatasp() {
             capacity: "300",
             view: "Ngoài trời",
             detail: "SP023",
+            state: 1,
         },
         {
             id: "SP024",
@@ -239,6 +262,7 @@ export function addDatasp() {
             capacity: "400",
             view: "Ngoài trời",
             detail: "SP024",
+            state: 1,
         },
         {
             id: "SP025",
@@ -249,6 +273,7 @@ export function addDatasp() {
             capacity: "200",
             view: "Ngoài trời",
             detail: "SP025",
+            state: 1,
         },
         {
             id: "SP026",
@@ -259,6 +284,7 @@ export function addDatasp() {
             capacity: "600",
             view: "Ngoài trời",
             detail: "SP026",
+            state: 1,
         },
         {
             id: "SP027",
@@ -269,6 +295,7 @@ export function addDatasp() {
             capacity: "300",
             view: "Ngoài trời",
             detail: "SP027",
+            state: 1,
         },
         {
             id: "SP028",
@@ -279,6 +306,7 @@ export function addDatasp() {
             capacity: "150",
             view: "Ngoài trời",
             detail: "SP028",
+            state: 1,
         }
     ];
     return productInfoList;

@@ -18,34 +18,61 @@ function addDatatoTable(product) {
     var tableProduct = document.getElementById('listProduct');
     var showProduct = document.createElement('tr');
     for (let key of Object.keys(product)) {
+        if(key === 'state') continue;
         let info = document.createElement('td');
         info.innerText = product[key];
         showProduct.appendChild(info);
     }
     // thêm nút sửa/xóa
     let info = document.createElement('td');
-    info.innerHTML = '<div><input type="button" value="xóa" name="ers"></div><div></div><div><input type="button" value="sửa" name="chg"></div>';
+    info.innerHTML = '<div><input type="button" value="Ẩn" name="ers"></div><input type="button" value="khôi phục" name="undo" class="d-none"><div></div><div><input type="button" value="sửa" name="chg"></div>';
     // set onclick cho nút xóa
     let deleteButton = info.querySelector('input[name="ers"]');
     deleteButton.id = 'ers_' + product.id;
+    let changeButton = info.querySelector('input[name="chg"]');
+    changeButton.id = 'chg_' + product.id;
+
+    let undoButton = info.querySelector('input[name="undo"]');
+    undoButton.id = 'undo_' + product.id;
+
+    if(product.state === '0'){
+        deleteButton.classList.add('d-none');
+        changeButton.classList.add('d-none');
+        undoButton.classList.remove('d-none');
+    }
+
     deleteButton.onclick = function (e) {
         e.stopPropagation();
         for (let i = 0; i < productInfoList.length; i++) {
             if (deleteButton.id == 'ers_' + productInfoList[i].id) {
-                // xóa dữ liệu khỏi mảng
-                productInfoList.splice(i, 1);
+                productInfoList[i].state = "0";
+                deleteButton.classList.add('d-none');
+                changeButton.classList.add('d-none');
+                undoButton.classList.remove('d-none');
                 localStorage.setItem('productList', JSON.stringify(productInfoList));
-                // xóa dữ liệu khỏi bảng
-                tableProduct.removeChild(showProduct);
-                // kiểm tra mảng 
-
                 break;
             }
         }
     }
+
+
+    undoButton.onclick = function (e) {
+        e.stopPropagation();
+        for (let i = 0; i < productInfoList.length; i++) {
+            if (undoButton.id == 'undo_' + productInfoList[i].id) {
+                productInfoList[i].state = "1";
+                deleteButton.classList.remove('d-none');
+                changeButton.classList.remove('d-none');
+                undoButton.classList.add('d-none');
+                localStorage.setItem('productList', JSON.stringify(productInfoList));
+                break;
+            }
+        }
+    }
+
+
     // set onclick cho nút sửa
-    let changeButton = info.querySelector('input[name="chg"]');
-    changeButton.id = 'chg_' + product.id;
+
     let countingPressChange = 0;
     changeButton.onclick = function (e) {
         e.stopPropagation();
@@ -183,6 +210,7 @@ function readData() {
         capacity: document.getElementById('addCapacity').value,
         view: document.getElementById('addView').value,
         detail: document.getElementById('addDetail').value,
+        state: "1"
     };
     return product;
 }
