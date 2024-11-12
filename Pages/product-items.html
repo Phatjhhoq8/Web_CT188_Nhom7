@@ -864,11 +864,11 @@
         }
         // xư kiện đăng nhập đăng xuất
         var toLogin = (e) => {
-            window.localStorage.setItem("currentPage", location.pathname);
+            window.localStorage.setItem("currentPage", location.pathname+location.search);
             window.location.href = "login.html";
         }
         var toSignup = (e) => {
-            window.localStorage.setItem("currentPage", location.pathname);
+            window.localStorage.setItem("currentPage", location.pathname+location.search);
             window.location.href = "signup.html";
         }
 
