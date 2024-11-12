@@ -150,6 +150,7 @@ function addDatatoTable(product) {
                     // phần đọc dữ liệu sau khi kiểm tra 
                     for (let key of Object.keys(productInfoList[i])) {
                         // đọc dữ liệu từ bảng chỉnh sửa
+                        if(key==='state') continue;
                         let inputElement = items[j].querySelector('input');
                         let selectElement = items[j].querySelector('select');
 
