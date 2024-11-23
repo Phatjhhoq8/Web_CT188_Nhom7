@@ -116,7 +116,7 @@ document.getElementById('them').onclick = function () {
         let ngaysinh = form.querySelector('[name="ngaysinh"]').value;
         let luong = form.querySelector('[name="luong"]').value;
         let bophan = form.querySelector('[name="bophan"]').value;
-        let ngaynghi = form.querySelector('[name="ngaynghi"]').value;
+        // let ngaynghi = form.querySelector('[name="ngaynghi"]').value;
 
         dsnhanvien.push({
             manhanvien: manhanvien.value,
@@ -124,7 +124,7 @@ document.getElementById('them').onclick = function () {
             ngaysinh: ngaysinh,
             luong: luong,
             bophan: bophan,
-            ngaynghi: ngaynghi
+            ngaynghi: 0
         });
 
         localStorage.setItem('dsnhanvien', JSON.stringify(dsnhanvien));
