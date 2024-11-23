@@ -132,6 +132,7 @@
                     document.getElementById('success').classList.remove('d-none');
                     let currentUser = i;
                     localStorage.setItem('currentUser', currentUser);
+                    if (typeof localStorage["adClosedDate"] !== "undefined") localStorage.removeItem("adClosedDate");
                     if(localStorage.getItem('currentPage')) window.location.assign(localStorage.getItem('currentPage'));
                     else window.location.assign('../index.html'); 
                     return;
