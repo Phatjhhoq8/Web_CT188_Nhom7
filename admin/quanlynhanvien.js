@@ -3,7 +3,7 @@ if (!dsnhanvien.length) {
     localStorage.removeItem('dsnhanvien');
     dsnhanvien = [
         {
-            manhanvien: "NV000",
+            manhanvien: "NV001",
             tennhanvien: "Nguyễn Văn Tèo",
             ngaysinh: "2005-01-19",
             luong: 200000,
@@ -11,7 +11,7 @@ if (!dsnhanvien.length) {
             ngaynghi: 0,
         },
         {
-            manhanvien: "NV001",
+            manhanvien: "NV002",
             tennhanvien: "Trần Thị Nở",
             ngaysinh: "2000-03-20",
             luong: 300000,
